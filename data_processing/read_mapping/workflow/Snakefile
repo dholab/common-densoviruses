@@ -1,0 +1,246 @@
+"""
+Simplified minimap2 alignment workflow for CHTC
+Accepts SRA accessions, paired-end FASTQ, or single-end FASTQ
+Outputs sorted, deduplicated, and indexed BAM files
+"""
+
+import os
+
+# Configuration
+configfile: "config/config.yaml"
+
+# Get output subdirectory from config (default to empty string for backward compatibility)
+OUTPUT_SUBDIR = config.get('global', {}).get('output_subdir', '')
+if OUTPUT_SUBDIR:
+    OUTPUT_DIR = f"output/{OUTPUT_SUBDIR}"
+else:
+    OUTPUT_DIR = "output"
+
+# Helper functions
+def get_sample_names(config):
+    """Extract sample names from config"""
+    return [sample['name'] for sample in config.get('samples', [])]
+
+def get_input_type(wildcards, config):
+    """Determine input type for a sample"""
+    for sample in config.get('samples', []):
+        if sample['name'] == wildcards.sample:
+            if 'biosample' in sample:
+                # BioSample ID - will fetch SRA accessions at runtime
+                return 'biosample'
+            elif 'sra' in sample:
+                # Check if SRA has paired-end files (R1/R2 from fasterq-dump)
+                if sample.get('sra_paired', False):
+                    return 'sra_paired'
+                return 'sra'
+            elif 'r1_fastq' in sample and 'r2_fastq' in sample:
+                return 'paired'
+            elif 'se_fastq' in sample:
+                return 'single'
+    raise ValueError(f"Could not determine input type for sample {wildcards.sample}")
+
+def get_input_files(wildcards, config):
+    """Get input file paths for a sample"""
+    for sample in config.get('samples', []):
+        if sample['name'] == wildcards.sample:
+            if 'biosample' in sample:
+                return {'biosample': sample['biosample']}
+            elif 'sra' in sample:
+                return {'sra': sample['sra']}
+            elif 'r1_fastq' in sample and 'r2_fastq' in sample:
+                return {'r1': sample['r1_fastq'], 'r2': sample['r2_fastq']}
+            elif 'se_fastq' in sample:
+                return {'se': sample['se_fastq']}
+    raise ValueError(f"Could not find input files for sample {wildcards.sample}")
+
+def get_minimap2_input(wildcards, config):
+    """Get the appropriate input files for minimap2 based on input type"""
+    input_type = get_input_type(wildcards, config)
+    if input_type == 'paired':
+        # For paired-end, return both files directly
+        files = get_input_files(wildcards, config)
+        return {'r1': files['r1'], 'r2': files['r2']}
+    elif input_type == 'sra_paired':
+        # For SRA paired-end, return prepared R1 and R2 files
+        return {
+            'r1': f"01_prepare_input/{wildcards.sample}_1.fastq",
+            'r2': f"01_prepare_input/{wildcards.sample}_2.fastq"
+        }
+    else:
+        # For SRA single-end or single-end fastq, use the prepared fastq
+        return {'fastq': f"01_prepare_input/{wildcards.sample}.fastq.gz"}
+
+def is_paired_end(wildcards, config):
+    """Check if sample is paired-end"""
+    return get_input_type(wildcards, config) == 'paired'
+
+def needs_prepare_input(wildcards, config):
+    """Check if sample needs prepare_input step (SRA or single-end)"""
+    return get_input_type(wildcards, config) != 'paired'
+
+# Get sample names
+SAMPLES = get_sample_names(config)
+
+# Separate samples by type
+PAIRED_SAMPLES = [s['name'] for s in config.get('samples', []) if 'r1_fastq' in s and 'r2_fastq' in s]
+SRA_PAIRED_SAMPLES = [s['name'] for s in config.get('samples', []) if 'sra' in s and s.get('sra_paired', False)]
+# NON_PAIRED_SAMPLES includes: SRA, biosample, and single-end FASTQ samples
+# These all go through prepare_input_single rule
+NON_PAIRED_SAMPLES = [s['name'] for s in config.get('samples', []) if s['name'] not in PAIRED_SAMPLES and s['name'] not in SRA_PAIRED_SAMPLES]
+
+# Target rule
+rule all:
+    input:
+        expand(OUTPUT_DIR + "/{sample}.dedup.sorted.bam", sample=SAMPLES),
+        expand(OUTPUT_DIR + "/{sample}.dedup.sorted.bam.bai", sample=SAMPLES)
+
+# Rule to prepare input files for SRA single-end or single-end FASTQ
+rule prepare_input_single:
+    output:
+        fastq="01_prepare_input/{sample}.fastq.gz"
+    params:
+        input_type=lambda wildcards: get_input_type(wildcards, config),
+        input_files=lambda wildcards: get_input_files(wildcards, config)
+    threads: workflow.cores
+    wildcard_constraints:
+        sample="|".join(NON_PAIRED_SAMPLES) if NON_PAIRED_SAMPLES else "NONE"
+    script:
+        "scripts/prepare_input.py"
+
+# Rule to prepare input files for SRA paired-end (keeps R1/R2 separate)
+rule prepare_input_sra_paired:
+    output:
+        r1="01_prepare_input/{sample}_1.fastq",
+        r2="01_prepare_input/{sample}_2.fastq"
+    params:
+        input_type=lambda wildcards: get_input_type(wildcards, config),
+        input_files=lambda wildcards: get_input_files(wildcards, config)
+    threads: workflow.cores
+    wildcard_constraints:
+        sample="|".join(SRA_PAIRED_SAMPLES) if SRA_PAIRED_SAMPLES else "NONE"
+    script:
+        "scripts/prepare_input_paired.py"
+
+# Rule to align paired-end reads directly with minimap2 (VSP samples)
+# minimap2 accepts two FASTQ files for paired-end data
+rule minimap2_align_paired:
+    input:
+        r1=lambda wildcards: get_input_files(wildcards, config)['r1'],
+        r2=lambda wildcards: get_input_files(wildcards, config)['r2'],
+        reference=config['global']['minimap2_reference']
+    output:
+        bam=temp("02_align/{sample}.bam")
+    threads: workflow.cores
+    wildcard_constraints:
+        sample="|".join(PAIRED_SAMPLES) if PAIRED_SAMPLES else "NONE"
+    shell:
+        """
+        minimap2 -ax sr -t {threads} {input.reference} {input.r1} {input.r2} | \
+        samtools view -b -F 4 > {output.bam}
+        """
+
+# Rule to align SRA paired-end reads with minimap2 (keeps R1/R2 separate, no interleaving)
+rule minimap2_align_sra_paired:
+    input:
+        r1="01_prepare_input/{sample}_1.fastq",
+        r2="01_prepare_input/{sample}_2.fastq",
+        reference=config['global']['minimap2_reference']
+    output:
+        bam=temp("02_align/{sample}.bam")
+    threads: workflow.cores
+    wildcard_constraints:
+        sample="|".join(SRA_PAIRED_SAMPLES) if SRA_PAIRED_SAMPLES else "NONE"
+    shell:
+        """
+        minimap2 -ax sr -t {threads} {input.reference} {input.r1} {input.r2} | \
+        samtools view -b -F 4 > {output.bam}
+        """
+
+# Rule to align single-end/SRA reads with minimap2
+# Automatically detects if paired-end R1/R2 files exist from SRA download
+rule minimap2_align_single:
+    input:
+        fastq="01_prepare_input/{sample}.fastq.gz",
+        reference=config['global']['minimap2_reference']
+    output:
+        bam=temp("02_align/{sample}.bam")
+    threads: workflow.cores
+    wildcard_constraints:
+        sample="|".join(NON_PAIRED_SAMPLES) if NON_PAIRED_SAMPLES else "NONE"
+    shell:
+        """
+        # Check if paired-end files exist (created by prepare_input.py for SRA paired-end)
+        R1="01_prepare_input/{wildcards.sample}_1.fastq"
+        R2="01_prepare_input/{wildcards.sample}_2.fastq"
+
+        if [ -f "$R1" ] && [ -f "$R2" ]; then
+            echo "Detected paired-end files from SRA download, using R1/R2 directly..."
+            minimap2 -ax sr -t {threads} {input.reference} "$R1" "$R2" | \
+            samtools view -b -F 4 > {output.bam}
+        else
+            echo "Using single-end/interleaved file..."
+            minimap2 -ax sr -t {threads} {input.reference} {input.fastq} | \
+            samtools view -b -F 4 > {output.bam}
+        fi
+        """
+
+# Rule to sort BAM by name (required for fixmate)
+rule sort_bam_by_name:
+    input:
+        bam="02_align/{sample}.bam"
+    output:
+        namesorted_bam=temp("03_namesort/{sample}.namesorted.bam")
+    threads: workflow.cores
+    shell:
+        """
+        samtools sort -n -@ {threads} -o {output.namesorted_bam} {input.bam}
+        """
+
+# Rule to add mate information (required for markdup)
+rule fixmate:
+    input:
+        namesorted_bam="03_namesort/{sample}.namesorted.bam"
+    output:
+        fixmate_bam=temp("04_fixmate/{sample}.fixmate.bam")
+    threads: workflow.cores
+    shell:
+        """
+        samtools fixmate -m -@ {threads} {input.namesorted_bam} {output.fixmate_bam}
+        """
+
+# Rule to sort BAM by coordinate (required for markdup)
+rule sort_bam:
+    input:
+        fixmate_bam="04_fixmate/{sample}.fixmate.bam"
+    output:
+        sorted_bam=temp("05_sort/{sample}.sorted.bam")
+    threads: workflow.cores
+    shell:
+        """
+        samtools sort -@ {threads} -o {output.sorted_bam} {input.fixmate_bam}
+        """
+
+# Rule to remove duplicate mappings
+rule remove_duplicates:
+    input:
+        sorted_bam="05_sort/{sample}.sorted.bam"
+    output:
+        dedup_bam=OUTPUT_DIR + "/{sample}.dedup.sorted.bam"
+    threads: workflow.cores
+    shell:
+        """
+        mkdir -p {OUTPUT_DIR}
+        samtools markdup -r -@ {threads} {input.sorted_bam} {output.dedup_bam}
+        """
+
+# Rule to index BAM file
+rule index_bam:
+    input:
+        dedup_bam=OUTPUT_DIR + "/{sample}.dedup.sorted.bam"
+    output:
+        bai=OUTPUT_DIR + "/{sample}.dedup.sorted.bam.bai"
+    threads: 1
+    shell:
+        """
+        samtools index {input.dedup_bam}
+        """
