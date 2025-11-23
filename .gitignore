@@ -1,0 +1,10 @@
+# Confidential site identification files
+air-samples/vsp/SITE-KEY-CONFIDENTIAL.md
+air-samples/vsp/private
+
+# OS files
+.DS_Store
+
+# Editor files
+*.swp
+*~
