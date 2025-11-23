@@ -206,6 +206,9 @@
                 const orderedSamples = samples; // Already sorted by read count
 
                 orderedSamples.forEach(sample => {
+                    // Scale height based on read count (min 30px, max 200px)
+                    const scaledHeight = Math.min(200, Math.max(30, Math.round(30 + (sample.reads / 10))));
+
                     tracks.push({
                         name: formatSampleName(sample.name, sample.reads),
                         type: "alignment",
@@ -214,17 +217,16 @@
                         indexURL: `data/bam/${sample.name}.bam.bai`,
                         displayMode: "SQUISHED",
                         alignmentRowHeight: 6,
-                        coverageTrackHeight: 30,
-                        colorBy: "strand",
-                        showSoftClips: true,
+                        showCoverage: false,  // Turn off coverage plot
+                        colorBy: "none",  // No color by attribute
+                        showSoftClips: false,  // Hide soft clips by default
                         viewAsPairs: false,
                         showMismatches: true,
                         showAllBases: false,
-                        showAlignments: false,  // Hide alignments by default, only show coverage
-                        height: 100,
+                        showAlignments: true,  // Show alignments
+                        height: scaledHeight,  // Scale height by read count
                         samplingWindowSize: 100,
-                        samplingDepth: 50,
-                        viewAsPairs: false
+                        samplingDepth: 50
                     });
                 });
 
