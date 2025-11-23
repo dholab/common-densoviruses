@@ -1,9 +1,0 @@
-# GitHub Pages Configuration
-theme: jekyll-theme-minimal
-title: Densovirus reads from Dane County, Wisconsin air samples mapped to HuCSFDV1
-description: Interactive visualization of densovirus genomic alignments from air samples collected in Dane County, Wisconsin
-
-# Exclude files from build
-exclude:
-  - README.md
-  - .gitignore

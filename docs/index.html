@@ -8,285 +8,266 @@
     <!-- IGV.js CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/igv@2.15.11/dist/css/igv.css">
 
-    <!-- Custom styles -->
+    <!-- GitHub-inspired minimalist styles -->
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        * {
             margin: 0;
-            padding: 20px;
-            background-color: #f5f5f5;
+            padding: 0;
+            box-sizing: border-box;
         }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+            font-size: 14px;
+            line-height: 1.5;
+            color: #1f2328;
+            background-color: #ffffff;
+        }
+
+        .header {
+            border-bottom: 1px solid #d1d9e0;
+            padding: 16px 0;
+            margin-bottom: 24px;
+        }
+
         .container {
-            max-width: 1400px;
+            max-width: 1280px;
             margin: 0 auto;
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 0 16px;
         }
+
         h1 {
-            color: #333;
-            border-bottom: 2px solid #007bff;
-            padding-bottom: 10px;
+            font-size: 20px;
+            font-weight: 600;
+            color: #1f2328;
+            margin-bottom: 4px;
         }
-        h2 {
-            color: #555;
-            margin-top: 30px;
+
+        .subtitle {
+            color: #656d76;
+            font-size: 14px;
         }
-        .viewer-container {
-            margin: 20px 0;
-            padding: 20px;
-            background-color: #f8f9fa;
-            border-radius: 5px;
+
+        .content {
+            display: flex;
+            gap: 24px;
         }
+
+        .sidebar {
+            width: 296px;
+            flex-shrink: 0;
+        }
+
+        .main {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .info-box {
+            border: 1px solid #d1d9e0;
+            border-radius: 6px;
+            padding: 16px;
+            margin-bottom: 16px;
+            background-color: #f6f8fa;
+        }
+
+        .info-box h3 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #1f2328;
+        }
+
+        .info-box p, .info-box li {
+            font-size: 12px;
+            color: #656d76;
+            margin-bottom: 4px;
+        }
+
+        .info-box ul {
+            margin-left: 16px;
+        }
+
         #igvDiv {
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            background-color: white;
-            min-height: 500px;
+            border: 1px solid #d1d9e0;
+            border-radius: 6px;
+            background-color: #ffffff;
+            min-height: 600px;
+            overflow: hidden;
         }
-        .sample-selector {
-            margin: 20px 0;
+
+        .loading-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 600px;
+            color: #656d76;
         }
-        select {
+
+        .loading-spinner {
+            border: 2px solid #d1d9e0;
+            border-top: 2px solid #2da44e;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            animation: spin 1s linear infinite;
+            margin-right: 12px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .stats {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 16px;
+            padding: 12px 0;
+            border-bottom: 1px solid #d1d9e0;
+        }
+
+        .stat {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #656d76;
+        }
+
+        .stat-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1f2328;
+        }
+
+        .track-list {
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #d1d9e0;
+            border-radius: 6px;
+            background-color: #ffffff;
+        }
+
+        .track-item {
             padding: 8px 12px;
-            font-size: 14px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            background-color: white;
-            cursor: pointer;
-            max-width: 500px;
+            border-bottom: 1px solid #f0f3f6;
+            font-size: 12px;
+            color: #656d76;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        button {
-            padding: 8px 16px;
-            margin: 0 5px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 14px;
+
+        .track-item:last-child {
+            border-bottom: none;
         }
-        button:hover {
-            background-color: #0056b3;
+
+        .track-name {
+            font-weight: 500;
+            color: #1f2328;
+            flex: 1;
         }
-        .info-panel {
-            margin: 20px 0;
-            padding: 15px;
-            background-color: #e9ecef;
-            border-radius: 5px;
-            border-left: 4px solid #007bff;
+
+        .track-size {
+            color: #656d76;
+            font-size: 11px;
+            text-align: right;
         }
-        .loading {
-            text-align: center;
-            padding: 50px;
-            color: #666;
-        }
+
         .error {
-            color: #dc3545;
-            padding: 10px;
-            background-color: #f8d7da;
-            border: 1px solid #f5c6cb;
-            border-radius: 4px;
-            margin: 10px 0;
+            background-color: #ffebe9;
+            border: 1px solid #ff8182;
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 16px;
+            color: #cf222e;
+            font-size: 14px;
         }
+
         .success {
-            color: #155724;
-            padding: 10px;
-            background-color: #d4edda;
-            border: 1px solid #c3e6cb;
-            border-radius: 4px;
-            margin: 10px 0;
+            background-color: #dafbe1;
+            border: 1px solid #82e596;
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 16px;
+            color: #1a7f37;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="header">
+        <div class="container">
+            <h1>Densovirus reads from Dane County, Wisconsin air samples mapped to HuCSFDV1</h1>
+            <div class="subtitle">Interactive genomic data visualization</div>
+        </div>
+    </div>
+
     <div class="container">
-        <h1>Densovirus reads from Dane County, Wisconsin air samples mapped to HuCSFDV1</h1>
-
-        <div class="info-panel">
-            <p><strong>Interactive Genome Viewer</strong></p>
-            <p>This page displays BAM alignment files from various air sample collections using IGV.js.
-               Use the controls below to select different samples and navigate the genome.</p>
-        </div>
-
-        <div class="sample-selector">
-            <label for="sampleSelect">Select Sample: </label>
-            <select id="sampleSelect">
-                <option value="">-- Choose a sample --</option>
-                <optgroup label="Wastewater Samples">
-                    <option value="WW-1">WW-1</option>
-                    <option value="WW-2">WW-2</option>
-                    <option value="WW-3">WW-3</option>
-                    <option value="WW-4">WW-4</option>
-                </optgroup>
-                <optgroup label="Elementary School 001">
-                    <option value="elementary-school-001-20250129-dilution-1-4">ES-001 2025-01-29 (dilution 1:4)</option>
-                    <option value="elementary-school-001-20250129-dilution-1-8">ES-001 2025-01-29 (dilution 1:8)</option>
-                    <option value="elementary-school-001-20250129-dilution-1-16">ES-001 2025-01-29 (dilution 1:16)</option>
-                    <option value="elementary-school-001-20250129-dilution-1-32">ES-001 2025-01-29 (dilution 1:32)</option>
-                    <option value="elementary-school-001-20250129-undiluted">ES-001 2025-01-29 (undiluted)</option>
-                    <option value="elementary-school-001-20250901-pooled">ES-001 2025-09-01 (pooled)</option>
-                    <option value="elementary-school-001-20250915-pooled">ES-001 2025-09-15 (pooled)</option>
-                    <option value="elementary-school-001-20250922-pooled">ES-001 2025-09-22 (pooled)</option>
-                    <option value="elementary-school-001-20250929-pooled">ES-001 2025-09-29 (pooled)</option>
-                </optgroup>
-                <optgroup label="Elementary School 002">
-                    <option value="elementary-school-002-20241018-ZCC">ES-002 2024-10-18 (ZCC)</option>
-                    <option value="elementary-school-002-20241023-1plex">ES-002 2024-10-23 (1plex)</option>
-                    <option value="elementary-school-002-20241023-3plex">ES-002 2024-10-23 (3plex)</option>
-                    <option value="elementary-school-002-20241023-9plex">ES-002 2024-10-23 (9plex)</option>
-                </optgroup>
-                <optgroup label="Elementary School 003">
-                    <option value="elementary-school-003-20250901-pooled">ES-003 2025-09-01 (pooled)</option>
-                    <option value="elementary-school-003-20250915-pooled">ES-003 2025-09-15 (pooled)</option>
-                    <option value="elementary-school-003-20250929-pooled">ES-003 2025-09-29 (pooled)</option>
-                </optgroup>
-                <optgroup label="Elementary School 004">
-                    <option value="elementary-school-004-20241121-1plex">ES-004 2024-11-21 (1plex)</option>
-                    <option value="elementary-school-004-20241121-3plex">ES-004 2024-11-21 (3plex)</option>
-                    <option value="elementary-school-004-20241121-9plex">ES-004 2024-11-21 (9plex)</option>
-                    <option value="elementary-school-004-20241125-ZCC">ES-004 2024-11-25 (ZCC)</option>
-                    <option value="elementary-school-004-20250901-pooled">ES-004 2025-09-01 (pooled)</option>
-                    <option value="elementary-school-004-20250915-pooled">ES-004 2025-09-15 (pooled)</option>
-                    <option value="elementary-school-004-20250922-pooled">ES-004 2025-09-22 (pooled)</option>
-                    <option value="elementary-school-004-20250929-pooled">ES-004 2025-09-29 (pooled)</option>
-                </optgroup>
-                <optgroup label="Elementary School 005">
-                    <option value="elementary-school-005-20250901-pooled">ES-005 2025-09-01 (pooled)</option>
-                    <option value="elementary-school-005-20250915-pooled">ES-005 2025-09-15 (pooled)</option>
-                    <option value="elementary-school-005-20250922-pooled">ES-005 2025-09-22 (pooled)</option>
-                    <option value="elementary-school-005-20250929-pooled">ES-005 2025-09-29 (pooled)</option>
-                </optgroup>
-                <optgroup label="Elementary School 006">
-                    <option value="elementary-school-006-20241213-ZCC">ES-006 2024-12-13 (ZCC)</option>
-                    <option value="elementary-school-006-20241217-1plex">ES-006 2024-12-17 (1plex)</option>
-                    <option value="elementary-school-006-20241217-3plex">ES-006 2024-12-17 (3plex)</option>
-                    <option value="elementary-school-006-20241217-9plex">ES-006 2024-12-17 (9plex)</option>
-                </optgroup>
-                <optgroup label="Elementary School 007">
-                    <option value="elementary-school-007-20241212-1plex">ES-007 2024-12-12 (1plex)</option>
-                    <option value="elementary-school-007-20241212-3plex">ES-007 2024-12-12 (3plex)</option>
-                    <option value="elementary-school-007-20241212-9plex">ES-007 2024-12-12 (9plex)</option>
-                    <option value="elementary-school-007-20241216-ZCC">ES-007 2024-12-16 (ZCC)</option>
-                    <option value="elementary-school-007-20250901-pooled">ES-007 2025-09-01 (pooled)</option>
-                    <option value="elementary-school-007-20250915-pooled">ES-007 2025-09-15 (pooled)</option>
-                    <option value="elementary-school-007-20250922-pooled">ES-007 2025-09-22 (pooled)</option>
-                    <option value="elementary-school-007-20250929-pooled">ES-007 2025-09-29 (pooled)</option>
-                </optgroup>
-                <optgroup label="Elementary School 008">
-                    <option value="elementary-school-008-20250901-pooled">ES-008 2025-09-01 (pooled)</option>
-                    <option value="elementary-school-008-20250915-pooled">ES-008 2025-09-15 (pooled)</option>
-                    <option value="elementary-school-008-20250922-pooled">ES-008 2025-09-22 (pooled)</option>
-                </optgroup>
-                <optgroup label="Elementary School 009">
-                    <option value="elementary-school-009-20250206-1plex">ES-009 2025-02-06 (1plex)</option>
-                    <option value="elementary-school-009-20250206-3plex">ES-009 2025-02-06 (3plex)</option>
-                    <option value="elementary-school-009-20250206-9plex">ES-009 2025-02-06 (9plex)</option>
-                    <option value="elementary-school-009-20250210-ZCC">ES-009 2025-02-10 (ZCC)</option>
-                    <option value="elementary-school-009-20250901-pooled">ES-009 2025-09-01 (pooled)</option>
-                    <option value="elementary-school-009-20250915-pooled">ES-009 2025-09-15 (pooled)</option>
-                    <option value="elementary-school-009-20250922-pooled">ES-009 2025-09-22 (pooled)</option>
-                    <option value="elementary-school-009-20250929-pooled">ES-009 2025-09-29 (pooled)</option>
-                </optgroup>
-                <optgroup label="K-12 School 001">
-                    <option value="k12-school-001-20240906-1plex">K12-001 2024-09-06 (1plex)</option>
-                    <option value="k12-school-001-20240906-3plex">K12-001 2024-09-06 (3plex)</option>
-                    <option value="k12-school-001-20240906-9plex">K12-001 2024-09-06 (9plex)</option>
-                    <option value="k12-school-001-20240910-ZCC">K12-001 2024-09-10 (ZCC)</option>
-                    <option value="k12-school-001-20250901-pooled">K12-001 2025-09-01 (pooled)</option>
-                    <option value="k12-school-001-20250915-pooled">K12-001 2025-09-15 (pooled)</option>
-                    <option value="k12-school-001-20250922-pooled">K12-001 2025-09-22 (pooled)</option>
-                </optgroup>
-                <optgroup label="Middle School 001">
-                    <option value="middle-school-001-20250922-pooled">MS-001 2025-09-22 (pooled)</option>
-                </optgroup>
-                <optgroup label="Middle School 002">
-                    <option value="middle-school-002-20250901-pooled">MS-002 2025-09-01 (pooled)</option>
-                    <option value="middle-school-002-20250915-pooled">MS-002 2025-09-15 (pooled)</option>
-                    <option value="middle-school-002-20250922-pooled">MS-002 2025-09-22 (pooled)</option>
-                    <option value="middle-school-002-20250929-pooled">MS-002 2025-09-29 (pooled)</option>
-                </optgroup>
-                <optgroup label="Middle School 003">
-                    <option value="middle-school-003-20250220-ZCC">MS-003 2025-02-20 (ZCC)</option>
-                    <option value="middle-school-003-20250226-1plex">MS-003 2025-02-26 (1plex)</option>
-                    <option value="middle-school-003-20250226-3plex">MS-003 2025-02-26 (3plex)</option>
-                    <option value="middle-school-003-20250226-9plex">MS-003 2025-02-26 (9plex)</option>
-                    <option value="middle-school-003-20250901-pooled">MS-003 2025-09-01 (pooled)</option>
-                    <option value="middle-school-003-20250915-pooled">MS-003 2025-09-15 (pooled)</option>
-                    <option value="middle-school-003-20250922-pooled">MS-003 2025-09-22 (pooled)</option>
-                    <option value="middle-school-003-20250929-pooled">MS-003 2025-09-29 (pooled)</option>
-                </optgroup>
-                <optgroup label="Middle School 004">
-                    <option value="middle-school-004-20250901-pooled">MS-004 2025-09-01 (pooled)</option>
-                    <option value="middle-school-004-20250915-pooled">MS-004 2025-09-15 (pooled)</option>
-                    <option value="middle-school-004-20250922-pooled">MS-004 2025-09-22 (pooled)</option>
-                    <option value="middle-school-004-20250929-pooled">MS-004 2025-09-29 (pooled)</option>
-                </optgroup>
-                <optgroup label="Middle School 005">
-                    <option value="middle-school-005-20250212-unpooled">MS-005 2025-02-12 (unpooled)</option>
-                    <option value="middle-school-005-20250216-unpooled">MS-005 2025-02-16 (unpooled)</option>
-                    <option value="middle-school-005-20250901-pooled">MS-005 2025-09-01 (pooled)</option>
-                    <option value="middle-school-005-20250915-pooled">MS-005 2025-09-15 (pooled)</option>
-                    <option value="middle-school-005-20250922-pooled">MS-005 2025-09-22 (pooled)</option>
-                    <option value="middle-school-005-20250929-pooled">MS-005 2025-09-29 (pooled)</option>
-                    <option value="middle-school-005-pooled-combo">MS-005 (pooled combo)</option>
-                </optgroup>
-                <optgroup label="High School 001">
-                    <option value="high-school-001-20250128-ZCC">HS-001 2025-01-28 (ZCC)</option>
-                    <option value="high-school-001-20250131-1plex">HS-001 2025-01-31 (1plex)</option>
-                    <option value="high-school-001-20250131-3plex">HS-001 2025-01-31 (3plex)</option>
-                    <option value="high-school-001-20250131-9plex">HS-001 2025-01-31 (9plex)</option>
-                    <option value="high-school-001-20250901-pooled">HS-001 2025-09-01 (pooled)</option>
-                    <option value="high-school-001-20250915-pooled">HS-001 2025-09-15 (pooled)</option>
-                    <option value="high-school-001-20250929-pooled">HS-001 2025-09-29 (pooled)</option>
-                </optgroup>
-                <optgroup label="High School 002">
-                    <option value="high-school-002-20250117-ZCC">HS-002 2025-01-17 (ZCC)</option>
-                    <option value="high-school-002-20250121-1plex">HS-002 2025-01-21 (1plex)</option>
-                    <option value="high-school-002-20250121-3plex">HS-002 2025-01-21 (3plex)</option>
-                    <option value="high-school-002-20250121-9plex">HS-002 2025-01-21 (9plex)</option>
-                    <option value="high-school-002-20250221-unpooled">HS-002 2025-02-21 (unpooled)</option>
-                    <option value="high-school-002-20250225-unpooled">HS-002 2025-02-25 (unpooled)</option>
-                    <option value="high-school-002-20250901-pooled">HS-002 2025-09-01 (pooled)</option>
-                    <option value="high-school-002-20250915-pooled">HS-002 2025-09-15 (pooled)</option>
-                    <option value="high-school-002-20250922-pooled">HS-002 2025-09-22 (pooled)</option>
-                    <option value="high-school-002-20250929-pooled">HS-002 2025-09-29 (pooled)</option>
-                    <option value="high-school-002-pooled-combo">HS-002 (pooled combo)</option>
-                </optgroup>
-                <optgroup label="High School 003">
-                    <option value="high-school-003-20250915-pooled">HS-003 2025-09-15 (pooled)</option>
-                    <option value="high-school-003-20250922-pooled">HS-003 2025-09-22 (pooled)</option>
-                    <option value="high-school-003-20250929-pooled">HS-003 2025-09-29 (pooled)</option>
-                </optgroup>
-                <optgroup label="Healthcare">
-                    <option value="healthcare-001-20250922-pooled">Healthcare-001 2025-09-22 (pooled)</option>
-                </optgroup>
-            </select>
-            <button onclick="loadSample()">Load Sample</button>
-            <button onclick="clearViewer()">Clear Viewer</button>
-            <button onclick="initializeIGV()">Initialize Viewer</button>
-        </div>
-
-        <div class="viewer-container">
-            <h2>Genome Browser</h2>
-            <div id="statusMessage"></div>
-            <div id="igvDiv">
-                <div class="loading">Click "Initialize Viewer" to start the genome browser</div>
+        <div class="stats">
+            <div class="stat">
+                <span class="stat-label">Total samples:</span>
+                <span class="stat-value" id="sampleCount">0</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Reference genome:</span>
+                <span class="stat-value">HuCSFDV1 (NC_076998)</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Genome length:</span>
+                <span class="stat-value">4,690 bp</span>
             </div>
         </div>
 
-        <div class="info-panel">
-            <p><strong>Navigation Tips:</strong></p>
-            <ul>
-                <li>First click "Initialize Viewer" to load the reference genome</li>
-                <li>Then select a sample from the dropdown and click "Load Sample"</li>
-                <li>Click and drag to pan along the genome</li>
-                <li>Use the mouse wheel or zoom controls to zoom in/out</li>
-                <li>Click on reads to see detailed alignment information</li>
-                <li>Use the search box to jump to specific genomic coordinates</li>
-            </ul>
+        <div class="content">
+            <div class="sidebar">
+                <div class="info-box">
+                    <h3>About</h3>
+                    <p>Densovirus sequences from air samples collected at schools and healthcare facilities in Dane County, Wisconsin.</p>
+                </div>
+
+                <div class="info-box">
+                    <h3>Navigation</h3>
+                    <ul>
+                        <li>Click and drag to pan</li>
+                        <li>Scroll to zoom in/out</li>
+                        <li>Click reads for details</li>
+                        <li>Use search for coordinates</li>
+                    </ul>
+                </div>
+
+                <div class="info-box">
+                    <h3>Loaded Samples</h3>
+                    <div id="trackList" class="track-list">
+                        <div class="track-item">
+                            <span class="track-name">Loading samples...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main">
+                <div id="statusMessage"></div>
+                <div id="igvDiv">
+                    <div class="loading-container">
+                        <div class="loading-spinner"></div>
+                        <span>Initializing genome browser...</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -296,152 +277,262 @@
     <script>
         let igvBrowser = null;
 
+        // Sample data with file sizes (as proxy for read counts)
+        const samples = [
+            { name: "high-school-001-20250901-pooled", size: 105372 },
+            { name: "elementary-school-004-20250929-pooled", size: 27042 },
+            { name: "elementary-school-006-20241217-1plex", size: 21660 },
+            { name: "high-school-001-20250915-pooled", size: 18668 },
+            { name: "high-school-001-20250131-1plex", size: 16215 },
+            { name: "high-school-001-20250929-pooled", size: 13864 },
+            { name: "elementary-school-004-20250901-pooled", size: 13712 },
+            { name: "elementary-school-004-20250922-pooled", size: 10601 },
+            { name: "elementary-school-006-20241217-3plex", size: 9324 },
+            { name: "elementary-school-002-20241023-1plex", size: 8693 },
+            { name: "high-school-001-20250131-9plex", size: 8421 },
+            { name: "elementary-school-004-20250915-pooled", size: 7546 },
+            { name: "high-school-002-20250922-pooled", size: 7198 },
+            { name: "elementary-school-008-20250901-pooled", size: 7148 },
+            { name: "high-school-001-20250131-3plex", size: 6934 },
+            { name: "elementary-school-006-20241213-ZCC", size: 6483 },
+            { name: "elementary-school-007-20241212-1plex", size: 5922 },
+            { name: "elementary-school-004-20241121-1plex", size: 5249 },
+            { name: "high-school-002-20250901-pooled", size: 4150 },
+            { name: "elementary-school-002-20241018-ZCC", size: 4141 },
+            { name: "elementary-school-009-20250206-3plex", size: 4028 },
+            { name: "elementary-school-001-20250929-pooled", size: 3856 },
+            { name: "high-school-002-20250915-pooled", size: 3825 },
+            { name: "elementary-school-002-20241023-3plex", size: 3778 },
+            { name: "k12-school-001-20250922-pooled", size: 3720 },
+            { name: "elementary-school-009-20250901-pooled", size: 3605 },
+            { name: "high-school-002-20250929-pooled", size: 3516 },
+            { name: "middle-school-003-20250226-1plex", size: 3362 },
+            { name: "elementary-school-001-20250129-undiluted", size: 3174 },
+            { name: "elementary-school-005-20250929-pooled", size: 3173 },
+            { name: "elementary-school-007-20241212-3plex", size: 3173 },
+            { name: "middle-school-004-20250929-pooled", size: 2982 },
+            { name: "elementary-school-009-20250929-pooled", size: 2883 },
+            { name: "elementary-school-006-20241217-9plex", size: 2849 },
+            { name: "k12-school-001-20250915-pooled", size: 2838 },
+            { name: "high-school-002-20250121-3plex", size: 2821 },
+            { name: "elementary-school-004-20241121-3plex", size: 2765 },
+            { name: "elementary-school-009-20250915-pooled", size: 2732 },
+            { name: "k12-school-001-20240906-3plex", size: 2709 },
+            { name: "elementary-school-007-20250929-pooled", size: 2642 },
+            { name: "high-school-003-20250929-pooled", size: 2528 },
+            { name: "elementary-school-009-20250922-pooled", size: 2342 },
+            { name: "middle-school-005-20250929-pooled", size: 2298 },
+            { name: "middle-school-004-20250901-pooled", size: 2272 },
+            { name: "elementary-school-002-20241023-9plex", size: 2227 },
+            { name: "high-school-003-20250915-pooled", size: 2200 },
+            { name: "middle-school-003-20250901-pooled", size: 2198 },
+            { name: "middle-school-004-20250915-pooled", size: 2124 },
+            { name: "middle-school-003-20250929-pooled", size: 2088 },
+            { name: "middle-school-003-20250226-3plex", size: 2033 },
+            { name: "elementary-school-007-20241212-9plex", size: 1958 },
+            { name: "elementary-school-001-20250922-pooled", size: 1948 },
+            { name: "elementary-school-007-20250901-pooled", size: 1873 },
+            { name: "middle-school-005-20250915-pooled", size: 1866 },
+            { name: "elementary-school-009-20250210-ZCC", size: 1859 },
+            { name: "high-school-003-20250922-pooled", size: 1856 },
+            { name: "elementary-school-004-20241121-9plex", size: 1838 },
+            { name: "elementary-school-007-20250922-pooled", size: 1835 },
+            { name: "middle-school-002-20250929-pooled", size: 1832 },
+            { name: "k12-school-001-20240906-1plex", size: 1814 },
+            { name: "middle-school-003-20250915-pooled", size: 1812 },
+            { name: "elementary-school-001-20250915-pooled", size: 1787 },
+            { name: "elementary-school-009-20250206-1plex", size: 1774 },
+            { name: "middle-school-003-20250220-ZCC", size: 1769 },
+            { name: "k12-school-001-20250901-pooled", size: 1743 },
+            { name: "elementary-school-007-20241216-ZCC", size: 1671 },
+            { name: "middle-school-005-20250922-pooled", size: 1653 },
+            { name: "high-school-002-20250225-unpooled", size: 1599 },
+            { name: "middle-school-003-20250922-pooled", size: 1591 },
+            { name: "high-school-002-20250121-1plex", size: 1546 },
+            { name: "elementary-school-009-20250206-9plex", size: 1491 },
+            { name: "elementary-school-001-20250129-dilution-1-4", size: 1451 },
+            { name: "middle-school-005-20250901-pooled", size: 1447 },
+            { name: "elementary-school-001-20250901-pooled", size: 1406 },
+            { name: "middle-school-002-20250915-pooled", size: 1362 },
+            { name: "high-school-002-pooled-combo", size: 1343 },
+            { name: "elementary-school-003-20250929-pooled", size: 1331 },
+            { name: "middle-school-005-pooled-combo", size: 1330 },
+            { name: "middle-school-002-20250901-pooled", size: 1317 },
+            { name: "middle-school-005-20250212-unpooled", size: 1284 },
+            { name: "elementary-school-007-20250915-pooled", size: 1276 },
+            { name: "elementary-school-003-20250915-pooled", size: 1258 },
+            { name: "elementary-school-005-20250922-pooled", size: 1250 },
+            { name: "elementary-school-004-20241125-ZCC", size: 1248 },
+            { name: "middle-school-002-20250922-pooled", size: 1243 },
+            { name: "high-school-002-20250121-9plex", size: 1240 },
+            { name: "elementary-school-003-20250901-pooled", size: 1221 },
+            { name: "middle-school-004-20250922-pooled", size: 1197 },
+            { name: "elementary-school-001-20250129-dilution-1-8", size: 1156 },
+            { name: "high-school-002-20250221-unpooled", size: 1129 },
+            { name: "elementary-school-005-20250901-pooled", size: 1116 },
+            { name: "middle-school-003-20250226-9plex", size: 1112 },
+            { name: "middle-school-005-20250216-unpooled", size: 1082 },
+            { name: "high-school-001-20250128-ZCC", size: 1050 },
+            { name: "k12-school-001-20240910-ZCC", size: 973 },
+            { name: "elementary-school-005-20250915-pooled", size: 950 },
+            { name: "elementary-school-001-20250129-dilution-1-16", size: 907 },
+            { name: "k12-school-001-20240906-9plex", size: 901 },
+            { name: "high-school-002-20250117-ZCC", size: 889 },
+            { name: "elementary-school-008-20250915-pooled", size: 886 },
+            { name: "elementary-school-008-20250922-pooled", size: 884 },
+            { name: "healthcare-001-20250922-pooled", size: 878 },
+            { name: "middle-school-001-20250922-pooled", size: 857 },
+            { name: "WW-1", size: 266 },
+            { name: "WW-2", size: 266 },
+            { name: "WW-3", size: 266 },
+            { name: "WW-4", size: 266 },
+            { name: "elementary-school-001-20250129-dilution-1-32", size: 266 }
+        ];
+
         // Function to show status messages
         function showMessage(message, type = 'info') {
             const statusDiv = document.getElementById('statusMessage');
-            statusDiv.className = type === 'error' ? 'error' : type === 'success' ? 'success' : 'info-panel';
+            if (type === 'error') {
+                statusDiv.className = 'error';
+            } else if (type === 'success') {
+                statusDiv.className = 'success';
+            } else {
+                statusDiv.style.display = 'none';
+                return;
+            }
             statusDiv.textContent = message;
             statusDiv.style.display = 'block';
 
             if (type !== 'error') {
                 setTimeout(() => {
                     statusDiv.style.display = 'none';
-                }, 5000);
+                }, 3000);
             }
         }
 
-        // Initialize IGV with default reference
+        // Format sample name for display
+        function formatSampleName(name) {
+            return name
+                .replace('elementary-school', 'ES')
+                .replace('middle-school', 'MS')
+                .replace('high-school', 'HS')
+                .replace('k12-school', 'K12')
+                .replace('healthcare', 'HC')
+                .replace('-pooled', ' (pooled)')
+                .replace('-unpooled', ' (unpooled)')
+                .replace('-ZCC', ' (ZCC)')
+                .replace('-1plex', ' (1plex)')
+                .replace('-3plex', ' (3plex)')
+                .replace('-9plex', ' (9plex)')
+                .replace('-dilution-', ' (dil ')
+                .replace('-undiluted', ' (undiluted)')
+                .replace('-combo', ' (combo)');
+        }
+
+        // Format file size
+        function formatSize(bytes) {
+            if (bytes < 1024) return bytes + ' B';
+            else if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+            else return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
+        }
+
+        // Update track list in sidebar
+        function updateTrackList() {
+            const trackListDiv = document.getElementById('trackList');
+            const loadedSamples = samples.slice(0, 20); // Show top 20 samples
+
+            let html = '';
+            loadedSamples.forEach(sample => {
+                html += `
+                    <div class="track-item">
+                        <span class="track-name">${formatSampleName(sample.name)}</span>
+                        <span class="track-size">${formatSize(sample.size)}</span>
+                    </div>
+                `;
+            });
+
+            trackListDiv.innerHTML = html;
+        }
+
+        // Initialize IGV and load all tracks
         async function initializeIGV() {
-            // Clear any existing browser
-            if (igvBrowser) {
-                igvBrowser.removeAllTracks();
-                igvBrowser = null;
-            }
-
-            // Clear the div
             const igvDiv = document.getElementById('igvDiv');
-            igvDiv.innerHTML = '<div class="loading">Initializing genome browser...</div>';
-
-            showMessage('Initializing genome viewer...', 'info');
-
-            // Use relative paths for GitHub Pages
-            const baseUrl = '';
-
-            const options = {
-                genome: {
-                    id: "HuCSFDV1",
-                    name: "Human CSF-associated densovirus 1",
-                    fastaURL: `data/ref/NC_076998.fasta`,
-                    tracks: [
-                        {
-                            name: "Genes",
-                            type: "annotation",
-                            format: "gff3",
-                            url: `data/ref/NC_076998.gff`,
-                            displayMode: "EXPANDED",
-                            height: 100,
-                            color: "rgb(0, 0, 150)"
-                        }
-                    ]
-                },
-                locus: "NC_076998.1:1-4900",
-                showNavigation: true,
-                showRuler: true,
-                showCenterGuide: true,
-                showCursorTrackingGuide: true,
-                showCommandBar: true
-            };
 
             try {
-                // Clear the div again before creating browser
+                // Clear the loading message
                 igvDiv.innerHTML = '';
 
+                // Create initial tracks array with reference and gene annotations
+                const tracks = [
+                    {
+                        name: "Genes",
+                        type: "annotation",
+                        format: "gff3",
+                        url: "data/ref/NC_076998.gff",
+                        displayMode: "EXPANDED",
+                        height: 100,
+                        color: "rgb(0, 0, 150)"
+                    }
+                ];
+
+                // Add top 20 BAM tracks (sorted by size/read count)
+                const topSamples = samples.slice(0, 20);
+                topSamples.forEach(sample => {
+                    tracks.push({
+                        name: formatSampleName(sample.name),
+                        type: "alignment",
+                        format: "bam",
+                        url: `data/bam/${sample.name}.bam`,
+                        indexURL: `data/bam/${sample.name}.bam.bai`,
+                        displayMode: "SQUISHED",
+                        alignmentRowHeight: 4,
+                        coverageTrackHeight: 20,
+                        colorBy: "strand",
+                        showSoftClips: true,
+                        viewAsPairs: false,
+                        showMismatches: true,
+                        showAllBases: false,
+                        height: 60
+                    });
+                });
+
+                const options = {
+                    genome: {
+                        id: "HuCSFDV1",
+                        name: "Human CSF-associated densovirus 1",
+                        fastaURL: "data/ref/NC_076998.fasta",
+                        tracks: tracks
+                    },
+                    locus: "NC_076998.1:1-4900",
+                    showNavigation: true,
+                    showRuler: true,
+                    showCenterGuide: true,
+                    showCursorTrackingGuide: true,
+                    showCommandBar: true
+                };
+
                 igvBrowser = await igv.createBrowser(igvDiv, options);
-                console.log("IGV browser initialized successfully");
-                showMessage('Genome viewer initialized successfully! You can now load samples.', 'success');
+
+                console.log("IGV browser initialized with", topSamples.length, "samples");
+                showMessage(`Loaded top ${topSamples.length} samples by read count`, 'success');
+
+                // Update sample count
+                document.getElementById('sampleCount').textContent = topSamples.length + ' (top samples shown)';
+
+                // Update track list
+                updateTrackList();
+
             } catch (error) {
                 console.error("Error initializing IGV:", error);
                 showMessage(`Failed to initialize genome viewer: ${error.message}`, 'error');
-                igvDiv.innerHTML = '<div class="error">Failed to initialize viewer. Please check console for details.</div>';
+                igvDiv.innerHTML = '<div class="loading-container">Failed to load viewer. Please refresh the page.</div>';
             }
         }
 
-        async function loadSample() {
-            const select = document.getElementById('sampleSelect');
-            const sampleId = select.value;
-
-            if (!sampleId) {
-                alert('Please select a sample');
-                return;
-            }
-
-            // Initialize IGV if not already done
-            if (!igvBrowser) {
-                showMessage('Initializing viewer first...', 'info');
-                await initializeIGV();
-
-                // Wait a bit for initialization to complete
-                await new Promise(resolve => setTimeout(resolve, 1000));
-            }
-
-            showMessage(`Loading sample: ${sampleId}...`, 'info');
-
-            // Clear existing BAM tracks
-            const tracks = igvBrowser.trackViews.filter(tv =>
-                tv.track.type === 'alignment'
-            );
-            for (let trackView of tracks) {
-                igvBrowser.removeTrack(trackView.track);
-            }
-
-            // Use relative paths for GitHub Pages
-            const baseUrl = '';
-
-            // Add new BAM track
-            const bamConfig = {
-                name: sampleId,
-                type: "alignment",
-                format: "bam",
-                url: `data/bam/${sampleId}.bam`,
-                indexURL: `data/bam/${sampleId}.bam.bai`,
-                displayMode: "SQUISHED",
-                alignmentRowHeight: 6,
-                coverageTrackHeight: 30,
-                colorBy: "strand",
-                showSoftClips: true,
-                viewAsPairs: false,
-                showMismatches: true,
-                showAllBases: false
-            };
-
-            try {
-                await igvBrowser.loadTrack(bamConfig);
-                console.log(`Loaded BAM track for ${sampleId}`);
-                showMessage(`Successfully loaded: ${sampleId}`, 'success');
-            } catch (error) {
-                console.error(`Error loading BAM track for ${sampleId}:`, error);
-                showMessage(`Failed to load sample ${sampleId}. The file may not be accessible or may be missing an index file.`, 'error');
-            }
-        }
-
-        function clearViewer() {
-            if (igvBrowser) {
-                // Remove all alignment tracks
-                const tracks = igvBrowser.trackViews.filter(tv =>
-                    tv.track.type === 'alignment'
-                );
-                for (let trackView of tracks) {
-                    igvBrowser.removeTrack(trackView.track);
-                }
-                showMessage('Cleared all loaded samples', 'success');
-            }
-            document.getElementById('sampleSelect').value = '';
-        }
-
-        // Initialize on page load - removed auto-initialization
+        // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('Page loaded. Click "Initialize Viewer" to start.');
-            showMessage('Click "Initialize Viewer" to start the genome browser', 'info');
+            console.log('Initializing IGV viewer...');
+            initializeIGV();
         });
     </script>
 </body>
