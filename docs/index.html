@@ -8,7 +8,7 @@
     <!-- IGV.js CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/igv@2.15.11/dist/css/igv.css">
 
-    <!-- GitHub-inspired minimalist styles -->
+    <!-- Minimalist full-width styles -->
     <style>
         * {
             margin: 0;
@@ -31,7 +31,7 @@
         }
 
         .container {
-            max-width: 1280px;
+            max-width: 1600px;
             margin: 0 auto;
             padding: 0 16px;
         }
@@ -40,59 +40,13 @@
             font-size: 20px;
             font-weight: 600;
             color: #1f2328;
-            margin-bottom: 4px;
-        }
-
-        .subtitle {
-            color: #656d76;
-            font-size: 14px;
-        }
-
-        .content {
-            display: flex;
-            gap: 24px;
-        }
-
-        .sidebar {
-            width: 296px;
-            flex-shrink: 0;
-        }
-
-        .main {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .info-box {
-            border: 1px solid #d1d9e0;
-            border-radius: 6px;
-            padding: 16px;
-            margin-bottom: 16px;
-            background-color: #f6f8fa;
-        }
-
-        .info-box h3 {
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: #1f2328;
-        }
-
-        .info-box p, .info-box li {
-            font-size: 12px;
-            color: #656d76;
-            margin-bottom: 4px;
-        }
-
-        .info-box ul {
-            margin-left: 16px;
         }
 
         #igvDiv {
             border: 1px solid #d1d9e0;
             border-radius: 6px;
             background-color: #ffffff;
-            min-height: 600px;
+            min-height: 800px;
             overflow: hidden;
         }
 
@@ -100,7 +54,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 600px;
+            min-height: 800px;
             color: #656d76;
         }
 
@@ -118,155 +72,20 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-
-        .stats {
-            display: flex;
-            gap: 24px;
-            margin-bottom: 16px;
-            padding: 12px 0;
-            border-bottom: 1px solid #d1d9e0;
-        }
-
-        .stat {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .stat-label {
-            font-size: 12px;
-            color: #656d76;
-        }
-
-        .stat-value {
-            font-size: 14px;
-            font-weight: 600;
-            color: #1f2328;
-        }
-
-        .track-list {
-            max-height: 400px;
-            overflow-y: auto;
-            border: 1px solid #d1d9e0;
-            border-radius: 6px;
-            background-color: #ffffff;
-        }
-
-        .track-item {
-            padding: 8px 12px;
-            border-bottom: 1px solid #f0f3f6;
-            font-size: 12px;
-            color: #656d76;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .track-item:last-child {
-            border-bottom: none;
-        }
-
-        .track-name {
-            font-weight: 500;
-            color: #1f2328;
-            flex: 1;
-        }
-
-        .track-size {
-            color: #656d76;
-            font-size: 11px;
-            text-align: right;
-        }
-
-        .error {
-            background-color: #ffebe9;
-            border: 1px solid #ff8182;
-            border-radius: 6px;
-            padding: 12px;
-            margin-bottom: 16px;
-            color: #cf222e;
-            font-size: 14px;
-        }
-
-        .success {
-            background-color: #dafbe1;
-            border: 1px solid #82e596;
-            border-radius: 6px;
-            padding: 12px;
-            margin-bottom: 16px;
-            color: #1a7f37;
-            font-size: 14px;
-        }
-
-        @media (max-width: 768px) {
-            .content {
-                flex-direction: column;
-            }
-            .sidebar {
-                width: 100%;
-            }
-        }
     </style>
 </head>
 <body>
     <div class="header">
         <div class="container">
             <h1>Densovirus reads from Dane County, Wisconsin air samples mapped to HuCSFDV1</h1>
-            <div class="subtitle">Interactive genomic data visualization</div>
         </div>
     </div>
 
     <div class="container">
-        <div class="stats">
-            <div class="stat">
-                <span class="stat-label">Total samples:</span>
-                <span class="stat-value" id="sampleCount">0</span>
-            </div>
-            <div class="stat">
-                <span class="stat-label">Reference genome:</span>
-                <span class="stat-value">HuCSFDV1 (NC_076998)</span>
-            </div>
-            <div class="stat">
-                <span class="stat-label">Genome length:</span>
-                <span class="stat-value">4,690 bp</span>
-            </div>
-        </div>
-
-        <div class="content">
-            <div class="sidebar">
-                <div class="info-box">
-                    <h3>About</h3>
-                    <p>Densovirus sequences from air samples collected at schools and healthcare facilities in Dane County, Wisconsin.</p>
-                </div>
-
-                <div class="info-box">
-                    <h3>Navigation</h3>
-                    <ul>
-                        <li>Click and drag to pan</li>
-                        <li>Scroll to zoom in/out</li>
-                        <li>Click reads for details</li>
-                        <li>Use search for coordinates</li>
-                    </ul>
-                </div>
-
-                <div class="info-box">
-                    <h3>Loaded Samples</h3>
-                    <div id="trackList" class="track-list">
-                        <div class="track-item">
-                            <span class="track-name">Loading samples...</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="main">
-                <div id="statusMessage"></div>
-                <div id="igvDiv">
-                    <div class="loading-container">
-                        <div class="loading-spinner"></div>
-                        <span>Initializing genome browser...</span>
-                    </div>
-                </div>
+        <div id="igvDiv">
+            <div class="loading-container">
+                <div class="loading-spinner"></div>
+                <span>Loading genome browser...</span>
             </div>
         </div>
     </div>
@@ -277,162 +96,113 @@
     <script>
         let igvBrowser = null;
 
-        // Sample data with actual read counts (only samples with reads)
+        // All samples with actual read counts
         const samples = [
-            { name: "high-school-001-20250901-pooled", size: 2355 },
-            { name: "elementary-school-004-20250929-pooled", size: 463 },
-            { name: "elementary-school-006-20241217-1plex", size: 354 },
-            { name: "high-school-001-20250915-pooled", size: 327 },
-            { name: "high-school-001-20250131-1plex", size: 248 },
-            { name: "high-school-001-20250929-pooled", size: 223 },
-            { name: "elementary-school-004-20250901-pooled", size: 215 },
-            { name: "elementary-school-004-20250922-pooled", size: 155 },
-            { name: "elementary-school-006-20241217-3plex", size: 136 },
-            { name: "elementary-school-002-20241023-1plex", size: 118 },
-            { name: "elementary-school-004-20250915-pooled", size: 112 },
-            { name: "high-school-001-20250131-9plex", size: 111 },
-            { name: "elementary-school-008-20250901-pooled", size: 109 },
-            { name: "high-school-002-20250922-pooled", size: 104 },
-            { name: "high-school-001-20250131-3plex", size: 94 },
-            { name: "elementary-school-006-20241213-ZCC", size: 83 },
-            { name: "elementary-school-007-20241212-1plex", size: 73 },
-            { name: "elementary-school-004-20241121-1plex", size: 69 },
-            { name: "high-school-002-20250901-pooled", size: 66 },
-            { name: "elementary-school-007-20250915-pooled", size: 58 },
-            { name: "elementary-school-007-20250901-pooled", size: 52 },
-            { name: "elementary-school-007-20250922-pooled", size: 50 },
-            { name: "elementary-school-002-20241018-ZCC", size: 43 },
-            { name: "high-school-001-20250128-ZCC", size: 36 },
-            { name: "elementary-school-001-20250129-undiluted", size: 34 },
-            { name: "high-school-002-20250117-ZCC", size: 29 },
-            { name: "elementary-school-002-20241023-3plex", size: 27 },
-            { name: "high-school-002-20250915-pooled", size: 25 },
-            { name: "elementary-school-006-20241217-9plex", size: 24 },
-            { name: "elementary-school-001-20250922-pooled", size: 24 },
-            { name: "elementary-school-009-20250206-3plex", size: 22 },
-            { name: "k12-school-001-20240906-3plex", size: 21 },
-            { name: "elementary-school-009-20250915-pooled", size: 20 },
-            { name: "k12-school-001-20250922-pooled", size: 20 },
-            { name: "elementary-school-007-20250929-pooled", size: 19 },
-            { name: "elementary-school-001-20250901-pooled", size: 18 },
-            { name: "elementary-school-004-20241121-3plex", size: 18 },
-            { name: "elementary-school-007-20241212-3plex", size: 16 },
-            { name: "elementary-school-009-20250901-pooled", size: 15 },
-            { name: "k12-school-001-20250915-pooled", size: 14 },
-            { name: "elementary-school-001-20250129-dilution-1-4", size: 13 },
-            { name: "high-school-002-20250929-pooled", size: 12 },
-            { name: "middle-school-003-20250226-1plex", size: 11 },
-            { name: "elementary-school-001-20250915-pooled", size: 10 },
-            { name: "elementary-school-002-20241023-9plex", size: 10 },
-            { name: "elementary-school-004-20241121-9plex", size: 10 },
-            { name: "high-school-002-20250121-3plex", size: 10 },
-            { name: "k12-school-001-20240906-9plex", size: 10 },
-            { name: "elementary-school-007-20241212-9plex", size: 9 },
-            { name: "elementary-school-009-20250206-1plex", size: 8 },
-            { name: "elementary-school-009-20250922-pooled", size: 8 },
-            { name: "k12-school-001-20240910-ZCC", size: 8 },
-            { name: "elementary-school-001-20250129-dilution-1-8", size: 7 },
-            { name: "elementary-school-009-20250210-ZCC", size: 7 },
-            { name: "middle-school-003-20250226-3plex", size: 7 },
-            { name: "elementary-school-004-20241125-ZCC", size: 6 },
-            { name: "elementary-school-009-20250206-9plex", size: 6 },
-            { name: "k12-school-001-20240906-1plex", size: 6 },
-            { name: "elementary-school-007-20241216-ZCC", size: 5 },
-            { name: "elementary-school-001-20250929-pooled", size: 4 },
-            { name: "high-school-002-20250121-1plex", size: 4 },
-            { name: "middle-school-003-20250220-ZCC", size: 4 },
-            { name: "k12-school-001-20250901-pooled", size: 3 },
-            { name: "elementary-school-001-20250129-dilution-1-16", size: 2 },
-            { name: "elementary-school-008-20250915-pooled", size: 2 },
-            { name: "high-school-002-20250121-9plex", size: 2 },
-            { name: "high-school-003-20250915-pooled", size: 2 },
-            { name: "high-school-003-20250922-pooled", size: 2 },
-            { name: "middle-school-003-20250226-9plex", size: 2 },
-            { name: "elementary-school-003-20250901-pooled", size: 1 },
-            { name: "elementary-school-003-20250929-pooled", size: 1 },
-            { name: "elementary-school-005-20250901-pooled", size: 1 },
-            { name: "elementary-school-005-20250915-pooled", size: 1 },
-            { name: "elementary-school-005-20250929-pooled", size: 1 },
-            { name: "elementary-school-008-20250922-pooled", size: 1 },
-            { name: "healthcare-001-20250922-pooled", size: 1 },
-            { name: "high-school-002-20250225-unpooled", size: 1 },
-            { name: "high-school-003-20250929-pooled", size: 1 },
-            { name: "middle-school-001-20250922-pooled", size: 1 },
-            { name: "middle-school-002-20250901-pooled", size: 1 },
-            { name: "middle-school-002-20250922-pooled", size: 1 },
-            { name: "middle-school-003-20250901-pooled", size: 1 },
-            { name: "middle-school-003-20250915-pooled", size: 1 },
-            { name: "middle-school-003-20250922-pooled", size: 1 },
-            { name: "middle-school-004-20250901-pooled", size: 1 },
-            { name: "middle-school-004-20250915-pooled", size: 1 },
-            { name: "middle-school-004-20250929-pooled", size: 1 },
-            { name: "middle-school-005-20250901-pooled", size: 1 },
-            { name: "middle-school-005-20250915-pooled", size: 1 },
-            { name: "middle-school-005-20250922-pooled", size: 1 },
-            { name: "middle-school-005-20250929-pooled", size: 1 }
+            { name: "high-school-001-20250901-pooled", reads: 2355 },
+            { name: "elementary-school-004-20250929-pooled", reads: 463 },
+            { name: "elementary-school-006-20241217-1plex", reads: 354 },
+            { name: "high-school-001-20250915-pooled", reads: 327 },
+            { name: "high-school-001-20250131-1plex", reads: 248 },
+            { name: "high-school-001-20250929-pooled", reads: 223 },
+            { name: "elementary-school-004-20250901-pooled", reads: 215 },
+            { name: "elementary-school-004-20250922-pooled", reads: 155 },
+            { name: "elementary-school-006-20241217-3plex", reads: 136 },
+            { name: "elementary-school-002-20241023-1plex", reads: 118 },
+            { name: "elementary-school-004-20250915-pooled", reads: 112 },
+            { name: "high-school-001-20250131-9plex", reads: 111 },
+            { name: "elementary-school-008-20250901-pooled", reads: 109 },
+            { name: "high-school-002-20250922-pooled", reads: 104 },
+            { name: "high-school-001-20250131-3plex", reads: 94 },
+            { name: "elementary-school-006-20241213-ZCC", reads: 83 },
+            { name: "elementary-school-007-20241212-1plex", reads: 73 },
+            { name: "elementary-school-004-20241121-1plex", reads: 69 },
+            { name: "high-school-002-20250901-pooled", reads: 66 },
+            { name: "elementary-school-007-20250915-pooled", reads: 58 },
+            { name: "elementary-school-007-20250901-pooled", reads: 52 },
+            { name: "elementary-school-007-20250922-pooled", reads: 50 },
+            { name: "elementary-school-002-20241018-ZCC", reads: 43 },
+            { name: "high-school-001-20250128-ZCC", reads: 36 },
+            { name: "elementary-school-001-20250129-undiluted", reads: 34 },
+            { name: "high-school-002-20250117-ZCC", reads: 29 },
+            { name: "elementary-school-002-20241023-3plex", reads: 27 },
+            { name: "high-school-002-20250915-pooled", reads: 25 },
+            { name: "elementary-school-006-20241217-9plex", reads: 24 },
+            { name: "elementary-school-001-20250922-pooled", reads: 24 },
+            { name: "elementary-school-009-20250206-3plex", reads: 22 },
+            { name: "k12-school-001-20240906-3plex", reads: 21 },
+            { name: "elementary-school-009-20250915-pooled", reads: 20 },
+            { name: "k12-school-001-20250922-pooled", reads: 20 },
+            { name: "elementary-school-007-20250929-pooled", reads: 19 },
+            { name: "elementary-school-001-20250901-pooled", reads: 18 },
+            { name: "elementary-school-004-20241121-3plex", reads: 18 },
+            { name: "elementary-school-007-20241212-3plex", reads: 16 },
+            { name: "elementary-school-009-20250901-pooled", reads: 15 },
+            { name: "k12-school-001-20250915-pooled", reads: 14 },
+            { name: "elementary-school-001-20250129-dilution-1-4", reads: 13 },
+            { name: "high-school-002-20250929-pooled", reads: 12 },
+            { name: "middle-school-003-20250226-1plex", reads: 11 },
+            { name: "elementary-school-001-20250915-pooled", reads: 10 },
+            { name: "elementary-school-002-20241023-9plex", reads: 10 },
+            { name: "elementary-school-004-20241121-9plex", reads: 10 },
+            { name: "high-school-002-20250121-3plex", reads: 10 },
+            { name: "k12-school-001-20240906-9plex", reads: 10 },
+            { name: "elementary-school-007-20241212-9plex", reads: 9 },
+            { name: "elementary-school-009-20250206-1plex", reads: 8 },
+            { name: "elementary-school-009-20250922-pooled", reads: 8 },
+            { name: "k12-school-001-20240910-ZCC", reads: 8 },
+            { name: "elementary-school-001-20250129-dilution-1-8", reads: 7 },
+            { name: "elementary-school-009-20250210-ZCC", reads: 7 },
+            { name: "middle-school-003-20250226-3plex", reads: 7 },
+            { name: "elementary-school-004-20241125-ZCC", reads: 6 },
+            { name: "elementary-school-009-20250206-9plex", reads: 6 },
+            { name: "k12-school-001-20240906-1plex", reads: 6 },
+            { name: "elementary-school-007-20241216-ZCC", reads: 5 },
+            { name: "elementary-school-001-20250929-pooled", reads: 4 },
+            { name: "high-school-002-20250121-1plex", reads: 4 },
+            { name: "middle-school-003-20250220-ZCC", reads: 4 },
+            { name: "k12-school-001-20250901-pooled", reads: 3 },
+            { name: "elementary-school-001-20250129-dilution-1-16", reads: 2 },
+            { name: "elementary-school-008-20250915-pooled", reads: 2 },
+            { name: "high-school-002-20250121-9plex", reads: 2 },
+            { name: "high-school-003-20250915-pooled", reads: 2 },
+            { name: "high-school-003-20250922-pooled", reads: 2 },
+            { name: "middle-school-003-20250226-9plex", reads: 2 },
+            { name: "elementary-school-003-20250901-pooled", reads: 1 },
+            { name: "elementary-school-003-20250929-pooled", reads: 1 },
+            { name: "elementary-school-005-20250901-pooled", reads: 1 },
+            { name: "elementary-school-005-20250915-pooled", reads: 1 },
+            { name: "elementary-school-005-20250929-pooled", reads: 1 },
+            { name: "elementary-school-008-20250922-pooled", reads: 1 },
+            { name: "healthcare-001-20250922-pooled", reads: 1 },
+            { name: "high-school-002-20250225-unpooled", reads: 1 },
+            { name: "high-school-003-20250929-pooled", reads: 1 },
+            { name: "middle-school-001-20250922-pooled", reads: 1 },
+            { name: "middle-school-002-20250901-pooled", reads: 1 },
+            { name: "middle-school-002-20250922-pooled", reads: 1 },
+            { name: "middle-school-003-20250901-pooled", reads: 1 },
+            { name: "middle-school-003-20250915-pooled", reads: 1 },
+            { name: "middle-school-003-20250922-pooled", reads: 1 },
+            { name: "middle-school-004-20250901-pooled", reads: 1 },
+            { name: "middle-school-004-20250915-pooled", reads: 1 },
+            { name: "middle-school-004-20250929-pooled", reads: 1 },
+            { name: "middle-school-005-20250901-pooled", reads: 1 },
+            { name: "middle-school-005-20250915-pooled", reads: 1 },
+            { name: "middle-school-005-20250922-pooled", reads: 1 },
+            { name: "middle-school-005-20250929-pooled", reads: 1 }
         ];
 
-        // Function to show status messages
-        function showMessage(message, type = 'info') {
-            const statusDiv = document.getElementById('statusMessage');
-            if (type === 'error') {
-                statusDiv.className = 'error';
-            } else if (type === 'success') {
-                statusDiv.className = 'success';
-            } else {
-                statusDiv.style.display = 'none';
-                return;
-            }
-            statusDiv.textContent = message;
-            statusDiv.style.display = 'block';
-
-            if (type !== 'error') {
-                setTimeout(() => {
-                    statusDiv.style.display = 'none';
-                }, 3000);
-            }
-        }
-
         // Format sample name for display
-        function formatSampleName(name) {
-            return name
+        function formatSampleName(name, reads) {
+            const formatted = name
                 .replace('elementary-school', 'ES')
                 .replace('middle-school', 'MS')
                 .replace('high-school', 'HS')
                 .replace('k12-school', 'K12')
                 .replace('healthcare', 'HC')
-                .replace('-pooled', ' (pooled)')
-                .replace('-unpooled', ' (unpooled)')
-                .replace('-ZCC', ' (ZCC)')
-                .replace('-1plex', ' (1plex)')
-                .replace('-3plex', ' (3plex)')
-                .replace('-9plex', ' (9plex)')
-                .replace('-dilution-', ' (dil ')
-                .replace('-undiluted', ' (undiluted)')
-                .replace('-combo', ' (combo)');
-        }
-
-        // Format read count
-        function formatSize(reads) {
-            return reads + ' reads';
-        }
-
-        // Update track list in sidebar
-        function updateTrackList() {
-            const trackListDiv = document.getElementById('trackList');
-            const loadedSamples = samples.slice(0, 20); // Show top 20 samples
-
-            let html = '';
-            loadedSamples.forEach(sample => {
-                html += `
-                    <div class="track-item">
-                        <span class="track-name">${formatSampleName(sample.name)}</span>
-                        <span class="track-size">${formatSize(sample.size)}</span>
-                    </div>
-                `;
-            });
-
-            trackListDiv.innerHTML = html;
+                .replace('-20250', '-25')
+                .replace('-20240', '-24')
+                .replace('-20241', '-24');
+            return `${formatted} (${reads} reads)`;
         }
 
         // Initialize IGV and load all tracks
@@ -451,29 +221,28 @@
                         format: "gff3",
                         url: "data/ref/NC_076998.gff",
                         displayMode: "EXPANDED",
-                        height: 100,
+                        height: 250,
                         color: "rgb(0, 0, 150)"
                     }
                 ];
 
-                // Add top 20 BAM tracks (sorted by size/read count)
-                const topSamples = samples.slice(0, 20);
-                topSamples.forEach(sample => {
+                // Add ALL BAM tracks with reads
+                samples.forEach(sample => {
                     tracks.push({
-                        name: formatSampleName(sample.name),
+                        name: formatSampleName(sample.name, sample.reads),
                         type: "alignment",
                         format: "bam",
                         url: `data/bam/${sample.name}.bam`,
                         indexURL: `data/bam/${sample.name}.bam.bai`,
                         displayMode: "SQUISHED",
-                        alignmentRowHeight: 4,
-                        coverageTrackHeight: 20,
+                        alignmentRowHeight: 3,
+                        coverageTrackHeight: 15,
                         colorBy: "strand",
                         showSoftClips: true,
                         viewAsPairs: false,
                         showMismatches: true,
                         showAllBases: false,
-                        height: 60
+                        height: 40
                     });
                 });
 
@@ -493,26 +262,17 @@
                 };
 
                 igvBrowser = await igv.createBrowser(igvDiv, options);
-
-                console.log("IGV browser initialized with", topSamples.length, "samples");
-                showMessage(`Loaded top ${topSamples.length} samples by read count`, 'success');
-
-                // Update sample count
-                document.getElementById('sampleCount').textContent = topSamples.length + ' (top samples shown)';
-
-                // Update track list
-                updateTrackList();
+                console.log(`IGV browser initialized with ${samples.length} samples containing densovirus reads`);
 
             } catch (error) {
                 console.error("Error initializing IGV:", error);
-                showMessage(`Failed to initialize genome viewer: ${error.message}`, 'error');
                 igvDiv.innerHTML = '<div class="loading-container">Failed to load viewer. Please refresh the page.</div>';
             }
         }
 
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('Initializing IGV viewer...');
+            console.log('Initializing IGV viewer with all samples containing reads...');
             initializeIGV();
         });
     </script>
