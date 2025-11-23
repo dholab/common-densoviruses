@@ -324,19 +324,20 @@
 
             showMessage('Initializing genome viewer...', 'info');
 
-            const baseUrl = 'https://raw.githubusercontent.com/dholab/common-densoviruses/main';
+            // Use relative paths for GitHub Pages
+            const baseUrl = '';
 
             const options = {
                 genome: {
                     id: "HuCSFDV1",
                     name: "Human CSF-associated densovirus 1",
-                    fastaURL: `${baseUrl}/air-samples/vsp/ref/NC_076998.fasta`,
+                    fastaURL: `data/ref/NC_076998.fasta`,
                     tracks: [
                         {
                             name: "Genes",
                             type: "annotation",
                             format: "gff3",
-                            url: `${baseUrl}/air-samples/vsp/ref/NC_076998.gff`,
+                            url: `data/ref/NC_076998.gff`,
                             displayMode: "EXPANDED",
                             height: 100,
                             color: "rgb(0, 0, 150)"
@@ -393,15 +394,16 @@
                 igvBrowser.removeTrack(trackView.track);
             }
 
-            const baseUrl = 'https://raw.githubusercontent.com/dholab/common-densoviruses/main';
+            // Use relative paths for GitHub Pages
+            const baseUrl = '';
 
             // Add new BAM track
             const bamConfig = {
                 name: sampleId,
                 type: "alignment",
                 format: "bam",
-                url: `${baseUrl}/air-samples/vsp/bam/${sampleId}.bam`,
-                indexURL: `${baseUrl}/air-samples/vsp/bam/${sampleId}.bam.bai`,
+                url: `data/bam/${sampleId}.bam`,
+                indexURL: `data/bam/${sampleId}.bam.bai`,
                 displayMode: "SQUISHED",
                 alignmentRowHeight: 6,
                 coverageTrackHeight: 30,
