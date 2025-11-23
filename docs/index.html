@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Densovirus reads from Dane County, Wisconsin air samples mapped to HuCSFDV1</title>
+
+    <!-- IGV.js CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/igv@2.15.11/dist/css/igv.css">
+
+    <!-- Custom styles -->
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #555;
+            margin-top: 30px;
+        }
+        .viewer-container {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+        #igvDiv {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: white;
+            min-height: 500px;
+        }
+        .sample-selector {
+            margin: 20px 0;
+        }
+        select {
+            padding: 8px 12px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: white;
+            cursor: pointer;
+        }
+        button {
+            padding: 8px 16px;
+            margin: 0 5px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .info-panel {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            border-left: 4px solid #007bff;
+        }
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: #666;
+        }
+        .error {
+            color: #dc3545;
+            padding: 10px;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Densovirus reads from Dane County, Wisconsin air samples mapped to HuCSFDV1</h1>
+
+        <div class="info-panel">
+            <p><strong>Interactive Genome Viewer</strong></p>
+            <p>This page displays BAM alignment files from various air sample collections using IGV.js.
+               Use the controls below to select different samples and navigate the genome.</p>
+        </div>
+
+        <div class="sample-selector">
+            <label for="sampleSelect">Select Sample: </label>
+            <select id="sampleSelect">
+                <option value="">-- Choose a sample --</option>
+                <optgroup label="Elementary Schools">
+                    <option value="elementary-school-004-20250929-pooled">Elementary School 004 (2025-09-29, pooled)</option>
+                    <option value="elementary-school-005-20250929-pooled">Elementary School 005 (2025-09-29, pooled)</option>
+                    <option value="elementary-school-006-20241213-ZCC">Elementary School 006 (2024-12-13, ZCC)</option>
+                    <option value="elementary-school-007-20250922-pooled">Elementary School 007 (2025-09-22, pooled)</option>
+                    <option value="elementary-school-008-20250922-pooled">Elementary School 008 (2025-09-22, pooled)</option>
+                    <option value="elementary-school-009-20250210-ZCC">Elementary School 009 (2025-02-10, ZCC)</option>
+                    <option value="elementary-school-009-20250206-3plex">Elementary School 009 (2025-02-06, 3plex)</option>
+                    <option value="elementary-school-009-20250915-pooled">Elementary School 009 (2025-09-15, pooled)</option>
+                </optgroup>
+                <optgroup label="K-12 Schools">
+                    <option value="k12-school-001-20240906-3plex">K-12 School 001 (2024-09-06, 3plex)</option>
+                    <option value="k12-school-001-20240906-9plex">K-12 School 001 (2024-09-06, 9plex)</option>
+                    <option value="k12-school-001-20240910-ZCC">K-12 School 001 (2024-09-10, ZCC)</option>
+                    <option value="k12-school-001-20250915-pooled">K-12 School 001 (2025-09-15, pooled)</option>
+                </optgroup>
+                <optgroup label="Middle Schools">
+                    <option value="middle-school-001-20250922-pooled">Middle School 001 (2025-09-22, pooled)</option>
+                    <option value="middle-school-004-20250901-pooled">Middle School 004 (2025-09-01, pooled)</option>
+                    <option value="middle-school-005-20250216-unpooled">Middle School 005 (2025-02-16, unpooled)</option>
+                </optgroup>
+                <optgroup label="High Schools">
+                    <option value="high-school-002-pooled-combo">High School 002 (pooled combo)</option>
+                </optgroup>
+                <optgroup label="Other">
+                    <option value="WW-1">Wastewater Sample 1</option>
+                </optgroup>
+            </select>
+            <button onclick="loadSample()">Load Sample</button>
+            <button onclick="clearViewer()">Clear Viewer</button>
+        </div>
+
+        <div class="viewer-container">
+            <h2>Genome Browser</h2>
+            <div id="igvDiv">
+                <div class="loading">Select a sample to begin viewing</div>
+            </div>
+        </div>
+
+        <div class="info-panel">
+            <p><strong>Navigation Tips:</strong></p>
+            <ul>
+                <li>Click and drag to pan along the genome</li>
+                <li>Use the mouse wheel or zoom controls to zoom in/out</li>
+                <li>Click on reads to see detailed alignment information</li>
+                <li>Use the search box to jump to specific genomic coordinates</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- IGV.js -->
+    <script src="https://cdn.jsdelivr.net/npm/igv@2.15.11/dist/igv.min.js"></script>
+
+    <script>
+        let igvBrowser = null;
+        const baseUrl = window.location.hostname === 'localhost'
+            ? '..'
+            : 'https://raw.githubusercontent.com/dholab/common-densoviruses/main';
+
+        // Initialize IGV with default reference
+        async function initializeIGV() {
+            const options = {
+                genome: {
+                    id: "HuCSFDV1",
+                    name: "Human CSF-associated densovirus 1",
+                    fastaURL: `${baseUrl}/air-samples/vsp/ref/NC_076998.fasta`,
+                    tracks: [
+                        {
+                            name: "Genes",
+                            type: "annotation",
+                            format: "gff3",
+                            url: `${baseUrl}/air-samples/vsp/ref/NC_076998.gff`,
+                            displayMode: "EXPANDED",
+                            height: 100,
+                            color: "rgb(0, 0, 150)"
+                        }
+                    ]
+                },
+                locus: "NC_076998.1:1-4900",
+                showNavigation: true,
+                showRuler: true,
+                showCenterGuide: true,
+                showCursorTrackingGuide: true,
+                showCommandBar: true
+            };
+
+            try {
+                igvBrowser = await igv.createBrowser(document.getElementById('igvDiv'), options);
+                console.log("IGV browser initialized successfully");
+            } catch (error) {
+                console.error("Error initializing IGV:", error);
+                showError("Failed to initialize genome viewer. Please refresh the page.");
+            }
+        }
+
+        async function loadSample() {
+            const select = document.getElementById('sampleSelect');
+            const sampleId = select.value;
+
+            if (!sampleId) {
+                alert('Please select a sample');
+                return;
+            }
+
+            // Initialize IGV if not already done
+            if (!igvBrowser) {
+                await initializeIGV();
+            }
+
+            // Clear existing BAM tracks
+            const tracks = igvBrowser.trackViews.filter(tv =>
+                tv.track.type === 'alignment'
+            );
+            for (let trackView of tracks) {
+                igvBrowser.removeTrack(trackView.track);
+            }
+
+            // Add new BAM track
+            const bamConfig = {
+                name: sampleId,
+                type: "alignment",
+                format: "bam",
+                url: `${baseUrl}/air-samples/vsp/bam/${sampleId}.bam`,
+                indexURL: `${baseUrl}/air-samples/vsp/bam/${sampleId}.bam.bai`,
+                displayMode: "SQUISHED",
+                alignmentRowHeight: 6,
+                coverageTrackHeight: 30,
+                colorBy: "strand",
+                showSoftClips: true,
+                viewAsPairs: false,
+                showMismatches: true,
+                showAllBases: false
+            };
+
+            try {
+                await igvBrowser.loadTrack(bamConfig);
+                console.log(`Loaded BAM track for ${sampleId}`);
+            } catch (error) {
+                console.error(`Error loading BAM track for ${sampleId}:`, error);
+                showError(`Failed to load sample ${sampleId}. The file may not be accessible.`);
+            }
+        }
+
+        function clearViewer() {
+            if (igvBrowser) {
+                // Remove all alignment tracks
+                const tracks = igvBrowser.trackViews.filter(tv =>
+                    tv.track.type === 'alignment'
+                );
+                for (let trackView of tracks) {
+                    igvBrowser.removeTrack(trackView.track);
+                }
+            }
+            document.getElementById('sampleSelect').value = '';
+        }
+
+        function showError(message) {
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error';
+            errorDiv.textContent = message;
+            document.querySelector('.viewer-container').insertBefore(
+                errorDiv,
+                document.getElementById('igvDiv')
+            );
+            setTimeout(() => errorDiv.remove(), 5000);
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Page loaded, ready to initialize IGV');
+        });
+    </script>
+</body>
+</html>
