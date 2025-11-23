@@ -3,12 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Densovirus reads from Dane County, Wisconsin air samples mapped to HuCSFDV1</title>
+    <title>Common Densoviruses - Genomic Visualizations</title>
 
-    <!-- IGV.js CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/igv@2.15.11/dist/css/igv.css">
-
-    <!-- Minimalist full-width styles -->
     <style>
         * {
             margin: 0;
@@ -26,252 +22,135 @@
 
         .header {
             border-bottom: 1px solid #d1d9e0;
-            padding: 16px 0;
-            margin-bottom: 24px;
+            padding: 24px 0;
+            margin-bottom: 32px;
         }
 
         .container {
-            max-width: 1600px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 0 16px;
         }
 
         h1 {
-            font-size: 20px;
+            font-size: 32px;
             font-weight: 600;
             color: #1f2328;
+            margin-bottom: 8px;
         }
 
-        #igvDiv {
+        .subtitle {
+            font-size: 16px;
+            color: #656d76;
+            margin-bottom: 32px;
+        }
+
+        .datasets {
+            display: grid;
+            gap: 24px;
+            max-width: 800px;
+        }
+
+        .dataset-card {
             border: 1px solid #d1d9e0;
             border-radius: 6px;
-            background-color: #ffffff;
-            min-height: 800px;
-            overflow: hidden;
+            padding: 24px;
+            transition: border-color 0.2s;
         }
 
-        .loading-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 800px;
+        .dataset-card:hover {
+            border-color: #818b98;
+        }
+
+        .dataset-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #0969da;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .dataset-title:hover {
+            text-decoration: underline;
+        }
+
+        .dataset-description {
+            color: #656d76;
+            margin-bottom: 12px;
+        }
+
+        .dataset-meta {
+            font-size: 12px;
             color: #656d76;
         }
 
-        .loading-spinner {
-            border: 2px solid #d1d9e0;
-            border-top: 2px solid #2da44e;
-            border-radius: 50%;
-            width: 32px;
-            height: 32px;
-            animation: spin 1s linear infinite;
-            margin-right: 12px;
+        .dataset-meta span {
+            margin-right: 16px;
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .coming-soon {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .coming-soon .dataset-title {
+            color: #656d76;
+            cursor: default;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 2px 7px;
+            font-size: 12px;
+            font-weight: 500;
+            border-radius: 20px;
+            background-color: #ddf4ff;
+            color: #0969da;
+            margin-left: 8px;
+        }
+
+        .badge.coming-soon-badge {
+            background-color: #fff8c5;
+            color: #9a6700;
         }
     </style>
 </head>
 <body>
     <div class="header">
         <div class="container">
-            <h1>Densovirus reads from Dane County, Wisconsin air samples mapped to HuCSFDV1</h1>
+            <h1>Common Densoviruses</h1>
+            <p class="subtitle">Interactive genomic visualizations of densovirus sequences from environmental samples</p>
         </div>
     </div>
 
     <div class="container">
-        <div id="igvDiv">
-            <div class="loading-container">
-                <div class="loading-spinner"></div>
-                <span>Loading genome browser...</span>
+        <div class="datasets">
+            <div class="dataset-card">
+                <a href="dane_county_air/" class="dataset-title">
+                    Dane County, Wisconsin Air Samples
+                </a>
+                <p class="dataset-description">
+                    Densovirus reads from air samples collected across Dane County schools and healthcare facilities,
+                    mapped to Human CSF-associated densovirus 1 (HuCSFDV1)
+                </p>
+                <div class="dataset-meta">
+                    <span>77 samples</span>
+                    <span>5,762 total reads</span>
+                    <span>Interactive IGV viewer</span>
+                </div>
+            </div>
+
+            <div class="dataset-card coming-soon">
+                <span class="dataset-title">
+                    Additional Datasets
+                    <span class="badge coming-soon-badge">Coming Soon</span>
+                </span>
+                <p class="dataset-description">
+                    More densovirus genomic visualizations from other environmental samples will be added here.
+                </p>
             </div>
         </div>
     </div>
-
-    <!-- IGV.js -->
-    <script src="https://cdn.jsdelivr.net/npm/igv@2.15.11/dist/igv.min.js"></script>
-
-    <script>
-        let igvBrowser = null;
-
-        // All samples with actual read counts (verified from BAM files in docs/data/bam)
-        const samples = [
-            { name: "high-school-001-20250901-pooled", reads: 2355 },
-            { name: "elementary-school-004-20250929-pooled", reads: 463 },
-            { name: "elementary-school-006-20241217-1plex", reads: 354 },
-            { name: "high-school-001-20250915-pooled", reads: 327 },
-            { name: "high-school-001-20250131-1plex", reads: 248 },
-            { name: "high-school-001-20250929-pooled", reads: 223 },
-            { name: "elementary-school-004-20250901-pooled", reads: 215 },
-            { name: "elementary-school-004-20250922-pooled", reads: 155 },
-            { name: "elementary-school-006-20241217-3plex", reads: 136 },
-            { name: "elementary-school-002-20241023-1plex", reads: 118 },
-            { name: "elementary-school-004-20250915-pooled", reads: 112 },
-            { name: "high-school-001-20250131-9plex", reads: 111 },
-            { name: "elementary-school-008-20250901-pooled", reads: 109 },
-            { name: "high-school-002-20250922-pooled", reads: 104 },
-            { name: "high-school-001-20250131-3plex", reads: 94 },
-            { name: "elementary-school-006-20241213-ZCC", reads: 83 },
-            { name: "elementary-school-007-20241212-1plex", reads: 73 },
-            { name: "elementary-school-004-20241121-1plex", reads: 69 },
-            { name: "high-school-002-20250901-pooled", reads: 66 },
-            { name: "elementary-school-007-20250915-pooled", reads: 58 },
-            { name: "elementary-school-007-20250901-pooled", reads: 52 },
-            { name: "elementary-school-007-20250922-pooled", reads: 50 },
-            { name: "elementary-school-002-20241018-ZCC", reads: 43 },
-            { name: "high-school-001-20250128-ZCC", reads: 36 },
-            { name: "elementary-school-001-20250129-undiluted", reads: 34 },
-            { name: "high-school-002-20250117-ZCC", reads: 29 },
-            { name: "elementary-school-002-20241023-3plex", reads: 27 },
-            { name: "high-school-002-20250915-pooled", reads: 25 },
-            { name: "elementary-school-006-20241217-9plex", reads: 24 },
-            { name: "elementary-school-001-20250922-pooled", reads: 24 },
-            { name: "elementary-school-008-20250922-pooled", reads: 23 },
-            { name: "elementary-school-004-20241125-ZCC", reads: 23 },
-            { name: "elementary-school-001-20250929-pooled", reads: 23 },
-            { name: "elementary-school-004-20241121-3plex", reads: 22 },
-            { name: "middle-school-004-20250901-pooled", reads: 16 },
-            { name: "high-school-003-20250922-pooled", reads: 16 },
-            { name: "elementary-school-009-20250915-pooled", reads: 16 },
-            { name: "elementary-school-007-20241212-3plex", reads: 16 },
-            { name: "elementary-school-002-20241023-9plex", reads: 16 },
-            { name: "middle-school-001-20250922-pooled", reads: 14 },
-            { name: "high-school-002-20250221-unpooled", reads: 14 },
-            { name: "elementary-school-001-20250901-pooled", reads: 13 },
-            { name: "elementary-school-001-20250129-dilution-1-4", reads: 12 },
-            { name: "k12-school-001-20250922-pooled", reads: 10 },
-            { name: "k12-school-001-20240906-1plex", reads: 10 },
-            { name: "high-school-002-20250929-pooled", reads: 10 },
-            { name: "middle-school-004-20250915-pooled", reads: 9 },
-            { name: "healthcare-001-20250922-pooled", reads: 9 },
-            { name: "elementary-school-001-20250129-dilution-1-8", reads: 9 },
-            { name: "high-school-002-pooled-combo", reads: 8 },
-            { name: "high-school-002-20250225-unpooled", reads: 8 },
-            { name: "elementary-school-007-20250929-pooled", reads: 6 },
-            { name: "elementary-school-004-20241121-9plex", reads: 6 },
-            { name: "elementary-school-003-20250929-pooled", reads: 6 },
-            { name: "elementary-school-001-20250129-dilution-1-16", reads: 6 },
-            { name: "middle-school-005-pooled-combo", reads: 5 },
-            { name: "elementary-school-008-20250915-pooled", reads: 5 },
-            { name: "middle-school-003-20250929-pooled", reads: 4 },
-            { name: "high-school-003-20250915-pooled", reads: 4 },
-            { name: "elementary-school-009-20250901-pooled", reads: 4 },
-            { name: "elementary-school-007-20241216-ZCC", reads: 4 },
-            { name: "elementary-school-007-20241212-9plex", reads: 4 },
-            { name: "elementary-school-005-20250929-pooled", reads: 4 },
-            { name: "middle-school-004-20250922-pooled", reads: 3 },
-            { name: "middle-school-005-20250922-pooled", reads: 2 },
-            { name: "middle-school-005-20250901-pooled", reads: 2 },
-            { name: "middle-school-005-20250212-unpooled", reads: 2 },
-            { name: "middle-school-002-20250901-pooled", reads: 2 },
-            { name: "k12-school-001-20250915-pooled", reads: 2 },
-            { name: "k12-school-001-20240906-3plex", reads: 2 },
-            { name: "high-school-003-20250929-pooled", reads: 2 },
-            { name: "high-school-002-20250121-3plex", reads: 2 },
-            { name: "high-school-002-20250121-1plex", reads: 2 },
-            { name: "elementary-school-001-20250915-pooled", reads: 2 },
-            { name: "middle-school-005-20250929-pooled", reads: 1 },
-            { name: "middle-school-004-20250929-pooled", reads: 1 }
-        ];
-
-        // Format sample name for display - keep original names
-        function formatSampleName(name, reads) {
-            return `${name} (${reads} reads)`;
-        }
-
-        // Initialize IGV and load all tracks
-        async function initializeIGV() {
-            const igvDiv = document.getElementById('igvDiv');
-
-            try {
-                // Clear the loading message
-                igvDiv.innerHTML = '';
-
-                // Create initial tracks array with reference and gene annotations
-                const tracks = [
-                    {
-                        name: "Genes",
-                        type: "annotation",
-                        format: "gff3",
-                        url: "data/ref/NC_076998.gff",
-                        displayMode: "EXPANDED",
-                        height: 250,
-                        color: "rgb(0, 0, 150)"
-                    }
-                ];
-
-                // Add ALL BAM tracks (all have at least 1 read now)
-                const orderedSamples = samples; // Already sorted by read count
-
-                orderedSamples.forEach(sample => {
-                    // Scale height based on read count (min 50px, max 250px)
-                    // Increased minimum to ensure space for label
-                    const scaledHeight = Math.min(250, Math.max(50, Math.round(50 + (sample.reads / 10))));
-
-                    tracks.push({
-                        name: formatSampleName(sample.name, sample.reads),
-                        type: "alignment",
-                        format: "bam",
-                        url: `data/bam/${sample.name}.bam`,
-                        indexURL: `data/bam/${sample.name}.bam.bai`,
-                        displayMode: "SQUISHED",
-                        alignmentRowHeight: 6,
-                        showCoverage: false,  // Turn off coverage plot
-                        colorBy: "none",  // No color by attribute
-                        showSoftClips: false,  // Hide soft clips by default
-                        viewAsPairs: false,
-                        showMismatches: true,
-                        showAllBases: false,
-                        showAlignments: true,  // Show alignments
-                        height: scaledHeight,  // Scale height by read count
-                        margin: 15,  // Increased margin between tracks
-                        minHeight: 50,  // Minimum height to ensure label space
-                        samplingWindowSize: 100,
-                        samplingDepth: 50
-                    });
-                });
-
-                const options = {
-                    genome: {
-                        id: "HuCSFDV1",
-                        name: "Human CSF-associated densovirus 1",
-                        fastaURL: "data/ref/NC_076998.fasta",
-                        tracks: tracks
-                    },
-                    locus: "NC_076998.1:1-4900",
-                    showNavigation: true,
-                    showRuler: true,
-                    showCenterGuide: true,
-                    showCursorTrackingGuide: true,
-                    showCommandBar: true,
-                    showTrackLabels: false  // Hide track labels by default
-                };
-
-                igvBrowser = await igv.createBrowser(igvDiv, options);
-                console.log(`IGV browser initialized with ${orderedSamples.length} samples containing densovirus reads`);
-
-                // Add error listener for track loading issues
-                igvBrowser.on('trackremoved', (track) => {
-                    console.log('Track removed:', track.name);
-                });
-
-                igvBrowser.on('trackloadfailed', (error, track) => {
-                    console.error('Track load failed:', track?.name, error);
-                });
-
-            } catch (error) {
-                console.error("Error initializing IGV:", error);
-                igvDiv.innerHTML = '<div class="loading-container">Failed to load viewer. Please refresh the page.</div>';
-            }
-        }
-
-        // Initialize on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('Initializing IGV viewer with all samples containing reads...');
-            initializeIGV();
-        });
-    </script>
 </body>
 </html>
