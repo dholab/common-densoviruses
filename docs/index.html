@@ -96,7 +96,7 @@
     <script>
         let igvBrowser = null;
 
-        // All samples with actual read counts
+        // All samples with actual read counts (verified from BAM files in docs/data/bam)
         const samples = [
             { name: "high-school-001-20250901-pooled", reads: 2355 },
             { name: "elementary-school-004-20250929-pooled", reads: 463 },
@@ -128,67 +128,52 @@
             { name: "high-school-002-20250915-pooled", reads: 25 },
             { name: "elementary-school-006-20241217-9plex", reads: 24 },
             { name: "elementary-school-001-20250922-pooled", reads: 24 },
-            { name: "elementary-school-009-20250206-3plex", reads: 22 },
-            { name: "k12-school-001-20240906-3plex", reads: 21 },
-            { name: "elementary-school-009-20250915-pooled", reads: 20 },
-            { name: "k12-school-001-20250922-pooled", reads: 20 },
-            { name: "elementary-school-007-20250929-pooled", reads: 19 },
-            { name: "elementary-school-001-20250901-pooled", reads: 18 },
-            { name: "elementary-school-004-20241121-3plex", reads: 18 },
+            { name: "elementary-school-008-20250922-pooled", reads: 23 },
+            { name: "elementary-school-004-20241125-ZCC", reads: 23 },
+            { name: "elementary-school-001-20250929-pooled", reads: 23 },
+            { name: "elementary-school-004-20241121-3plex", reads: 22 },
+            { name: "middle-school-004-20250901-pooled", reads: 16 },
+            { name: "high-school-003-20250922-pooled", reads: 16 },
+            { name: "elementary-school-009-20250915-pooled", reads: 16 },
             { name: "elementary-school-007-20241212-3plex", reads: 16 },
-            { name: "elementary-school-009-20250901-pooled", reads: 15 },
-            { name: "k12-school-001-20250915-pooled", reads: 14 },
-            { name: "elementary-school-001-20250129-dilution-1-4", reads: 13 },
-            { name: "high-school-002-20250929-pooled", reads: 12 },
-            { name: "middle-school-003-20250226-1plex", reads: 11 },
-            { name: "elementary-school-001-20250915-pooled", reads: 10 },
-            { name: "elementary-school-002-20241023-9plex", reads: 10 },
-            { name: "elementary-school-004-20241121-9plex", reads: 10 },
-            { name: "high-school-002-20250121-3plex", reads: 10 },
-            { name: "k12-school-001-20240906-9plex", reads: 10 },
-            { name: "elementary-school-007-20241212-9plex", reads: 9 },
-            { name: "elementary-school-009-20250206-1plex", reads: 8 },
-            { name: "elementary-school-009-20250922-pooled", reads: 8 },
-            { name: "k12-school-001-20240910-ZCC", reads: 8 },
-            { name: "elementary-school-001-20250129-dilution-1-8", reads: 7 },
-            { name: "elementary-school-009-20250210-ZCC", reads: 7 },
-            { name: "middle-school-003-20250226-3plex", reads: 7 },
-            { name: "elementary-school-004-20241125-ZCC", reads: 6 },
-            { name: "elementary-school-009-20250206-9plex", reads: 6 },
-            { name: "k12-school-001-20240906-1plex", reads: 6 },
-            { name: "elementary-school-007-20241216-ZCC", reads: 5 },
-            { name: "elementary-school-001-20250929-pooled", reads: 4 },
-            { name: "high-school-002-20250121-1plex", reads: 4 },
-            { name: "middle-school-003-20250220-ZCC", reads: 4 },
-            { name: "k12-school-001-20250901-pooled", reads: 3 },
-            { name: "elementary-school-001-20250129-dilution-1-16", reads: 2 },
-            { name: "elementary-school-008-20250915-pooled", reads: 2 },
-            { name: "high-school-002-20250121-9plex", reads: 2 },
-            { name: "high-school-003-20250915-pooled", reads: 2 },
-            { name: "high-school-003-20250922-pooled", reads: 2 },
-            { name: "middle-school-003-20250226-9plex", reads: 2 },
-            { name: "elementary-school-003-20250901-pooled", reads: 1 },
-            { name: "elementary-school-003-20250929-pooled", reads: 1 },
-            { name: "elementary-school-005-20250901-pooled", reads: 1 },
-            { name: "elementary-school-005-20250915-pooled", reads: 1 },
-            { name: "elementary-school-005-20250929-pooled", reads: 1 },
-            { name: "elementary-school-008-20250922-pooled", reads: 1 },
-            { name: "healthcare-001-20250922-pooled", reads: 1 },
-            { name: "high-school-002-20250225-unpooled", reads: 1 },
-            { name: "high-school-003-20250929-pooled", reads: 1 },
-            { name: "middle-school-001-20250922-pooled", reads: 1 },
-            { name: "middle-school-002-20250901-pooled", reads: 1 },
-            { name: "middle-school-002-20250922-pooled", reads: 1 },
-            { name: "middle-school-003-20250901-pooled", reads: 1 },
-            { name: "middle-school-003-20250915-pooled", reads: 1 },
-            { name: "middle-school-003-20250922-pooled", reads: 1 },
-            { name: "middle-school-004-20250901-pooled", reads: 1 },
-            { name: "middle-school-004-20250915-pooled", reads: 1 },
-            { name: "middle-school-004-20250929-pooled", reads: 1 },
-            { name: "middle-school-005-20250901-pooled", reads: 1 },
-            { name: "middle-school-005-20250915-pooled", reads: 1 },
-            { name: "middle-school-005-20250922-pooled", reads: 1 },
-            { name: "middle-school-005-20250929-pooled", reads: 1 }
+            { name: "elementary-school-002-20241023-9plex", reads: 16 },
+            { name: "middle-school-001-20250922-pooled", reads: 14 },
+            { name: "high-school-002-20250221-unpooled", reads: 14 },
+            { name: "elementary-school-001-20250901-pooled", reads: 13 },
+            { name: "elementary-school-001-20250129-dilution-1-4", reads: 12 },
+            { name: "k12-school-001-20250922-pooled", reads: 10 },
+            { name: "k12-school-001-20240906-1plex", reads: 10 },
+            { name: "high-school-002-20250929-pooled", reads: 10 },
+            { name: "middle-school-004-20250915-pooled", reads: 9 },
+            { name: "healthcare-001-20250922-pooled", reads: 9 },
+            { name: "elementary-school-001-20250129-dilution-1-8", reads: 9 },
+            { name: "high-school-002-pooled-combo", reads: 8 },
+            { name: "high-school-002-20250225-unpooled", reads: 8 },
+            { name: "elementary-school-007-20250929-pooled", reads: 6 },
+            { name: "elementary-school-004-20241121-9plex", reads: 6 },
+            { name: "elementary-school-003-20250929-pooled", reads: 6 },
+            { name: "elementary-school-001-20250129-dilution-1-16", reads: 6 },
+            { name: "middle-school-005-pooled-combo", reads: 5 },
+            { name: "elementary-school-008-20250915-pooled", reads: 5 },
+            { name: "middle-school-003-20250929-pooled", reads: 4 },
+            { name: "high-school-003-20250915-pooled", reads: 4 },
+            { name: "elementary-school-009-20250901-pooled", reads: 4 },
+            { name: "elementary-school-007-20241216-ZCC", reads: 4 },
+            { name: "elementary-school-007-20241212-9plex", reads: 4 },
+            { name: "elementary-school-005-20250929-pooled", reads: 4 },
+            { name: "middle-school-004-20250922-pooled", reads: 3 },
+            { name: "middle-school-005-20250922-pooled", reads: 2 },
+            { name: "middle-school-005-20250901-pooled", reads: 2 },
+            { name: "middle-school-005-20250212-unpooled", reads: 2 },
+            { name: "middle-school-002-20250901-pooled", reads: 2 },
+            { name: "k12-school-001-20250915-pooled", reads: 2 },
+            { name: "k12-school-001-20240906-3plex", reads: 2 },
+            { name: "high-school-003-20250929-pooled", reads: 2 },
+            { name: "high-school-002-20250121-3plex", reads: 2 },
+            { name: "high-school-002-20250121-1plex", reads: 2 },
+            { name: "elementary-school-001-20250915-pooled", reads: 2 },
+            { name: "middle-school-005-20250929-pooled", reads: 1 },
+            { name: "middle-school-004-20250929-pooled", reads: 1 }
         ];
 
         // Format sample name for display - keep original names
@@ -217,30 +202,29 @@
                     }
                 ];
 
-                // Add only BAM tracks with significant reads (>5 reads to avoid empty tracks)
-                // Also add onerror handler for 416 errors
-                samples.forEach(sample => {
-                    if (sample.reads > 5) {  // Only include samples with more than 5 reads
-                        tracks.push({
-                            name: formatSampleName(sample.name, sample.reads),
-                            type: "alignment",
-                            format: "bam",
-                            url: `data/bam/${sample.name}.bam`,
-                            indexURL: `data/bam/${sample.name}.bam.bai`,
-                            displayMode: "SQUISHED",
-                            alignmentRowHeight: 6,
-                            coverageTrackHeight: 30,
-                            colorBy: "strand",
-                            showSoftClips: true,
-                            viewAsPairs: false,
-                            showMismatches: true,
-                            showAllBases: false,
-                            height: 100,  // Set to 100 as requested
-                            onerror: function(error) {
-                                console.warn(`Failed to load ${sample.name}:`, error);
-                            }
-                        });
-                    }
+                // Add ALL BAM tracks (all have at least 1 read now)
+                const orderedSamples = samples; // Already sorted by read count
+
+                orderedSamples.forEach(sample => {
+                    tracks.push({
+                        name: formatSampleName(sample.name, sample.reads),
+                        type: "alignment",
+                        format: "bam",
+                        url: `data/bam/${sample.name}.bam`,
+                        indexURL: `data/bam/${sample.name}.bam.bai`,
+                        displayMode: "SQUISHED",
+                        alignmentRowHeight: 6,
+                        coverageTrackHeight: 30,
+                        colorBy: "strand",
+                        showSoftClips: true,
+                        viewAsPairs: false,
+                        showMismatches: true,
+                        showAllBases: false,
+                        height: 100,
+                        samplingWindowSize: 100,
+                        samplingDepth: 50,
+                        viewAsPairs: false
+                    });
                 });
 
                 const options = {
@@ -259,7 +243,16 @@
                 };
 
                 igvBrowser = await igv.createBrowser(igvDiv, options);
-                console.log(`IGV browser initialized with ${samples.length} samples containing densovirus reads`);
+                console.log(`IGV browser initialized with ${orderedSamples.length} samples containing densovirus reads`);
+
+                // Add error listener for track loading issues
+                igvBrowser.on('trackremoved', (track) => {
+                    console.log('Track removed:', track.name);
+                });
+
+                igvBrowser.on('trackloadfailed', (error, track) => {
+                    console.error('Track load failed:', track?.name, error);
+                });
 
             } catch (error) {
                 console.error("Error initializing IGV:", error);
