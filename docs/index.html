@@ -191,18 +191,9 @@
             { name: "middle-school-005-20250929-pooled", reads: 1 }
         ];
 
-        // Format sample name for display
+        // Format sample name for display - keep original names
         function formatSampleName(name, reads) {
-            const formatted = name
-                .replace('elementary-school', 'ES')
-                .replace('middle-school', 'MS')
-                .replace('high-school', 'HS')
-                .replace('k12-school', 'K12')
-                .replace('healthcare', 'HC')
-                .replace('-20250', '-25')
-                .replace('-20240', '-24')
-                .replace('-20241', '-24');
-            return `${formatted} (${reads} reads)`;
+            return `${name} (${reads} reads)`;
         }
 
         // Initialize IGV and load all tracks
@@ -226,24 +217,30 @@
                     }
                 ];
 
-                // Add ALL BAM tracks with reads
+                // Add only BAM tracks with significant reads (>5 reads to avoid empty tracks)
+                // Also add onerror handler for 416 errors
                 samples.forEach(sample => {
-                    tracks.push({
-                        name: formatSampleName(sample.name, sample.reads),
-                        type: "alignment",
-                        format: "bam",
-                        url: `data/bam/${sample.name}.bam`,
-                        indexURL: `data/bam/${sample.name}.bam.bai`,
-                        displayMode: "SQUISHED",
-                        alignmentRowHeight: 3,
-                        coverageTrackHeight: 15,
-                        colorBy: "strand",
-                        showSoftClips: true,
-                        viewAsPairs: false,
-                        showMismatches: true,
-                        showAllBases: false,
-                        height: 40
-                    });
+                    if (sample.reads > 5) {  // Only include samples with more than 5 reads
+                        tracks.push({
+                            name: formatSampleName(sample.name, sample.reads),
+                            type: "alignment",
+                            format: "bam",
+                            url: `data/bam/${sample.name}.bam`,
+                            indexURL: `data/bam/${sample.name}.bam.bai`,
+                            displayMode: "SQUISHED",
+                            alignmentRowHeight: 6,
+                            coverageTrackHeight: 30,
+                            colorBy: "strand",
+                            showSoftClips: true,
+                            viewAsPairs: false,
+                            showMismatches: true,
+                            showAllBases: false,
+                            height: 100,  // Set to 100 as requested
+                            onerror: function(error) {
+                                console.warn(`Failed to load ${sample.name}:`, error);
+                            }
+                        });
+                    }
                 });
 
                 const options = {
