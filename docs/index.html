@@ -206,9 +206,9 @@
                 const orderedSamples = samples; // Already sorted by read count
 
                 orderedSamples.forEach(sample => {
-                    // Scale height based on read count (min 40px, max 250px)
-                    // Add padding to ensure label space
-                    const scaledHeight = Math.min(250, Math.max(40, Math.round(40 + (sample.reads / 10))));
+                    // Scale height based on read count (min 50px, max 250px)
+                    // Increased minimum to ensure space for label
+                    const scaledHeight = Math.min(250, Math.max(50, Math.round(50 + (sample.reads / 10))));
 
                     tracks.push({
                         name: formatSampleName(sample.name, sample.reads),
@@ -226,7 +226,8 @@
                         showAllBases: false,
                         showAlignments: true,  // Show alignments
                         height: scaledHeight,  // Scale height by read count
-                        margin: 10,  // Add margin between tracks
+                        margin: 15,  // Increased margin between tracks
+                        minHeight: 50,  // Minimum height to ensure label space
                         samplingWindowSize: 100,
                         samplingDepth: 50
                     });
