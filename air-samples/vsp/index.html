@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VSP Densovirus Alignment Viewer</title>
+    <script src="https://cdn.jsdelivr.net/npm/igv@3.0.5/dist/igv.min.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .description {
+            color: #666;
+            margin-bottom: 20px;
+            max-width: 800px;
+        }
+        #igv-div {
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background: white;
+        }
+        .stats {
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .stats h3 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>VSP Densovirus Alignment Viewer</h1>
+    <div class="description">
+        <p>Interactive genome browser showing alignments to Human CSF-associated densovirus (NC_076998). 
+        Tracks are ordered by number of mapped reads (highest to lowest). 
+        Only samples with at least 1 mapped read are shown.</p>
+    </div>
+    
+    <div id="igv-div"></div>
+    
+    <div class="stats">
+        <h3>Sample Statistics</h3>
+        <p><strong>Total samples with reads:</strong> 75</p>
+        <p><strong>Total mapped reads:</strong> 6,188</p>
+        <p><strong>Reference:</strong> Human CSF-associated densovirus (NC_076998, 4,678 bp)</p>
+    </div>
+
+    <script>
+        var igvDiv = document.getElementById("igv-div");
+
+        var options = {
+            "reference": {
+                "id": "NC_076998",
+                "name": "Human CSF-associated densovirus",
+                "fastaURL": "ref/NC_076998.fasta",
+                "indexURL": "ref/NC_076998.fasta.fai"
+            },
+            "locus": "NC_076998:1-4678",
+            "tracks": [
+        {
+                "name": "Gene Annotations",
+                "type": "annotation",
+                "format": "gff3",
+                "url": "ref/NC_076998.gff",
+                "height": 250,
+                "displayMode": "EXPANDED",
+                "color": "rgb(0,0,150)"
+        },
+        {
+                "name": "high-school-001 2025-09-01 pooled (2355 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/high-school-001-20250901-pooled.bam",
+                "indexURL": "bam/high-school-001-20250901-pooled.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "elementary-school-004 2025-09-29 pooled (463 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/elementary-school-004-20250929-pooled.bam",
+                "indexURL": "bam/elementary-school-004-20250929-pooled.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "elementary-school-006 2024-12-17 1plex (354 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/elementary-school-006-20241217-1plex.bam",
+                "indexURL": "bam/elementary-school-006-20241217-1plex.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "high-school-001 2025-09-15 pooled (327 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/high-school-001-20250915-pooled.bam",
+                "indexURL": "bam/high-school-001-20250915-pooled.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "high-school-001 2025-01-31 1plex (248 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/high-school-001-20250131-1plex.bam",
+                "indexURL": "bam/high-school-001-20250131-1plex.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "high-school-001 2025-09-29 pooled (223 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/high-school-001-20250929-pooled.bam",
+                "indexURL": "bam/high-school-001-20250929-pooled.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "elementary-school-004 2025-09-01 pooled (215 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/elementary-school-004-20250901-pooled.bam",
+                "indexURL": "bam/elementary-school-004-20250901-pooled.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "elementary-school-004 2025-09-22 pooled (155 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/elementary-school-004-20250922-pooled.bam",
+                "indexURL": "bam/elementary-school-004-20250922-pooled.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "elementary-school-006 2024-12-17 3plex (136 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/elementary-school-006-20241217-3plex.bam",
+                "indexURL": "bam/elementary-school-006-20241217-3plex.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "elementary-school-002 2024-10-23 1plex (118 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/elementary-school-002-20241023-1plex.bam",
+                "indexURL": "bam/elementary-school-002-20241023-1plex.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "elementary-school-004 2025-09-15 pooled (112 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/elementary-school-004-20250915-pooled.bam",
+                "indexURL": "bam/elementary-school-004-20250915-pooled.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "high-school-001 2025-01-31 9plex (111 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/high-school-001-20250131-9plex.bam",
+                "indexURL": "bam/high-school-001-20250131-9plex.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "elementary-school-008 2025-09-01 pooled (109 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/elementary-school-008-20250901-pooled.bam",
+                "indexURL": "bam/elementary-school-008-20250901-pooled.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "high-school-002 2025-09-22 pooled (104 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/high-school-002-20250922-pooled.bam",
+                "indexURL": "bam/high-school-002-20250922-pooled.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "high-school-001 2025-01-31 3plex (94 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/high-school-001-20250131-3plex.bam",
+                "indexURL": "bam/high-school-001-20250131-3plex.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "elementary-school-006 2024-12-13 ZCC (83 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/elementary-school-006-20241213-ZCC.bam",
+                "indexURL": "bam/elementary-school-006-20241213-ZCC.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "elementary-school-007 2024-12-12 1plex (73 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/elementary-school-007-20241212-1plex.bam",
+                "indexURL": "bam/elementary-school-007-20241212-1plex.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "elementary-school-004 2024-11-21 1plex (69 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/elementary-school-004-20241121-1plex.bam",
+                "indexURL": "bam/elementary-school-004-20241121-1plex.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "high-school-002 2025-09-01 pooled (66 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/high-school-002-20250901-pooled.bam",
+                "indexURL": "bam/high-school-002-20250901-pooled.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "elementary-school-007 2025-09-15 pooled (58 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/elementary-school-007-20250915-pooled.bam",
+                "indexURL": "bam/elementary-school-007-20250915-pooled.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "elementary-school-007 2025-09-01 pooled (52 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/elementary-school-007-20250901-pooled.bam",
+                "indexURL": "bam/elementary-school-007-20250901-pooled.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "elementary-school-007 2025-09-22 pooled (50 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/elementary-school-007-20250922-pooled.bam",
+                "indexURL": "bam/elementary-school-007-20250922-pooled.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "elementary-school-002 2024-10-18 ZCC (43 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/elementary-school-002-20241018-ZCC.bam",
+                "indexURL": "bam/elementary-school-002-20241018-ZCC.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "high-school-001 2025-01-28 ZCC (36 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/high-school-001-20250128-ZCC.bam",
+                "indexURL": "bam/high-school-001-20250128-ZCC.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "elementary-school-001 2025-01-29 undiluted (34 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/elementary-school-001-20250129-undiluted.bam",
+                "indexURL": "bam/elementary-school-001-20250129-undiluted.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "high-school-002 2025-01-17 ZCC (29 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/high-school-002-20250117-ZCC.bam",
+                "indexURL": "bam/high-school-002-20250117-ZCC.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "elementary-school-002 2024-10-23 3plex (27 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/elementary-school-002-20241023-3plex.bam",
+                "indexURL": "bam/elementary-school-002-20241023-3plex.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "high-school-002 2025-09-15 pooled (25 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/high-school-002-20250915-pooled.bam",
+                "indexURL": "bam/high-school-002-20250915-pooled.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "elementary-school-001 2025-09-22 pooled (24 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/elementary-school-001-20250922-pooled.bam",
+                "indexURL": "bam/elementary-school-001-20250922-pooled.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "elementary-school-006 2024-12-17 9plex (24 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/elementary-school-006-20241217-9plex.bam",
+                "indexURL": "bam/elementary-school-006-20241217-9plex.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "elementary-school-001 2025-09-29 pooled (23 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/elementary-school-001-20250929-pooled.bam",
+                "indexURL": "bam/elementary-school-001-20250929-pooled.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "elementary-school-004 2024-11-25 ZCC (23 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/elementary-school-004-20241125-ZCC.bam",
+                "indexURL": "bam/elementary-school-004-20241125-ZCC.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "elementary-school-008 2025-09-22 pooled (23 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/elementary-school-008-20250922-pooled.bam",
+                "indexURL": "bam/elementary-school-008-20250922-pooled.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "elementary-school-004 2024-11-21 3plex (22 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/elementary-school-004-20241121-3plex.bam",
+                "indexURL": "bam/elementary-school-004-20241121-3plex.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "elementary-school-002 2024-10-23 9plex (16 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/elementary-school-002-20241023-9plex.bam",
+                "indexURL": "bam/elementary-school-002-20241023-9plex.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "elementary-school-007 2024-12-12 3plex (16 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/elementary-school-007-20241212-3plex.bam",
+                "indexURL": "bam/elementary-school-007-20241212-3plex.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "elementary-school-009 2025-09-15 pooled (16 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/elementary-school-009-20250915-pooled.bam",
+                "indexURL": "bam/elementary-school-009-20250915-pooled.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "high-school-003 2025-09-22 pooled (16 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/high-school-003-20250922-pooled.bam",
+                "indexURL": "bam/high-school-003-20250922-pooled.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "middle-school-004 2025-09-01 pooled (16 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/middle-school-004-20250901-pooled.bam",
+                "indexURL": "bam/middle-school-004-20250901-pooled.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "high-school-002 2025-02-21 unpooled (14 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/high-school-002-20250221-unpooled.bam",
+                "indexURL": "bam/high-school-002-20250221-unpooled.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "middle-school-001 2025-09-22 pooled (14 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/middle-school-001-20250922-pooled.bam",
+                "indexURL": "bam/middle-school-001-20250922-pooled.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "elementary-school-001 2025-09-01 pooled (13 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/elementary-school-001-20250901-pooled.bam",
+                "indexURL": "bam/elementary-school-001-20250901-pooled.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "elementary-school-001 2025-01-29 dilution-1:4 (12 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/elementary-school-001-20250129-dilution-1-4.bam",
+                "indexURL": "bam/elementary-school-001-20250129-dilution-1-4.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "high-school-002 2025-09-29 pooled (10 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/high-school-002-20250929-pooled.bam",
+                "indexURL": "bam/high-school-002-20250929-pooled.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "k12-school-001 2024-09-06 1plex (10 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/k12-school-001-20240906-1plex.bam",
+                "indexURL": "bam/k12-school-001-20240906-1plex.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "k12-school-001 2025-09-22 pooled (10 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/k12-school-001-20250922-pooled.bam",
+                "indexURL": "bam/k12-school-001-20250922-pooled.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "elementary-school-001 2025-01-29 dilution-1:8 (9 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/elementary-school-001-20250129-dilution-1-8.bam",
+                "indexURL": "bam/elementary-school-001-20250129-dilution-1-8.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "middle-school-004 2025-09-15 pooled (9 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/middle-school-004-20250915-pooled.bam",
+                "indexURL": "bam/middle-school-004-20250915-pooled.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "high-school-002  pooled-combo (8 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/high-school-002-pooled-combo.bam",
+                "indexURL": "bam/high-school-002-pooled-combo.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "high-school-002 2025-02-25 unpooled (8 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/high-school-002-20250225-unpooled.bam",
+                "indexURL": "bam/high-school-002-20250225-unpooled.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "elementary-school-001 2025-01-29 dilution-1:16 (6 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/elementary-school-001-20250129-dilution-1-16.bam",
+                "indexURL": "bam/elementary-school-001-20250129-dilution-1-16.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "elementary-school-003 2025-09-29 pooled (6 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/elementary-school-003-20250929-pooled.bam",
+                "indexURL": "bam/elementary-school-003-20250929-pooled.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "elementary-school-004 2024-11-21 9plex (6 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/elementary-school-004-20241121-9plex.bam",
+                "indexURL": "bam/elementary-school-004-20241121-9plex.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "elementary-school-007 2025-09-29 pooled (6 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/elementary-school-007-20250929-pooled.bam",
+                "indexURL": "bam/elementary-school-007-20250929-pooled.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "elementary-school-008 2025-09-15 pooled (5 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/elementary-school-008-20250915-pooled.bam",
+                "indexURL": "bam/elementary-school-008-20250915-pooled.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "middle-school-005  pooled-combo (5 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/middle-school-005-pooled-combo.bam",
+                "indexURL": "bam/middle-school-005-pooled-combo.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "elementary-school-005 2025-09-29 pooled (4 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/elementary-school-005-20250929-pooled.bam",
+                "indexURL": "bam/elementary-school-005-20250929-pooled.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "elementary-school-007 2024-12-12 9plex (4 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/elementary-school-007-20241212-9plex.bam",
+                "indexURL": "bam/elementary-school-007-20241212-9plex.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "elementary-school-007 2024-12-16 ZCC (4 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/elementary-school-007-20241216-ZCC.bam",
+                "indexURL": "bam/elementary-school-007-20241216-ZCC.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "elementary-school-009 2025-09-01 pooled (4 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/elementary-school-009-20250901-pooled.bam",
+                "indexURL": "bam/elementary-school-009-20250901-pooled.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "high-school-003 2025-09-15 pooled (4 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/high-school-003-20250915-pooled.bam",
+                "indexURL": "bam/high-school-003-20250915-pooled.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "middle-school-003 2025-09-29 pooled (4 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/middle-school-003-20250929-pooled.bam",
+                "indexURL": "bam/middle-school-003-20250929-pooled.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "middle-school-004 2025-09-22 pooled (3 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/middle-school-004-20250922-pooled.bam",
+                "indexURL": "bam/middle-school-004-20250922-pooled.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "elementary-school-001 2025-09-15 pooled (2 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/elementary-school-001-20250915-pooled.bam",
+                "indexURL": "bam/elementary-school-001-20250915-pooled.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "high-school-002 2025-01-21 1plex (2 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/high-school-002-20250121-1plex.bam",
+                "indexURL": "bam/high-school-002-20250121-1plex.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "high-school-002 2025-01-21 3plex (2 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/high-school-002-20250121-3plex.bam",
+                "indexURL": "bam/high-school-002-20250121-3plex.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "high-school-003 2025-09-29 pooled (2 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/high-school-003-20250929-pooled.bam",
+                "indexURL": "bam/high-school-003-20250929-pooled.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "k12-school-001 2024-09-06 3plex (2 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/k12-school-001-20240906-3plex.bam",
+                "indexURL": "bam/k12-school-001-20240906-3plex.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "k12-school-001 2025-09-15 pooled (2 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/k12-school-001-20250915-pooled.bam",
+                "indexURL": "bam/k12-school-001-20250915-pooled.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "middle-school-002 2025-09-01 pooled (2 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/middle-school-002-20250901-pooled.bam",
+                "indexURL": "bam/middle-school-002-20250901-pooled.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "middle-school-005 2025-02-12 unpooled (2 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/middle-school-005-20250212-unpooled.bam",
+                "indexURL": "bam/middle-school-005-20250212-unpooled.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "middle-school-005 2025-09-01 pooled (2 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/middle-school-005-20250901-pooled.bam",
+                "indexURL": "bam/middle-school-005-20250901-pooled.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "middle-school-005 2025-09-22 pooled (2 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/middle-school-005-20250922-pooled.bam",
+                "indexURL": "bam/middle-school-005-20250922-pooled.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "middle-school-004 2025-09-29 pooled (1 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/middle-school-004-20250929-pooled.bam",
+                "indexURL": "bam/middle-school-004-20250929-pooled.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        },
+        {
+                "name": "middle-school-005 2025-09-29 pooled (1 reads)",
+                "type": "alignment",
+                "format": "bam",
+                "url": "bam/middle-school-005-20250929-pooled.bam",
+                "indexURL": "bam/middle-school-005-20250929-pooled.bam.bai",
+                "height": 100,
+                "colorBy": "strand"
+        }
+]
+        };
+
+        igv.createBrowser(igvDiv, options)
+            .then(function (browser) {
+                console.log("IGV browser created");
+            })
+            .catch(function (error) {
+                console.error("Error creating IGV browser:", error);
+                igvDiv.innerHTML = "<p style='color:red;padding:20px;'>Error loading IGV browser. " +
+                    "This viewer requires files to be served via HTTP. " +
+                    "If viewing locally, please use a local web server.</p>";
+            });
+    </script>
+</body>
+</html>

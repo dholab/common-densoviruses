@@ -1,0 +1,50 @@
+name: Deploy IGV Viewer to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'air-samples/vsp/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Create Pages artifact
+        run: |
+          mkdir -p _site
+          # Copy the VSP viewer and all required files
+          cp -r air-samples/vsp/* _site/
+          # Remove confidential files if they somehow got included
+          rm -f _site/SITE-KEY-CONFIDENTIAL.md
+          rm -rf _site/private
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
