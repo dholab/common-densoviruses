@@ -16,7 +16,7 @@ During our continued analysis of air metagenomic datasets generated in these eff
 
 We collected air samples from congregate indoor spaces in K-12 schools, essentially as previously described. In most sites, a ThermoFisher AerosolSense is run continuously for at least one day. Particulates are eluted in phosphate-buffered saline with 0.1% Tween. Total nucleic acids are extracted from the eluate on a Promega Maxwell instrument. Nucleic acids are enriched for viruses using the Illumina VSP2 protocol according to the manufacturer's recommendation. The purpose of target enrichment is for monitoring of conventional human pathogens. Densoviruses are not included in the VSP probes and are therefore not specifically enriched. Sequences were obtained on an Illumina NovaSeqX. Three datasets with [102 total samples](air-samples/vsp/vsp-sample-metadata.md) were sequenced in three independent VSP2 experiments.
 
-We developed a [Snakemake workflow](data_processing/read_mapping) that accepts BioSample accessions as input, automatically retrieves all associated SRA run accessions via Entrez queries, downloads reads using fasterq-dump (v3.1.1), and concatenates multi-run samples into unified FASTQ files. Reads are aligned to the HuCSFDV1 reference [NC_076998](https://www.ncbi.nlm.nih.gov/nuccore/NC_076998.1) using minimap2 (v2.28-r1209) with short-read presets, and the resulting alignments are processed through samtools (v1.20) for coordinate sorting, mate-pair fixing, and PCR duplicate removal, yielding indexed BAM files suitable for variant calling and coverage analysis.
+We developed a [Snakemake workflow](data_processing/read_mapping) aligns reads to the HuCSFDV1 reference [NC_076998](https://www.ncbi.nlm.nih.gov/nuccore/NC_076998.1) using minimap2 (v2.28-r1209) with short-read presets, and the resulting alignments are processed through samtools (v1.20) for coordinate sorting, mate-pair fixing, and PCR duplicate removal, yielding indexed BAM files suitable for variant calling and coverage analysis.
 
 76 of the 102 samples from K-12 schools [had at least one read mapped to HuCSFDV1](https://dholab.github.io/common-densoviruses/dane_county_air/). While spurious read mapping could be explained by non-specific mapping, 14 of the samples had at least 100 reads mapped to HuCSFDV1. The sample with the strongest read support for HuCSFDV1, termed `high-school-001-20250901-pooled`, was collected between 2025-09-04 and 2025-09-08. 2,355 reads from this sample mapped to HuCSFDV1. The majority consensus sequence from this sample is 99% nucleotide identical to HuCSFDV1, with 48 majority consensus nucleotide substitutions.
 
@@ -26,9 +26,10 @@ We recently participated in another air sampling project in [international airpo
 
 
 
+
 ### HuCSFDV1 is detected in mammalian datasets in NCBI SRA
 
-
+that accepts BioSample accessions as input, automatically retrieves all associated SRA run accessions via Entrez queries, downloads reads using fasterq-dump (v3.1.1), and concatenates multi-run samples into unified FASTQ files. Reads are aligned 
 
 
 ### HuCSFDV1 is found in human skin microbiome
