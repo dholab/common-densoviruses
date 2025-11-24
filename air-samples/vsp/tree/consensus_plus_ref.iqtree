@@ -1,0 +1,167 @@
+IQ-TREE 3.0.1 built Jul  9 2025
+
+Input file name: air-samples/vsp/align/consensus_plus_ref.aln.fasta
+Type of analysis: tree reconstruction + ultrafast bootstrap (1000 replicates)
+Random seed number: 288239
+
+REFERENCES
+----------
+
+To cite IQ-TREE 3 please use:
+
+Thomas K.F. Wong, Nhan Ly-Trong, Huaiyan Ren, Hector Banos, Andrew J. Roger,
+Edward Susko, Chris Bielow, Nicola De Maio, Nick Goldman, Matthew W. Hahn,
+Gavin Huttley, Robert Lanfear, Bui Quang Minh (2025)
+IQ-TREE 3: Phylogenomic Inference Software using Complex Evolutionary Models.
+Submitted.
+
+Please also cite the following paper(s) for the feature(s) that you used:
+
+Since you used ultrafast bootstrap (UFBoot) please also cite: 
+
+Diep Thi Hoang, Olga Chernomor, Arndt von Haeseler, Bui Quang Minh,
+and Le Sy Vinh (2018) UFBoot2: Improving the ultrafast bootstrap
+approximation. Mol. Biol. Evol., 35:518–522.
+https://doi.org/10.1093/molbev/msx281
+
+SEQUENCE ALIGNMENT
+------------------
+
+Input data: 8 sequences with 4679 nucleotide sites
+Number of constant sites: 4612 (= 98.5681% of all sites)
+Number of invariant (constant or ambiguous constant) sites: 4612 (= 98.5681% of all sites)
+Number of parsimony informative sites: 21
+Number of distinct site patterns: 186
+
+SUBSTITUTION PROCESS
+--------------------
+
+Model of substitution: GTR+F+G4
+
+Rate parameter R:
+
+  A-C: 1.0797
+  A-G: 2.3524
+  A-T: 1.2174
+  C-G: 1.4469
+  C-T: 7.1010
+  G-T: 1.0000
+
+State frequencies: (empirical counts from alignment)
+
+  pi(A) = 0.3383
+  pi(C) = 0.1947
+  pi(G) = 0.209
+  pi(T) = 0.258
+
+Rate matrix Q:
+
+  A   -0.6247    0.1293    0.3023    0.1931
+  C    0.2246    -1.537    0.1859     1.126
+  G    0.4893    0.1732   -0.8211    0.1586
+  T    0.2532    0.8501    0.1285    -1.232
+
+Model of rate heterogeneity: Gamma with 4 categories
+Gamma shape alpha: 0.02002
+
+ Category  Relative_rate  Proportion
+  1         4.803e-31      0.25
+  2         1.037e-15      0.25
+  3         9.674e-07      0.25
+  4         4              0.25
+Relative rates are computed as MEAN of the portion of the Gamma distribution falling in the category.
+
+MAXIMUM LIKELIHOOD TREE
+-----------------------
+
+Log-likelihood of the tree: -6870.2505 (s.e. 56.6522)
+Unconstrained log-likelihood (without tree): -17957.0310
+Number of free parameters (#branches + #model parameters): 22
+Akaike information criterion (AIC) score: 13784.5010
+Corrected Akaike information criterion (AICc) score: 13784.7183
+Bayesian information criterion (BIC) score: 13926.4194
+
+Total tree length (sum of branch lengths): 0.0154
+Sum of internal branch lengths: 0.0057 (36.6759% of tree length)
+
+WARNING: 1 near-zero internal branches (<0.0002) should be treated with caution
+         Such branches are denoted by '**' in the figure below
+
+NOTE: Tree is UNROOTED although outgroup taxon 'NC_076998_ref' is drawn at root
+Numbers in parentheses are  ultrafast bootstrap support (%)
+
++-----------------------------------------------------------NC_076998_ref
+|
+|                       +**elementary-school-004-20250901
+|                    +**| (34)
+|                    |  +--elementary-school-004-20250929
+|                +---| (67)
+|                |   +--elementary-school-004-20250922
++----------------| (98)
+|                +--elementary-school-004-20250915
+|
+|                    +**high-school-001-20250901
+|                 +--| (84)
+|                 |  +----high-school-001-20250915
++-----------------| (99)
+                  +--high-school-001-20250929
+
+Tree in newick format:
+
+(NC_076998_ref:0.0078539315,(((elementary-school-004-20250901:0.0000010000,elementary-school-004-20250929:0.0002216387)34:0.0000010000,elementary-school-004-20250922:0.0002934720)67:0.0005450170,elementary-school-004-20250915:0.0003554140)98:0.0022720117,((high-school-001-20250901:0.0000010000,high-school-001-20250915:0.0007131722)84:0.0003723468,high-school-001-20250929:0.0003252334)99:0.0024652150);
+
+CONSENSUS TREE
+--------------
+
+Consensus tree is constructed from 1000 bootstrap trees
+Log-likelihood of consensus tree: -6870.267181
+Robinson-Foulds distance between ML tree and consensus tree: 2
+
+Branches with support >0.000000% are kept (extended consensus)
+Branch lengths are optimized by maximum likelihood on original alignment
+Numbers in parentheses are bootstrap supports (%)
+
++-----------------------------------------------------------NC_076998_ref
+|
+|                       +--elementary-school-004-20250901
+|                    +--| (36)
+|                    |  +--elementary-school-004-20250922
+|                +---| (67)
+|                |   +--elementary-school-004-20250929
++----------------| (98)
+|                +--elementary-school-004-20250915
+|
+|                    +**high-school-001-20250901
+|                 +--| (84)
+|                 |  +----high-school-001-20250915
++-----------------| (99)
+                  +--high-school-001-20250929
+
+
+Consensus tree in newick format: 
+
+(NC_076998_ref:0.0078541608,(((elementary-school-004-20250901:0.0000026743,elementary-school-004-20250922:0.0002929903)36:0.0000026907,elementary-school-004-20250929:0.0002213909)67:0.0005453271,elementary-school-004-20250915:0.0003550952)98:0.0022719197,((high-school-001-20250901:0.0000011076,high-school-001-20250915:0.0007128344)84:0.0003721985,high-school-001-20250929:0.0003261211)99:0.0024649173);
+
+ALISIM COMMAND
+--------------
+To simulate an alignment of the same length as the original alignment, using the tree and model parameters estimated from this analysis, you can use the following command:
+
+--alisim simulated_MSA -t air-samples/vsp/tree/consensus_plus_ref.treefile -m "GTR{1.07972,2.35242,1.21742,1.44691,7.10097}+F{0.338282,0.194716,0.209001,0.258}+G4{0.0200244}" --length 4679
+
+To mimic the alignment used to produce this analysis, i.e. simulate an alignment of the same length as the original alignment, using the tree and model parameters estimated from this analysis *and* copying the same gap positions as the original alignment, you can use the following command:
+
+iqtree -s air-samples/vsp/align/consensus_plus_ref.aln.fasta --alisim mimicked_MSA
+
+To simulate any number of alignments in either of the two commandlines above, use the --num-alignments options, for example mimic 100 alignments you would use the command line:
+
+iqtree -s air-samples/vsp/align/consensus_plus_ref.aln.fasta --alisim mimicked_MSA --num-alignments 100
+
+For more information on using AliSim, please visit: www.iqtree.org/doc/AliSim
+
+TIME STAMP
+----------
+
+Date and time: Sun Nov 23 18:06:05 2025
+Total CPU time used: 0.336409 seconds (0h:0m:0s)
+Total wall-clock time used: 0.3502440453 seconds (0h:0m:0s)
+

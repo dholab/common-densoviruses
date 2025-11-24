@@ -8,3 +8,7 @@ air-samples/vsp/private
 # Editor files
 *.swp
 *~
+
+# Conda
+.conda
+.claude

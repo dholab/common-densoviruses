@@ -1,8 +1,4 @@
-# VSP Air Sample Metadata
-
-This table contains metadata for air samples collected as part of the Viral Surveillance Project (VSP).
-
-## Sample Summary
+## Air samples from Dane County, Wisconsin air samples mapped to HuCSFDV1
 
 | Site Code | Sample Date | Sample Type | Cartridge ID | Mapped Reads | BAM File |
 |-----------|-------------|-------------|--------------|-------------:|----------|
@@ -113,13 +109,3 @@ This table contains metadata for air samples collected as part of the Viral Surv
 | middle-school-003 | 2025-09-22 | pooled | AE00000F4C874C, AE00000F4C5546 | 0 | middle-school-003-20250922-pooled.bam |
 | middle-school-005 | 2025-02-16 | unpooled | AE000010003821 | 0 | middle-school-005-20250216-unpooled.bam |
 | middle-school-005 | 2025-09-15 | pooled | AE00000F9CDB54, AE00000F9D084B | 0 | middle-school-005-20250915-pooled.bam |
-
-## Site Types
-
-| Site Type | Count (unique sites) |
-|-----------|---------------------:|
-| control | 1 |
-| elementary-school | 9 |
-| high-school | 3 |
-| k12-school | 1 |
-| middle-school | 5 |
