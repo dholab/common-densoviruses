@@ -26,9 +26,23 @@ We recently participated in another air sampling project in [international airpo
 
 ### HuCSFDV1 is detected in mammalian datasets in NCBI SRA
 
-The HuCSFDV1 reference [NC_076998](https://www.ncbi.nlm.nih.gov/nuccore/NC_076998.1) was split into 1kb segments. Each segment was input into [Logan Search](https://logan-search.org/dashboard) using the default treshold of 0.5 and the 'All' reference group. [The results](logan/logan-output) of Logan Search for each segment were combined to create the set of matching SRA accessions. [This table](logan/sra-metadata.md) shows all of the matching datasets. If the source of HuCSFDV1 is a reagent contaminant we would expect to see datasets with matching kmers throughout SRA, largely irrespective of sample origin. Conversely, if HuCSFDV1 is an invertebrate virus like other densoviruses, we would expect the most matches in invertebrate SRA datasets. This is not what we observed. Instead, of the 126 SRA datasets with matches sequences, 56 are from mice. The next most common data sources are air and wastewater genomes, with 16 and 10 datasets, respectively. 5 human datasets also have matches to HuCSFDV1, including XX datasets that were deposited as part of the original description of HuCSFDV1 in 2016.
+The HuCSFDV1 reference [NC_076998](https://www.ncbi.nlm.nih.gov/nuccore/NC_076998.1) was split into 1kb segments. Each segment was input into [Logan Search](https://logan-search.org/dashboard) using the default treshold of 0.5 and the 'All' reference group. [The results](logan/logan-output) of Logan Search for each segment were combined to create the set of matching SRA accessions. [This table](logan/sra-metadata.md) shows all of the matching datasets. To expore HuCSFDV1-like reads in these SRA datasets, the reads were downloaded with fasterq-dump, mapped to the HuCSFDV1 reference and deduplicated as described above, yielding indexed BAM files that are visualized in [IGV](https://dholab.github.io/common-densoviruses/logan/). Two human SRA datasets (SAMN05172265 and SAMN05172266) were deposited in 2016 in support of the original manuscript describing HuCSFDV1. Both were identified from SRA in this analaysis, providing a sanity check on using Logan Search to find additional datasets containing HuCSFDV1-like reads.
 
-Reads from all of these SRA datasets were downloaded with fasterq-dump, mapped to the HuCSFDV1 reference and deduplicated as described above, yielding indexed BAM files. 
+If the source of HuCSFDV1 is a reagent contaminant we would expect to see datasets with matching kmers throughout SRA, largely irrespective of sample origin. Conversely, if HuCSFDV1 is an invertebrate virus like other densoviruses, we would expect the most matches in invertebrate SRA datasets. This is not what we observed. Instead, of the 126 SRA datasets with matches sequences, 56 are from mice. The next most common data sources are air and wastewater genomes, with 16 and 10 datasets, respectively. Besides the two SRA datasets associated with the discovery of HuCSFDV1, three other human datasets also have matches to HuCSFDV1. One was found in a German investigation of the CSF from a 28 year old with subclinical neuroinflammation.
+
+One potential explanation for the apparent mouse and human predominance is that datasets from the known densovirus hosts are not as common in SRA. The number of SRA datasets associated with each taxonomic rank (and rank subtrees) of known densovirus hosts as of 26 November 2025 are: 
+- Blattodea (cockroaches & termites) - 6179
+- Diptera (flies) - 374,969
+- Hemiptera (true bugs) - 32,059
+- Hymenoptera - 103,337
+- Lepidoptera (moths & butterflies) - 93,852
+- Orthoptera (grasshoppers, crickets & katydids) - 10,253
+- Crustacea - 78,320
+- Echinodermata - 20,870
+
+In total, there are 719,839 SRA datasets from these taxa, yet they are virtually unrepresented in the SRA datasets with HuCSFDV1-like reads. Therefore, it is  unlikely that HuCSFDV1 is commonly found in the invertebrate hosts that are infected by other densoviruses.
+
+
 
 ### HuCSFDV1 is found in human skin microbiome
 
