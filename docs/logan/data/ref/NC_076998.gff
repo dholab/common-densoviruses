@@ -1,0 +1,13 @@
+##gff-version 3
+##source-version geneious 2025.2.2
+##sequence-region	NC_076998	1	4678
+NC_076998.1	Geneious	source	1	4678	.	+	.	Name=source Human CSF-associated densovirus
+NC_076998.1	Geneious	gene	238	2015	.	+	.	
+NC_076998.1	Geneious	CDS	238	301	.	+	0	Name=putative nonstructural protein NS1 CDS;ID=xzGMKc0jcQc+6CcysXFMt3is/vQ.1763925117815.0
+NC_076998.1	Geneious	CDS	373	2015	.	+	0	Name=putative nonstructural protein NS1 CDS;ID=xzGMKc0jcQc+6CcysXFMt3is/vQ.1763925117815.0
+NC_076998.1	Geneious	gene	424	1128	.	+	.	
+NC_076998.1	Geneious	CDS	424	1128	.	+	0	Name=nonstructural protein NS2 CDS
+NC_076998.1	Geneious	gene	978	2015	.	+	.	
+NC_076998.1	Geneious	CDS	978	2015	.	+	0	Name=nonstructural protein NS3 CDS
+NC_076998.1	Geneious	gene	2036	4558	.	+	.	
+NC_076998.1	Geneious	CDS	2036	4558	.	+	0	Name=structural protein VP CDS

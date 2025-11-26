@@ -24,19 +24,20 @@ Fortuitously, two sites (high-school-001 and elementary-school-004) each yielded
 
 We recently participated in another air sampling project in [international airports](https://www.medrxiv.org/content/10.1101/2025.09.22.25336185v3). Metagenomic sequencing with VSP enrichment was also performed on a subset of these samples (Bioproject: PRJNA989177), resulting in 159 datasets. Reads from these datasets were downloaded and mapped to the HuCSFDV1 reference as described above. Seven samples had a [single paired-end read](air-samples/tgs/consensus) that mapped to HuCSFDV1; a BLASTN search against core-nt (as of 23 November 2025) unambiguously HuCSFDV1 as the most significant alignment for all seven. Unlike schools where air samplers are located primarily in cafeterias where students and staff dwell, the air samplers in airports were located in international arrival corridors. Arriving passengers would be in the vicinity of the air samplers briefly, possibly accounting for the less robust detection of HuCSFDV1 reads. Nevertheless, this demonstrates that reads corresponding to this virus were found in multiple air samples in two international airports, Dulles and San Fransisco, separated by thousands of miles.
 
-
-
-
 ### HuCSFDV1 is detected in mammalian datasets in NCBI SRA
 
-that accepts BioSample accessions as input, automatically retrieves all associated SRA run accessions via Entrez queries, downloads reads using fasterq-dump (v3.1.1), and concatenates multi-run samples into unified FASTQ files. Reads are aligned 
+The HuCSFDV1 reference [NC_076998](https://www.ncbi.nlm.nih.gov/nuccore/NC_076998.1) was split into 1kb segments. Each segment was input into [Logan Search](https://logan-search.org/dashboard) using the default treshold of 0.5 and the 'All' reference group. [The results](logan/logan-output) of Logan Search for each segment were combined to create the set of matching SRA accessions. [This table](logan/sra-metadata.md) shows all of the matching datasets. If the source of HuCSFDV1 is a reagent contaminant we would expect to see datasets with matching kmers throughout SRA, largely irrespective of sample origin. Conversely, if HuCSFDV1 is an invertebrate virus like other densoviruses, we would expect the most matches in invertebrate SRA datasets. This is not what we observed. Instead, of the 126 SRA datasets with matches sequences, 56 are from mice. The next most common data sources are air and wastewater genomes, with 16 and 10 datasets, respectively. 5 human datasets also have matches to HuCSFDV1, including XX datasets that were deposited as part of the original description of HuCSFDV1 in 2016.
 
+Reads from all of these SRA datasets were downloaded with fasterq-dump, mapped to the HuCSFDV1 reference and deduplicated as described above, yielding indexed BAM files. 
 
 ### HuCSFDV1 is found in human skin microbiome
 
 In a 2016 manuscript, metagenomic sequencing was performed 594 skin samples from 12 healthy individuals. A subset of these individuals had reads that were categorized as Acheta domestica (i.e., house cricket) densovirus. Sequencing reads from the manuscript are available in [NCBI BioProject 46333](https://www.ncbi.nlm.nih.gov/sra?linkname=bioproject_sra_all&from_uid=46333). Unfortunately, there are 4,619 SRA datasets in this BioProject, along with 5,894 BioSamples. The umbrella BioProject does not list this publication in its references, however, exploration of the BioProject identified [1,120 metagenomic datasets](oh-et-al-skin-microbiome/sra-experiment-records.md) with identifiers that matched the ones used in the manuscript (SRA Links for BioProject (Select 46333) AND "human skin metagenome"[orgn:__txid539655]).
 
 Additionally, [Supplemental Table S2 from Oh et al.](https://www.cell.com/cms/10.1016/j.cell.2016.04.008/attachment/db43522c-ed59-47f2-a378-469abee3924b/mmc3.xlsx) describes 585 samples with taxonomic classifications, including 56 samples with densovirus reads. We reformatted this into [a table](oh-et-al-skin-microbiome/samples-with-densovirus-status.md) that describes the 585 samples, the corresponding data in NCBI, and densovirus status.
+
+that accepts BioSample accessions as input, automatically retrieves all associated SRA run accessions via Entrez queries, downloads reads using fasterq-dump (v3.1.1), and concatenates multi-run samples into unified FASTQ files. Reads are aligned 
+
 
 
 ## Authors and affiliations

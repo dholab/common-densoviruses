@@ -195,7 +195,7 @@
                         name: "Genes",
                         type: "annotation",
                         format: "gff3",
-                        url: "../data/ref/NC_076998.gff",
+                        url: "data/ref/NC_076998.gff",
                         displayMode: "EXPANDED",
                         height: 250,
                         color: "rgb(0, 0, 150)"
@@ -214,8 +214,8 @@
                         name: formatSampleName(sample.name, sample.reads),
                         type: "alignment",
                         format: "bam",
-                        url: `../data/bam/${sample.name}.bam`,
-                        indexURL: `../data/bam/${sample.name}.bam.bai`,
+                        url: `data/bam/${sample.name}.bam`,
+                        indexURL: `data/bam/${sample.name}.bam.bai`,
                         displayMode: "SQUISHED",
                         alignmentRowHeight: 6,
                         showCoverage: false,  // Turn off coverage plot
@@ -237,7 +237,7 @@
                     genome: {
                         id: "HuCSFDV1",
                         name: "Human CSF-associated densovirus 1",
-                        fastaURL: "../data/ref/NC_076998.fasta",
+                        fastaURL: "data/ref/NC_076998.fasta",
                         tracks: tracks
                     },
                     locus: "NC_076998.1:1-4900",
