@@ -4,129 +4,130 @@ This table contains metadata for SRA accessions identified through [Logan Search
 
 **Total Accessions:** 124 (with mapped reads)
 
-| BioSample | Mapped Reads | SRA Accession | BioProject | Organism | SRA Sample Name | Source Name |
-|-----------|--------------|---------------|------------|----------|-----------------|-------------|
-| SAMN35556869 | 19470 | SRR24793411 | PRJNA978525 | Mus musculus | GSM7438685 | Sperm, Tdg +/-, rep3 |
-| SAMN03282914 | 8941 | SRR1754483 | PRJNA272507 | Mus musculus | GSM1582209 | F12A2_1NP |
-| SAMN03282695 | 7572 | SRR1754639 | PRJNA272507 | Mus musculus | GSM1582365 | F17B3_1NP |
-| SAMN05172265 | 5090 | SRR3581665 | PRJNA322666 | human metagenome | CSFPool |  |
-| SAMN14606515 | 4876 | SRR11556555 | PRJNA625732 | Mus musculus | GSM4479488 | PGNs_R1_GAM180113_3NP_E08_2_S157 |
-| SAMN10713895 | 4338 | SRR8478958 | PRJNA513835 | Homo sapiens | SCNI3 |  |
-| SAMN14427291 | 4033 | SRR11392655 | PRJNA614480 | Homo sapiens | GSM4430009 | Donor_1_Control_ChIPseq [primary human TH1 cells] |
-| SAMEA9361894 | 3195 | ERR6212450 | PRJEB43730 | Mus musculus | SAMEA9361894 | ChIP_SSDS_DMC1_MUT_D |
-| SAMN33976229 | 2986 | SRR24010792 | PRJNA950127 | air metagenome | ENV/USA/WI-MSN-AE0000100A9532/2022 |  |
-| SAMN11882269 | 2829 | SRR9150765 | PRJNA545299 | Mus musculus | GSM3825974 | 180309_CEMBA_mm_P56_P63_2E_CEMBA180220_2E_1_CEMBA180220_2E_2_D5_AD008_indexed |
-| SAMN17835559 | 2224 | SRR13658032 | PRJNA700651 | Mus musculus | GSM5070101 | full-collection-4np: 4np (G1G3) |
-| SAMN14608350 | 1867 | SRR11556263 | PRJNA625732 | Mus musculus | GSM4481001 | DNs_R2_GAM180806_3NP_C01_1_S3 |
-| SAMN03283097 | 1722 | SRR1754495 | PRJNA272507 | Mus musculus | GSM1582221 | F12C2_1NP |
-| SAMN05172266 | 1349 | SRR3581666 | PRJNA322666 | human metagenome | CSF21 |  |
-| SAMEA6428851 | 1198 | ERR5162996 | PRJEB28690 | Mus musculus | SAMEA6428851 | EpiAge8648721 |
-| SAMN03282682 | 979 | SRR1754640 | PRJNA272507 | Mus musculus | GSM1582366 | F17B4_1NP |
-| SAMN03282676 | 845 | SRR1754632 | PRJNA272507 | Mus musculus | GSM1582358 | F17A3_1NP |
-| SAMN10220126 | 840 | SRR7984158 | PRJNA495153 | Mus musculus | GSM3422512 | Stage E5.5 embryo 2 section 5 region VE (E5.5_Ref_5VE) |
-| SAMN15564055 | 800 | SRR12244187 | PRJNA497195 | Mus musculus | GSM4675576 | iHEC-sc44 |
-| SAMN14606877 | 796 | SRR11556839 | PRJNA625732 | Mus musculus | GSM4479770 | PGNs_R2_GAM190104_3NP_E05_2_S133 |
-| SAMN03283130 | 794 | SRR1754446 | PRJNA272507 | Mus musculus | GSM1582172 | F11A6_1NP |
-| SAMN03282797 | 772 | SRR1754513 | PRJNA272507 | Mus musculus | GSM1582239 | F12F2_1NP |
-| SAMN03282668 | 698 | SRR1754646 | PRJNA272507 | Mus musculus | GSM1582372 | F17C3_1NP |
-| SAMN05578520 | 675 | SRR4039772 | PRJNA338997 | aquatic metagenome | STB1 | Stingray Touch |
-| SAMN03283014 | 623 | SRR1754486 | PRJNA272507 | Mus musculus | GSM1582212 | F12A5_1NP |
-| SAMN17834913 | 599 | SRR13657740 | PRJNA700652 | Mus musculus | GSM5069811 | pi-staining-and-freezing: pi_stained 4np (F38A6) |
-| SAMN17834866 | 586 | SRR13657862 | PRJNA700652 | Mus musculus | GSM5069933 | wga-pcr-cycles-test: 25-pcr-cycles 4np (F43A1) |
-| SAMN01760507 | 558 | SRR584137 | PRJNA176941 | Arabidopsis thaliana | GSM1017178 | PTB_OE2_R2 |
-| SAMN03282804 | 524 | SRR1754631 | PRJNA272507 | Mus musculus | GSM1582357 | F17A2_1NP |
-| SAMEA4790996 | 491 | ERR2699812 | PRJEB27640 | indoor metagenome | SAMEA4790996 | UR |
-| SAMN03282723 | 487 | SRR1754519 | PRJNA272507 | Mus musculus | GSM1582245 | F12G2_1NP |
-| SAMN13135889 | 416 | SRR10418382 | PRJNA579886 | insect metagenome | Pools_2012 | Viral Metagenome from Belgian Honey bees. |
-| SAMN33976210 | 413 | SRR24010804 | PRJNA950127 | air metagenome | ENV/USA/WI-MSN-AE00001004492C/2021 |  |
-| SAMN02199191 | 399 | SRR896107 | PRJNA208073 | Homo sapiens | GSM1160643 | BDP1_IMR90 |
-| SAMEA9361893 | 390 | ERR6212447 | PRJEB43730 | Mus musculus | SAMEA9361893 | ChIP_SSDS_DMC1_WT_A |
-| SAMN08110506 | 389 | SRR6330483 | PRJNA420368 | Mus musculus | GSM2869255 | ActD_timecourse_rep2_time240 |
-| SAMN33976233 | 359 | SRR24010788 | PRJNA950127 | air metagenome | ENV/USA/WI-MSN-AE0000106DC33E/2022 |  |
-| SAMN33921312 | 344 | SRR23973226 | PRJNA948850 | wastewater metagenome | GSM7117191 | DNA_220629_20-22hmix_cer_BIOMcombi |
-| SAMN14431031 | 312 | SRR11401857 | PRJNA596372 | Bos taurus | N-VM004-T01-healthy-MAPneg4 |  |
-| SAMN33921318 | 291 | SRR23973377 | PRJNA948850 | wastewater metagenome | GSM7117185 | DNA_220607_22-24hmix_centri_BIOMcombi |
-| SAMN03282725 | 281 | SRR1754708 | PRJNA272507 | other sequences | GSM1582434 | F12H2_negative_control |
-| SAMN03282782 | 279 | SRR1754501 | PRJNA272507 | Mus musculus | GSM1582227 | F12D2_1NP |
-| SAMN10764815 | 274 | SRR8451350 | PRJNA515691 | Dioscorea abyssinica | A5045_WGS_AfriCrop |  |
-| SAMEA9361896 | 264 | ERR6212448 | PRJEB43730 | Mus musculus | SAMEA9361896 | ChIP_SSDS_DMC1_WT_B |
-| SAMN33593424 | 262 | SRR23705987 | PRJNA941228 | Mus musculus | GSM7081467 | G2021_115_4 |
-| SAMN03282819 | 258 | SRR1754507 | PRJNA272507 | Mus musculus | GSM1582233 | F12E2_1NP |
-| SAMN33976212 | 257 | SRR24010787 | PRJNA950127 | air metagenome | ENV/USA/WI-MSN-AE0000100A8B3C/2022 |  |
-| SAMN03282885 | 254 | SRR1754489 | PRJNA272507 | Mus musculus | GSM1582215 | F12B2_1NP |
-| SAMN03282899 | 249 | SRR1754482 | PRJNA272507 | Mus musculus | GSM1582208 | F12A1_1NP |
-| SAMN34271735 | 240 | SRR24234000 | PRJNA957828 | Plasmodium falciparum | GSM7192254 | 40R_H3K4ME3-rep2 |
-| SAMN03282999 | 233 | SRR1754443 | PRJNA272507 | Mus musculus | GSM1582169 | F11A3_1NP |
-| SAMN33388219 | 228 | SRR23595637 | ERROR | ERROR | ERROR | ERROR |
-| SAMN33976211 | 227 | SRR24010793 | PRJNA950127 | air metagenome | ENV/USA/WI-MSN-AE0000100A8839/2022 |  |
-| SAMN14607101 | 221 | SRR11556989 | PRJNA625732 | Mus musculus | GSM4479917 | OLGs_GAM180713_3NP_C07_1_S51 |
-| SAMN27034175 | 220 | SRR18559096 | PRJNA821007 | Pteronia ciliata | Pteronia ciliata I R198 |  |
-| SAMN33229434 | 219 | SRR23387193 | PRJNA933216 | Drosophila melanogaster | GSM7036472 | chip msl2 +clamp rep3 |
-| SAMN03282898 | 217 | SRR1754445 | PRJNA272507 | Mus musculus | GSM1582171 | F11A5_1NP |
-| SAMN32275148 | 216 | SRR22765745 | PRJNA913116 | Homo sapiens | GSM6846369 | metagenomic sample obtained from skin of Pat19, Stage: nonlesional (sample100) |
-| SAMN03282901 | 208 | SRR1754442 | PRJNA272507 | Mus musculus | GSM1582168 | F11A2_1NP |
-| SAMEA9361895 | 208 | ERR6212449 | PRJEB43730 | Mus musculus | SAMEA9361895 | ChIP_SSDS_DMC1_MUT_C |
-| SAMN03282992 | 204 | SRR1754484 | PRJNA272507 | Mus musculus | GSM1582210 | F12A3_1NP |
-| SAMN16661199 | 203 | SRR12983556 | PRJNA674565 | aquatic metagenome | M25 | water |
-| SAMN11373788 | 200 | SRR8920154 | PRJNA531288 | Mus musculus | MSAN2-MS119 |  |
-| SAMN10771822 | 191 | SRR8454740 | PRJNA515881 | Mus musculus | GSM3569073 | single sperm_2281 |
-| SAMN03283115 | 189 | SRR1754485 | PRJNA272507 | Mus musculus | GSM1582211 | F12A4_1NP |
-| SAMN03282940 | 186 | SRR1754401 | PRJNA272507 | Mus musculus | GSM1582127 | F10A2_1NP |
-| SAMN35164886 | 180 | SRR24642190 | PRJNA974021 | Mus musculus | GSM7377508 | 13A_M_637 |
-| SAMN33976225 | 176 | SRR24010797 | PRJNA950127 | air metagenome | ENV/USA/WI-MSN-AE000010014930/2022 |  |
-| SAMN33976216 | 173 | SRR24010782 | PRJNA950127 | air metagenome | ENV/USA/WI-MSN-AE0000100CD638/2022 |  |
-| SAMN33921310 | 173 | SRR23973224 | PRJNA948850 | wastewater metagenome | GSM7117193 | DNA_220629_22-24hmix_cer_BIOMcombi |
-| SAMN03282880 | 171 | SRR1754487 | PRJNA272507 | Mus musculus | GSM1582213 | F12A6_1NP |
-| SAMN03282848 | 170 | SRR1754650 | PRJNA272507 | Mus musculus | GSM1582376 | F17C7_1NP |
-| SAMN33921324 | 155 | SRR23973170 | PRJNA948850 | wastewater metagenome | GSM7117179 | DNA_220602_20-22hmix_centri_BIOMcombi |
-| SAMN33593416 | 142 | SRR23705979 | PRJNA941228 | Mus musculus | GSM7081475 | G2021_115_15 |
-| SAMN03349865 | 134 | SRR2298545 | PRJNA275568 | human gut metagenome | bin_58: 4705A_2002-01-06 |  |
-| SAMEA14104442 | 134 | ERR9613094 | PRJEB52388 | gut metagenome | SAMEA14104442 | 46_f0_Viruses |
-| SAMN03979631 | 131 | SRR4014434 | PRJNA292073 | Mus musculus | GSM1845262 | ChIP-Seq MII oocyte K4Me3 rep1 |
-| SAMN33976217 | 129 | SRR24010781 | PRJNA950127 | air metagenome | ENV/USA/WI-MSN-AE0000100CA232/2022 |  |
-| SAMEA1116972 | 124 | ERR2535119 | PRJEB25980 | Homo sapiens | SAMEA1116972 | 36_tumor2 |
-| SAMN17393144 | 123 | SRR13494329 | PRJNA693645 | bat metagenome | IH002_33 |  |
-| SAMN37778567 | 119 | SRR26359790 | PRJNA1026948 | Mus musculus | GSM7836515 | PS23.2 |
-| SAMN37973255 | 115 | SRR26638149 | PRJNA1033037 | hospital metagenome | 4-HW19-Nov1-virus |  |
-| SAMN33976232 | 114 | SRR24010789 | PRJNA950127 | air metagenome | ENV/USA/WI-MSN-AE00001073172E/2022 |  |
-| SAMEA112227666 | 108 | ERR10661727 | PRJEB58202 | Mus musculus | SAMEA112227666 | Wild-type 1 |
-| SAMEA1116971 | 104 | ERR2535118 | PRJEB25980 | Homo sapiens | SAMEA1116971 | 36_tumor1 |
-| SAMN20995854 | 103 | SRR15624099 | PRJNA758072 | Mus musculus | GSM5538674 | 18_CoH_0_Naive_S18 [PBMC vaccine transcriptome] |
-| SAMN33921323 | 97 | SRR23973169 | PRJNA948850 | wastewater metagenome | GSM7117180 | DNA_220602_20-22hmix_cer_BIOMcombi |
-| SAMN11667598 | 97 | SRR9079106 | PRJNA543464 | Mus musculus | GSM3772587 | 171219_CEMBA_mm_P56_P63_4B_CEMBA171213_4B_3_CEMBA171213_4B_4_H6_AD001_indexed |
-| SAMN33976230 | 96 | SRR24010791 | PRJNA950127 | air metagenome | ENV/USA/WI-MSN-AE0000100A9F46/2022 |  |
-| SAMN37973242 | 94 | SRR26638134 | PRJNA1033037 | hospital metagenome | 1-HW6-Oct11-virus |  |
-| SAMN14431022 | 93 | SRR11401866 | PRJNA596372 | Bos taurus | N-VM002-T02-healthy-MAPneg8 |  |
-| SAMN17717728 | 92 | SRR14117203 | PRJNA695070 | human metagenome | CHNsample168 |  |
-| SAMN37973262 | 91 | SRR26638141 | PRJNA1033037 | hospital metagenome | 5-HW26-Nov8-virus |  |
-| SAMEA5689226 | 91 | ERR3352107 | PRJEB22024 | Mus musculus | SAMEA5689226 | MM_pIC_8h_22_F6 |
-| SAMN14431027 | 88 | SRR11401861 | PRJNA596372 | Bos taurus | N-VM003-T02-healthy-MAPneg9 |  |
-| SAMN34509297 | 87 | SRR24390631 | PRJNA965924 | freshwater metagenome | EM02TI_201023 |  |
-| SAMN33921320 | 85 | SRR23973382 | PRJNA948850 | wastewater metagenome | GSM7117183 | DNA_220607_20-22hmix_centri_BIOMcombi |
-| SAMN33976218 | 80 | SRR24010780 | PRJNA950127 | air metagenome | ENV/USA/WI-MSN-AE0000100C7A40/2022 |  |
-| SAMEA4790997 | 76 | ERR2699813 | PRJEB27640 | indoor metagenome | SAMEA4790997 | CR8 |
-| SAMN11374844 | 75 | SRR8904411 | PRJNA531288 | Macaca fascicularis | KSAN3-KS52 |  |
-| SAMN11374810 | 74 | SRR8904257 | PRJNA531288 | Macaca fascicularis | KSAN3-KS12 |  |
-| SAMN09829651 | 67 | SRR7756905 | PRJNA485869 | Penaeus vannamei | F1 population shrimp 270 offspring from Guangxi Key Laboratory of Aquatic Genetic Breeding and Healthy Aquaculture | Invertebrate sample from Litopenaeus vannamei |
-| SAMN11885008 | 62 | SRR9153062 | PRJNA545313 | Mus musculus | GSM3827791 | 180309_CEMBA_mm_P56_P63_2E_CEMBA180222_2E_1_CEMBA180222_2E_2_H12_AD001_indexed |
-| SAMN11662441 | 62 | SRR9074249 | PRJNA543328 | Mus musculus | GSM3771128 | 171219_CEMBA_mm_P56_P63_4B_CEMBA171212_4B_1_CEMBA171212_4B_2_G12_AD002_indexed |
-| SAMN31240689 | 61 | SRR21861451 | PRJNA889367 | Mus musculus | GSM6627042 | 10C_M_1484 |
-| SAMN27553873 | 61 | SRR18740045 | PRJNA826255 | Caenorhabditis elegans | fog-2 male treated F1 |  |
-| SAMN06462397 | 61 | SRR5330768 | PRJNA377569 | root metagenome | MRF_roots |  |
-| SAMN14339251 | 54 | SRR11274019 | PRJNA611602 | Callithrix jacchus | GSM4400466 | MM_M1_2_sample 515 |
-| SAMN14396196 | 50 | SRR11342363 | PRJNA613194 | Lasiopodomys mandarinus | L33 | Lasiopodomys mandarinus LMAN14f neo-X2 |
-| SAMN08476499 | 48 | SRR6682411 | PRJNA433375 | Mus musculus | GSM2985052 | Stage E7.5 embryo 3 section 9 region A |
-| SAMN33976220 | 46 | SRR24010802 | PRJNA950127 | air metagenome | ENV/USA/WI-MSN-AE0000100CC536/2022 |  |
-| SAMN12545617 | 44 | SRR9941646 | PRJNA559540 | Mus musculus | GSM4024487 | CEMBA190307_5A_1_CEMBA190307_5A_2_E4_ad012 |
-| SAMN33976221 | 43 | SRR24010801 | PRJNA950127 | air metagenome | ENV/USA/WI-MSN-AE0000100CC63D/2022 |  |
-| SAMN07373717 | 36 | SRR5853136 | PRJNA395239 | indoor metagenome | UCF13 | F6_DNA |
-| SAMN10342723 | 35 | SRR8133840 | PRJNA499081 | human gut metagenome | 9_5_FF2_08_DNA_AAGAGGCA-TATCCTCT_L002 | R3_5 |
-| SAMN29231487 | 31 | SRR19776513 | PRJNA741997 | Mus | GSM6258191 | mouse, blastocysts, Rbm14 ko, S4 |
-| SAMEA5366993 | 30 | ERR3173144 | PRJEB31375 | Schistosoma mansoni | SAMEA5366993 | Schistosoma mansoni |
-| SAMN33976215 | 29 | SRR24010783 | PRJNA950127 | air metagenome | ENV/USA/WI-MSN-AE0000100CA130/2022 |  |
-| SAMN33976219 | 25 | SRR24010803 | PRJNA950127 | air metagenome | ENV/USA/WI-MSN-AE0000100C702C/2022 |  |
-| SAMN12333308 | 20 | SRR9724016 | PRJNA555850 | Mus musculus | GSM3957669 | CEMBA180910_5J_3_CEMBA180910_5J_4_E3_ad006 |
-| SAMN14854320 | 16 | SRR11835980 | PRJNA631182 | Caullerya mesnili | Caullerya mesnili spores | Invertebrate sample from Caullerya mesnili |
-| SAMN33911630 | 10 | SRR23986800 | PRJNA948647 | wastewater metagenome | wastewater metagenome 3 | Wastewater 2 |
-| SAMEA4527617 | 8 | ERR2200444 | PRJEB23496 | wastewater metagenome | SAMEA4527617 | wastewater metagenome |
-| SAMEA4527640 | 3 | ERR2200451 | PRJEB23496 | wastewater metagenome | SAMEA4527640 | wastewater metagenome |
+| BioSample | Mapped Reads | SRA Accession | BioProject | Submission | Organism | SRA Sample Name | Source Name |
+|-----------|--------------|---------------|------------|------------|----------|-----------------|-------------|
+| [SAMN35556869](https://www.ncbi.nlm.nih.gov/biosample/SAMN35556869) | 19470 | [SRR24793411](https://www.ncbi.nlm.nih.gov/sra/SRR24793411) | [PRJNA978525](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA978525) | ETH Zurich, 2023-06-01 | Mus musculus | GSM7438685 | Sperm, Tdg +/-, rep3 |
+| [SAMN03282914](https://www.ncbi.nlm.nih.gov/biosample/SAMN03282914) | 8941 | [SRR1754483](https://www.ncbi.nlm.nih.gov/sra/SRR1754483) | [PRJNA272507](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA272507) | GEO, 2014-12-05 | Mus musculus | GSM1582209 | F12A2_1NP |
+| [SAMN03282695](https://www.ncbi.nlm.nih.gov/biosample/SAMN03282695) | 7572 | [SRR1754639](https://www.ncbi.nlm.nih.gov/sra/SRR1754639) | [PRJNA272507](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA272507) | GEO, 2014-12-05 | Mus musculus | GSM1582365 | F17B3_1NP |
+| [SAMN05172265](https://www.ncbi.nlm.nih.gov/biosample/SAMN05172265) | 5090 | [SRR3581665](https://www.ncbi.nlm.nih.gov/sra/SRR3581665) | [PRJNA322666](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA322666) | University of Sydney, 2016-05-20 | human metagenome | CSFPool |  |
+| [SAMN14606515](https://www.ncbi.nlm.nih.gov/biosample/SAMN14606515) | 4876 | [SRR11556555](https://www.ncbi.nlm.nih.gov/sra/SRR11556555) | [PRJNA625732](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA625732) | GEO, 2020-04-09 | Mus musculus | GSM4479488 | PGNs_R1_GAM180113_3NP_E08_2_S157 |
+| [SAMN10713895](https://www.ncbi.nlm.nih.gov/biosample/SAMN10713895) | 4338 | [SRR8478958](https://www.ncbi.nlm.nih.gov/sra/SRR8478958) | [PRJNA513835](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA513835) | UNC Chapel Hill, 2019-01-15 | Homo sapiens | SCNI3 |  |
+| [SAMN14427291](https://www.ncbi.nlm.nih.gov/biosample/SAMN14427291) | 4033 | [SRR11392655](https://www.ncbi.nlm.nih.gov/sra/SRR11392655) | [PRJNA614480](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA614480) | GEO, 2020-03-31 | Homo sapiens | GSM4430009 | Donor_1_Control_ChIPseq [primary human TH1 cells] |
+| [SAMEA9361894](https://www.ncbi.nlm.nih.gov/biosample/SAMEA9361894) | 3195 | [ERR6212450](https://www.ebi.ac.uk/ena/browser/view/ERR6212450) | [PRJEB43730](https://www.ebi.ac.uk/ena/browser/view/PRJEB43730) | CRUK Manchester Institute, 2021-06-18 | Mus musculus | SAMEA9361894 | ChIP_SSDS_DMC1_MUT_D |
+| [SAMN33976229](https://www.ncbi.nlm.nih.gov/biosample/SAMN33976229) | 2986 | [SRR24010792](https://www.ncbi.nlm.nih.gov/sra/SRR24010792) | [PRJNA950127](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA950127) | UW-Madison, 2023-03-29 | air metagenome | ENV/USA/WI-MSN-AE0000100A9532/2022 |  |
+| [SAMN11882269](https://www.ncbi.nlm.nih.gov/biosample/SAMN11882269) | 2829 | [SRR9150765](https://www.ncbi.nlm.nih.gov/sra/SRR9150765) | [PRJNA545299](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA545299) | GEO, 2019-05-23 | Mus musculus | GSM3825974 | 180309_CEMBA_mm_P56_P63_2E_CEMBA180220_2E_1_CEMBA180220_2E_2_D5_AD008_indexed |
+| [SAMN17835559](https://www.ncbi.nlm.nih.gov/biosample/SAMN17835559) | 2224 | [SRR13658032](https://www.ncbi.nlm.nih.gov/sra/SRR13658032) | [PRJNA700651](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA700651) | GEO, 2021-02-02 | Mus musculus | GSM5070101 | full-collection-4np: 4np (G1G3) |
+| [SAMN14608350](https://www.ncbi.nlm.nih.gov/biosample/SAMN14608350) | 1867 | [SRR11556263](https://www.ncbi.nlm.nih.gov/sra/SRR11556263) | [PRJNA625732](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA625732) | GEO, 2020-04-09 | Mus musculus | GSM4481001 | DNs_R2_GAM180806_3NP_C01_1_S3 |
+| [SAMN03283097](https://www.ncbi.nlm.nih.gov/biosample/SAMN03283097) | 1722 | [SRR1754495](https://www.ncbi.nlm.nih.gov/sra/SRR1754495) | [PRJNA272507](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA272507) | GEO, 2014-12-05 | Mus musculus | GSM1582221 | F12C2_1NP |
+| [SAMN05172266](https://www.ncbi.nlm.nih.gov/biosample/SAMN05172266) | 1349 | [SRR3581666](https://www.ncbi.nlm.nih.gov/sra/SRR3581666) | [PRJNA322666](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA322666) | University of Sydney, 2016-05-20 | human metagenome | CSF21 |  |
+| [SAMEA6428851](https://www.ncbi.nlm.nih.gov/biosample/SAMEA6428851) | 1198 | [ERR5162996](https://www.ebi.ac.uk/ena/browser/view/ERR5162996) | [PRJEB28690](https://www.ebi.ac.uk/ena/browser/view/PRJEB28690) | Babraham Institute, 2020-11-26 | Mus musculus | SAMEA6428851 | EpiAge8648721 |
+| [SAMN03282682](https://www.ncbi.nlm.nih.gov/biosample/SAMN03282682) | 979 | [SRR1754640](https://www.ncbi.nlm.nih.gov/sra/SRR1754640) | [PRJNA272507](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA272507) | GEO, 2014-12-05 | Mus musculus | GSM1582366 | F17B4_1NP |
+| [SAMN03282676](https://www.ncbi.nlm.nih.gov/biosample/SAMN03282676) | 845 | [SRR1754632](https://www.ncbi.nlm.nih.gov/sra/SRR1754632) | [PRJNA272507](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA272507) | GEO, 2014-12-05 | Mus musculus | GSM1582358 | F17A3_1NP |
+| [SAMN10220126](https://www.ncbi.nlm.nih.gov/biosample/SAMN10220126) | 840 | [SRR7984158](https://www.ncbi.nlm.nih.gov/sra/SRR7984158) | [PRJNA495153](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA495153) | GEO, 2018-10-07 | Mus musculus | GSM3422512 | Stage E5.5 embryo 2 section 5 region VE (E5.5_Ref_5VE) |
+| [SAMN15564055](https://www.ncbi.nlm.nih.gov/biosample/SAMN15564055) | 800 | [SRR12244187](https://www.ncbi.nlm.nih.gov/sra/SRR12244187) | [PRJNA497195](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA497195) | GEO, 2020-07-27 | Mus musculus | GSM4675576 | iHEC-sc44 |
+| [SAMN14606877](https://www.ncbi.nlm.nih.gov/biosample/SAMN14606877) | 796 | [SRR11556839](https://www.ncbi.nlm.nih.gov/sra/SRR11556839) | [PRJNA625732](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA625732) | GEO, 2020-04-09 | Mus musculus | GSM4479770 | PGNs_R2_GAM190104_3NP_E05_2_S133 |
+| [SAMN03283130](https://www.ncbi.nlm.nih.gov/biosample/SAMN03283130) | 794 | [SRR1754446](https://www.ncbi.nlm.nih.gov/sra/SRR1754446) | [PRJNA272507](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA272507) | GEO, 2014-12-05 | Mus musculus | GSM1582172 | F11A6_1NP |
+| [SAMN03282797](https://www.ncbi.nlm.nih.gov/biosample/SAMN03282797) | 772 | [SRR1754513](https://www.ncbi.nlm.nih.gov/sra/SRR1754513) | [PRJNA272507](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA272507) | GEO, 2014-12-05 | Mus musculus | GSM1582239 | F12F2_1NP |
+| [SAMN03282668](https://www.ncbi.nlm.nih.gov/biosample/SAMN03282668) | 698 | [SRR1754646](https://www.ncbi.nlm.nih.gov/sra/SRR1754646) | [PRJNA272507](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA272507) | GEO, 2014-12-05 | Mus musculus | GSM1582372 | F17C3_1NP |
+| [SAMN05578520](https://www.ncbi.nlm.nih.gov/biosample/SAMN05578520) | 675 | [SRR4039772](https://www.ncbi.nlm.nih.gov/sra/SRR4039772) | [PRJNA338997](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA338997) | San Diego Zoo, 2016-08-18 | aquatic metagenome | STB1 | Stingray Touch |
+| [SAMN03283014](https://www.ncbi.nlm.nih.gov/biosample/SAMN03283014) | 623 | [SRR1754486](https://www.ncbi.nlm.nih.gov/sra/SRR1754486) | [PRJNA272507](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA272507) | GEO, 2014-12-05 | Mus musculus | GSM1582212 | F12A5_1NP |
+| [SAMN17834913](https://www.ncbi.nlm.nih.gov/biosample/SAMN17834913) | 599 | [SRR13657740](https://www.ncbi.nlm.nih.gov/sra/SRR13657740) | [PRJNA700652](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA700652) | GEO, 2021-02-02 | Mus musculus | GSM5069811 | pi-staining-and-freezing: pi_stained 4np (F38A6) |
+| [SAMN17834866](https://www.ncbi.nlm.nih.gov/biosample/SAMN17834866) | 586 | [SRR13657862](https://www.ncbi.nlm.nih.gov/sra/SRR13657862) | [PRJNA700652](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA700652) | GEO, 2021-02-02 | Mus musculus | GSM5069933 | wga-pcr-cycles-test: 25-pcr-cycles 4np (F43A1) |
+| [SAMN01760507](https://www.ncbi.nlm.nih.gov/biosample/SAMN01760507) | 558 | [SRR584137](https://www.ncbi.nlm.nih.gov/sra/SRR584137) | [PRJNA176941](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA176941) | GEO, 2013-01-22 | Arabidopsis thaliana | GSM1017178 | PTB_OE2_R2 |
+| [SAMN03282804](https://www.ncbi.nlm.nih.gov/biosample/SAMN03282804) | 524 | [SRR1754631](https://www.ncbi.nlm.nih.gov/sra/SRR1754631) | [PRJNA272507](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA272507) | GEO, 2014-12-05 | Mus musculus | GSM1582357 | F17A2_1NP |
+| [SAMEA4790996](https://www.ncbi.nlm.nih.gov/biosample/SAMEA4790996) | 491 | [ERR2699812](https://www.ebi.ac.uk/ena/browser/view/ERR2699812) | [PRJEB27640](https://www.ebi.ac.uk/ena/browser/view/PRJEB27640) | Argonne National Lab, 2018-06-14 | indoor metagenome | SAMEA4790996 | UR |
+| [SAMN03282723](https://www.ncbi.nlm.nih.gov/biosample/SAMN03282723) | 487 | [SRR1754519](https://www.ncbi.nlm.nih.gov/sra/SRR1754519) | [PRJNA272507](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA272507) | GEO, 2014-12-05 | Mus musculus | GSM1582245 | F12G2_1NP |
+| [SAMN13135889](https://www.ncbi.nlm.nih.gov/biosample/SAMN13135889) | 416 | [SRR10418382](https://www.ncbi.nlm.nih.gov/sra/SRR10418382) | [PRJNA579886](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA579886) | Sciensano, 2019-10-24 | insect metagenome | Pools_2012 | Viral Metagenome from Belgian Honey bees. |
+| [SAMN33976210](https://www.ncbi.nlm.nih.gov/biosample/SAMN33976210) | 413 | [SRR24010804](https://www.ncbi.nlm.nih.gov/sra/SRR24010804) | [PRJNA950127](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA950127) | UW-Madison, 2023-03-29 | air metagenome | ENV/USA/WI-MSN-AE00001004492C/2021 |  |
+| [SAMN02199191](https://www.ncbi.nlm.nih.gov/biosample/SAMN02199191) | 399 | [SRR896107](https://www.ncbi.nlm.nih.gov/sra/SRR896107) | [PRJNA208073](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA208073) | GEO, 2013-08-21 | Homo sapiens | GSM1160643 | BDP1_IMR90 |
+| [SAMEA9361893](https://www.ncbi.nlm.nih.gov/biosample/SAMEA9361893) | 390 | [ERR6212447](https://www.ebi.ac.uk/ena/browser/view/ERR6212447) | [PRJEB43730](https://www.ebi.ac.uk/ena/browser/view/PRJEB43730) | CRUK Manchester Institute, 2021-06-18 | Mus musculus | SAMEA9361893 | ChIP_SSDS_DMC1_WT_A |
+| [SAMN08110506](https://www.ncbi.nlm.nih.gov/biosample/SAMN08110506) | 389 | [SRR6330483](https://www.ncbi.nlm.nih.gov/sra/SRR6330483) | [PRJNA420368](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA420368) | GEO, 2017-12-04 | Mus musculus | GSM2869255 | ActD_timecourse_rep2_time240 |
+| [SAMN33976233](https://www.ncbi.nlm.nih.gov/biosample/SAMN33976233) | 359 | [SRR24010788](https://www.ncbi.nlm.nih.gov/sra/SRR24010788) | [PRJNA950127](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA950127) | UW-Madison, 2023-03-29 | air metagenome | ENV/USA/WI-MSN-AE0000106DC33E/2022 |  |
+| [SAMN33921312](https://www.ncbi.nlm.nih.gov/biosample/SAMN33921312) | 344 | [SRR23973226](https://www.ncbi.nlm.nih.gov/sra/SRR23973226) | [PRJNA948850](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA948850) | GEO, 2023-03-27 | wastewater metagenome | GSM7117191 | DNA_220629_20-22hmix_cer_BIOMcombi |
+| [SAMN14431031](https://www.ncbi.nlm.nih.gov/biosample/SAMN14431031) | 312 | [SRR11401857](https://www.ncbi.nlm.nih.gov/sra/SRR11401857) | [PRJNA596372](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA596372) | Wageningen, 2020-04-01 | Bos taurus | N-VM004-T01-healthy-MAPneg4 |  |
+| [SAMN33921318](https://www.ncbi.nlm.nih.gov/biosample/SAMN33921318) | 291 | [SRR23973377](https://www.ncbi.nlm.nih.gov/sra/SRR23973377) | [PRJNA948850](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA948850) | GEO, 2023-03-27 | wastewater metagenome | GSM7117185 | DNA_220607_22-24hmix_centri_BIOMcombi |
+| [SAMN03282725](https://www.ncbi.nlm.nih.gov/biosample/SAMN03282725) | 281 | [SRR1754708](https://www.ncbi.nlm.nih.gov/sra/SRR1754708) | [PRJNA272507](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA272507) | GEO, 2014-12-05 | other sequences | GSM1582434 | F12H2_negative_control |
+| [SAMN03282782](https://www.ncbi.nlm.nih.gov/biosample/SAMN03282782) | 279 | [SRR1754501](https://www.ncbi.nlm.nih.gov/sra/SRR1754501) | [PRJNA272507](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA272507) | GEO, 2014-12-05 | Mus musculus | GSM1582227 | F12D2_1NP |
+| [SAMN10764815](https://www.ncbi.nlm.nih.gov/biosample/SAMN10764815) | 274 | [SRR8451350](https://www.ncbi.nlm.nih.gov/sra/SRR8451350) | [PRJNA515691](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA515691) | IITA, 2019-01-16 | Dioscorea abyssinica | A5045_WGS_AfriCrop |  |
+| [SAMEA9361896](https://www.ncbi.nlm.nih.gov/biosample/SAMEA9361896) | 264 | [ERR6212448](https://www.ebi.ac.uk/ena/browser/view/ERR6212448) | [PRJEB43730](https://www.ebi.ac.uk/ena/browser/view/PRJEB43730) | CRUK Manchester Institute, 2021-06-18 | Mus musculus | SAMEA9361896 | ChIP_SSDS_DMC1_WT_B |
+| [SAMN33593424](https://www.ncbi.nlm.nih.gov/biosample/SAMN33593424) | 262 | [SRR23705987](https://www.ncbi.nlm.nih.gov/sra/SRR23705987) | [PRJNA941228](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA941228) | GEO, 2023-03-20 | Mus musculus | GSM7081467 | G2021_115_4 |
+| [SAMN03282819](https://www.ncbi.nlm.nih.gov/biosample/SAMN03282819) | 258 | [SRR1754507](https://www.ncbi.nlm.nih.gov/sra/SRR1754507) | [PRJNA272507](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA272507) | GEO, 2014-12-05 | Mus musculus | GSM1582233 | F12E2_1NP |
+| [SAMN33976212](https://www.ncbi.nlm.nih.gov/biosample/SAMN33976212) | 257 | [SRR24010787](https://www.ncbi.nlm.nih.gov/sra/SRR24010787) | [PRJNA950127](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA950127) | UW-Madison, 2023-03-29 | air metagenome | ENV/USA/WI-MSN-AE0000100A8B3C/2022 |  |
+| [SAMN03282885](https://www.ncbi.nlm.nih.gov/biosample/SAMN03282885) | 254 | [SRR1754489](https://www.ncbi.nlm.nih.gov/sra/SRR1754489) | [PRJNA272507](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA272507) | GEO, 2014-12-05 | Mus musculus | GSM1582215 | F12B2_1NP |
+| [SAMN03282899](https://www.ncbi.nlm.nih.gov/biosample/SAMN03282899) | 249 | [SRR1754482](https://www.ncbi.nlm.nih.gov/sra/SRR1754482) | [PRJNA272507](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA272507) | GEO, 2014-12-05 | Mus musculus | GSM1582208 | F12A1_1NP |
+| [SAMN34271735](https://www.ncbi.nlm.nih.gov/biosample/SAMN34271735) | 240 | [SRR24234000](https://www.ncbi.nlm.nih.gov/sra/SRR24234000) | [PRJNA957828](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA957828) | GEO, 2023-04-27 | Plasmodium falciparum | GSM7192254 | 40R_H3K4ME3-rep2 |
+| [SAMN03282999](https://www.ncbi.nlm.nih.gov/biosample/SAMN03282999) | 233 | [SRR1754443](https://www.ncbi.nlm.nih.gov/sra/SRR1754443) | [PRJNA272507](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA272507) | GEO, 2014-12-05 | Mus musculus | GSM1582169 | F11A3_1NP |
+| [SAMN33388219](https://www.ncbi.nlm.nih.gov/biosample/SAMN33388219) | 228 | [SRR23595637](https://www.ncbi.nlm.nih.gov/sra/SRR23595637) | ERROR | N/A, 2023-03-14 | ERROR | ERROR | ERROR |
+| [SAMN33976211](https://www.ncbi.nlm.nih.gov/biosample/SAMN33976211) | 227 | [SRR24010793](https://www.ncbi.nlm.nih.gov/sra/SRR24010793) | [PRJNA950127](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA950127) | UW-Madison, 2023-03-29 | air metagenome | ENV/USA/WI-MSN-AE0000100A8839/2022 |  |
+| [SAMN14607101](https://www.ncbi.nlm.nih.gov/biosample/SAMN14607101) | 221 | [SRR11556989](https://www.ncbi.nlm.nih.gov/sra/SRR11556989) | [PRJNA625732](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA625732) | GEO, 2020-04-09 | Mus musculus | GSM4479917 | OLGs_GAM180713_3NP_C07_1_S51 |
+| [SAMN27034175](https://www.ncbi.nlm.nih.gov/biosample/SAMN27034175) | 220 | [SRR18559096](https://www.ncbi.nlm.nih.gov/sra/SRR18559096) | [PRJNA821007](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA821007) | SANBI, 2022-04-01 | Pteronia ciliata | Pteronia ciliata I R198 |  |
+| [SAMN33229434](https://www.ncbi.nlm.nih.gov/biosample/SAMN33229434) | 219 | [SRR23387193](https://www.ncbi.nlm.nih.gov/sra/SRR23387193) | [PRJNA933216](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA933216) | GEO, 2023-03-05 | Drosophila melanogaster | GSM7036472 | chip msl2 +clamp rep3 |
+| [SAMN03282898](https://www.ncbi.nlm.nih.gov/biosample/SAMN03282898) | 217 | [SRR1754445](https://www.ncbi.nlm.nih.gov/sra/SRR1754445) | [PRJNA272507](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA272507) | GEO, 2014-12-05 | Mus musculus | GSM1582171 | F11A5_1NP |
+| [SAMN32275148](https://www.ncbi.nlm.nih.gov/biosample/SAMN32275148) | 216 | [SRR22765745](https://www.ncbi.nlm.nih.gov/sra/SRR22765745) | [PRJNA913116](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA913116) | GEO, 2022-12-21 | Homo sapiens | GSM6846369 | metagenomic sample obtained from skin of Pat19, Stage: nonlesional (sample100) |
+| [SAMN03282901](https://www.ncbi.nlm.nih.gov/biosample/SAMN03282901) | 208 | [SRR1754442](https://www.ncbi.nlm.nih.gov/sra/SRR1754442) | [PRJNA272507](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA272507) | GEO, 2014-12-05 | Mus musculus | GSM1582168 | F11A2_1NP |
+| [SAMEA9361895](https://www.ncbi.nlm.nih.gov/biosample/SAMEA9361895) | 208 | [ERR6212449](https://www.ebi.ac.uk/ena/browser/view/ERR6212449) | [PRJEB43730](https://www.ebi.ac.uk/ena/browser/view/PRJEB43730) | CRUK Manchester Institute, 2021-06-18 | Mus musculus | SAMEA9361895 | ChIP_SSDS_DMC1_MUT_C |
+| [SAMN03282992](https://www.ncbi.nlm.nih.gov/biosample/SAMN03282992) | 204 | [SRR1754484](https://www.ncbi.nlm.nih.gov/sra/SRR1754484) | [PRJNA272507](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA272507) | GEO, 2014-12-05 | Mus musculus | GSM1582210 | F12A3_1NP |
+| [SAMN16661199](https://www.ncbi.nlm.nih.gov/biosample/SAMN16661199) | 203 | [SRR12983556](https://www.ncbi.nlm.nih.gov/sra/SRR12983556) | [PRJNA674565](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA674565) | Purdue University, 2020-10-23 | aquatic metagenome | M25 | water |
+| [SAMN11373788](https://www.ncbi.nlm.nih.gov/biosample/SAMN11373788) | 200 | [SRR8920154](https://www.ncbi.nlm.nih.gov/sra/SRR8920154) | [PRJNA531288](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA531288) | ENCODE DCC, 2019-04-09 | Mus musculus | MSAN2-MS119 |  |
+| [SAMN10771822](https://www.ncbi.nlm.nih.gov/biosample/SAMN10771822) | 191 | [SRR8454740](https://www.ncbi.nlm.nih.gov/sra/SRR8454740) | [PRJNA515881](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA515881) | GEO, 2019-01-18 | Mus musculus | GSM3569073 | single sperm_2281 |
+| [SAMN03283115](https://www.ncbi.nlm.nih.gov/biosample/SAMN03283115) | 189 | [SRR1754485](https://www.ncbi.nlm.nih.gov/sra/SRR1754485) | [PRJNA272507](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA272507) | GEO, 2014-12-05 | Mus musculus | GSM1582211 | F12A4_1NP |
+| [SAMN03282940](https://www.ncbi.nlm.nih.gov/biosample/SAMN03282940) | 186 | [SRR1754401](https://www.ncbi.nlm.nih.gov/sra/SRR1754401) | [PRJNA272507](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA272507) | GEO, 2014-12-05 | Mus musculus | GSM1582127 | F10A2_1NP |
+| [SAMN35164886](https://www.ncbi.nlm.nih.gov/biosample/SAMN35164886) | 180 | [SRR24642190](https://www.ncbi.nlm.nih.gov/sra/SRR24642190) | [PRJNA974021](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA974021) | GEO, 2023-05-26 | Mus musculus | GSM7377508 | 13A_M_637 |
+| [SAMN33976225](https://www.ncbi.nlm.nih.gov/biosample/SAMN33976225) | 176 | [SRR24010797](https://www.ncbi.nlm.nih.gov/sra/SRR24010797) | [PRJNA950127](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA950127) | UW-Madison, 2023-03-29 | air metagenome | ENV/USA/WI-MSN-AE000010014930/2022 |  |
+| [SAMN33976216](https://www.ncbi.nlm.nih.gov/biosample/SAMN33976216) | 173 | [SRR24010782](https://www.ncbi.nlm.nih.gov/sra/SRR24010782) | [PRJNA950127](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA950127) | UW-Madison, 2023-03-29 | air metagenome | ENV/USA/WI-MSN-AE0000100CD638/2022 |  |
+| [SAMN33921310](https://www.ncbi.nlm.nih.gov/biosample/SAMN33921310) | 173 | [SRR23973224](https://www.ncbi.nlm.nih.gov/sra/SRR23973224) | [PRJNA948850](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA948850) | GEO, 2023-03-27 | wastewater metagenome | GSM7117193 | DNA_220629_22-24hmix_cer_BIOMcombi |
+| [SAMN03282880](https://www.ncbi.nlm.nih.gov/biosample/SAMN03282880) | 171 | [SRR1754487](https://www.ncbi.nlm.nih.gov/sra/SRR1754487) | [PRJNA272507](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA272507) | GEO, 2014-12-05 | Mus musculus | GSM1582213 | F12A6_1NP |
+| [SAMN03282848](https://www.ncbi.nlm.nih.gov/biosample/SAMN03282848) | 170 | [SRR1754650](https://www.ncbi.nlm.nih.gov/sra/SRR1754650) | [PRJNA272507](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA272507) | GEO, 2014-12-05 | Mus musculus | GSM1582376 | F17C7_1NP |
+| [SAMN33921324](https://www.ncbi.nlm.nih.gov/biosample/SAMN33921324) | 155 | [SRR23973170](https://www.ncbi.nlm.nih.gov/sra/SRR23973170) | [PRJNA948850](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA948850) | GEO, 2023-03-27 | wastewater metagenome | GSM7117179 | DNA_220602_20-22hmix_centri_BIOMcombi |
+| [SAMN33593416](https://www.ncbi.nlm.nih.gov/biosample/SAMN33593416) | 142 | [SRR23705979](https://www.ncbi.nlm.nih.gov/sra/SRR23705979) | [PRJNA941228](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA941228) | GEO, 2023-03-20 | Mus musculus | GSM7081475 | G2021_115_15 |
+| [SAMN03349865](https://www.ncbi.nlm.nih.gov/biosample/SAMN03349865) | 134 | [SRR2298545](https://www.ncbi.nlm.nih.gov/sra/SRR2298545) | [PRJNA275568](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA275568) | WashU Medicine, 2015-03-20 | human gut metagenome | bin_58: 4705A_2002-01-06 |  |
+| [SAMEA14104442](https://www.ncbi.nlm.nih.gov/biosample/SAMEA14104442) | 134 | [ERR9613094](https://www.ebi.ac.uk/ena/browser/view/ERR9613094) | [PRJEB52388](https://www.ebi.ac.uk/ena/browser/view/PRJEB52388) | Weizmann Institute, 2022-04-24 | gut metagenome | SAMEA14104442 | 46_f0_Viruses |
+| [SAMN03979631](https://www.ncbi.nlm.nih.gov/biosample/SAMN03979631) | 131 | [SRR4014434](https://www.ncbi.nlm.nih.gov/sra/SRR4014434) | [PRJNA292073](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA292073) | GEO, 2015-09-02 | Mus musculus | GSM1845262 | ChIP-Seq MII oocyte K4Me3 rep1 |
+| [SAMN33976217](https://www.ncbi.nlm.nih.gov/biosample/SAMN33976217) | 129 | [SRR24010781](https://www.ncbi.nlm.nih.gov/sra/SRR24010781) | [PRJNA950127](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA950127) | UW-Madison, 2023-03-29 | air metagenome | ENV/USA/WI-MSN-AE0000100CA232/2022 |  |
+| [SAMEA1116972](https://www.ncbi.nlm.nih.gov/biosample/SAMEA1116972) | 124 | [ERR2535119](https://www.ebi.ac.uk/ena/browser/view/ERR2535119) | [PRJEB25980](https://www.ebi.ac.uk/ena/browser/view/PRJEB25980) | University of Cambridge, 2014-02-05 | Homo sapiens | SAMEA1116972 | 36_tumor2 |
+| [SAMN17393144](https://www.ncbi.nlm.nih.gov/biosample/SAMN17393144) | 123 | [SRR13494329](https://www.ncbi.nlm.nih.gov/sra/SRR13494329) | [PRJNA693645](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA693645) | NIV India, 2021-01-15 | bat metagenome | IH002_33 |  |
+| [SAMN37778567](https://www.ncbi.nlm.nih.gov/biosample/SAMN37778567) | 119 | [SRR26359790](https://www.ncbi.nlm.nih.gov/sra/SRR26359790) | [PRJNA1026948](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA1026948) | GEO, 2023-10-09 | Mus musculus | GSM7836515 | PS23.2 |
+| [SAMN37973255](https://www.ncbi.nlm.nih.gov/biosample/SAMN37973255) | 115 | [SRR26638149](https://www.ncbi.nlm.nih.gov/sra/SRR26638149) | [PRJNA1033037](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA1033037) | Tao Wang Lab, 2023-10-20 | hospital metagenome | 4-HW19-Nov1-virus |  |
+| [SAMN33976232](https://www.ncbi.nlm.nih.gov/biosample/SAMN33976232) | 114 | [SRR24010789](https://www.ncbi.nlm.nih.gov/sra/SRR24010789) | [PRJNA950127](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA950127) | UW-Madison, 2023-03-29 | air metagenome | ENV/USA/WI-MSN-AE00001073172E/2022 |  |
+| [SAMEA112227666](https://www.ncbi.nlm.nih.gov/biosample/SAMEA112227666) | 108 | [ERR10661727](https://www.ebi.ac.uk/ena/browser/view/ERR10661727) | [PRJEB58202](https://www.ebi.ac.uk/ena/browser/view/PRJEB58202) | MRC HGU, 2022-11-30 | Mus musculus | SAMEA112227666 | Wild-type 1 |
+| [SAMEA1116971](https://www.ncbi.nlm.nih.gov/biosample/SAMEA1116971) | 104 | [ERR2535118](https://www.ebi.ac.uk/ena/browser/view/ERR2535118) | [PRJEB25980](https://www.ebi.ac.uk/ena/browser/view/PRJEB25980) | University of Cambridge, 2014-02-05 | Homo sapiens | SAMEA1116971 | 36_tumor1 |
+| [SAMN20995854](https://www.ncbi.nlm.nih.gov/biosample/SAMN20995854) | 103 | [SRR15624099](https://www.ncbi.nlm.nih.gov/sra/SRR15624099) | [PRJNA758072](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA758072) | GEO, 2021-08-17 | Mus musculus | GSM5538674 | 18_CoH_0_Naive_S18 [PBMC vaccine transcriptome] |
+| [SAMN33921323](https://www.ncbi.nlm.nih.gov/biosample/SAMN33921323) | 97 | [SRR23973169](https://www.ncbi.nlm.nih.gov/sra/SRR23973169) | [PRJNA948850](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA948850) | GEO, 2023-03-27 | wastewater metagenome | GSM7117180 | DNA_220602_20-22hmix_cer_BIOMcombi |
+| [SAMN11667598](https://www.ncbi.nlm.nih.gov/biosample/SAMN11667598) | 97 | [SRR9079106](https://www.ncbi.nlm.nih.gov/sra/SRR9079106) | [PRJNA543464](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA543464) | GEO, 2019-05-14 | Mus musculus | GSM3772587 | 171219_CEMBA_mm_P56_P63_4B_CEMBA171213_4B_3_CEMBA171213_4B_4_H6_AD001_indexed |
+| [SAMN33976230](https://www.ncbi.nlm.nih.gov/biosample/SAMN33976230) | 96 | [SRR24010791](https://www.ncbi.nlm.nih.gov/sra/SRR24010791) | [PRJNA950127](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA950127) | UW-Madison, 2023-03-29 | air metagenome | ENV/USA/WI-MSN-AE0000100A9F46/2022 |  |
+| [SAMN37973242](https://www.ncbi.nlm.nih.gov/biosample/SAMN37973242) | 94 | [SRR26638134](https://www.ncbi.nlm.nih.gov/sra/SRR26638134) | [PRJNA1033037](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA1033037) | Tao Wang Lab, 2023-10-20 | hospital metagenome | 1-HW6-Oct11-virus |  |
+| [SAMN14431022](https://www.ncbi.nlm.nih.gov/biosample/SAMN14431022) | 93 | [SRR11401866](https://www.ncbi.nlm.nih.gov/sra/SRR11401866) | [PRJNA596372](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA596372) | Wageningen, 2020-04-01 | Bos taurus | N-VM002-T02-healthy-MAPneg8 |  |
+| [SAMN17717728](https://www.ncbi.nlm.nih.gov/biosample/SAMN17717728) | 92 | [SRR14117203](https://www.ncbi.nlm.nih.gov/sra/SRR14117203) | [PRJNA695070](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA695070) | Liying Sun Lab, 2021-02-27 | human metagenome | CHNsample168 |  |
+| [SAMN37973262](https://www.ncbi.nlm.nih.gov/biosample/SAMN37973262) | 91 | [SRR26638141](https://www.ncbi.nlm.nih.gov/sra/SRR26638141) | [PRJNA1033037](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA1033037) | Tao Wang Lab, 2023-10-20 | hospital metagenome | 5-HW26-Nov8-virus |  |
+| [SAMEA5689226](https://www.ncbi.nlm.nih.gov/biosample/SAMEA5689226) | 91 | [ERR3352107](https://www.ebi.ac.uk/ena/browser/view/ERR3352107) | [PRJEB22024](https://www.ebi.ac.uk/ena/browser/view/PRJEB22024) | EMBL-EBI, 2019-05-21 | Mus musculus | SAMEA5689226 | MM_pIC_8h_22_F6 |
+| [SAMN14431027](https://www.ncbi.nlm.nih.gov/biosample/SAMN14431027) | 88 | [SRR11401861](https://www.ncbi.nlm.nih.gov/sra/SRR11401861) | [PRJNA596372](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA596372) | Wageningen, 2020-04-01 | Bos taurus | N-VM003-T02-healthy-MAPneg9 |  |
+| [SAMN34509297](https://www.ncbi.nlm.nih.gov/biosample/SAMN34509297) | 87 | [SRR24390631](https://www.ncbi.nlm.nih.gov/sra/SRR24390631) | [PRJNA965924](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA965924) | CEU San Pablo, 2023-05-09 | freshwater metagenome | EM02TI_201023 |  |
+| [SAMN33921320](https://www.ncbi.nlm.nih.gov/biosample/SAMN33921320) | 85 | [SRR23973382](https://www.ncbi.nlm.nih.gov/sra/SRR23973382) | [PRJNA948850](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA948850) | GEO, 2023-03-27 | wastewater metagenome | GSM7117183 | DNA_220607_20-22hmix_centri_BIOMcombi |
+| [SAMN33976218](https://www.ncbi.nlm.nih.gov/biosample/SAMN33976218) | 80 | [SRR24010780](https://www.ncbi.nlm.nih.gov/sra/SRR24010780) | [PRJNA950127](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA950127) | UW-Madison, 2023-03-29 | air metagenome | ENV/USA/WI-MSN-AE0000100C7A40/2022 |  |
+| [SAMEA4790997](https://www.ncbi.nlm.nih.gov/biosample/SAMEA4790997) | 76 | [ERR2699813](https://www.ebi.ac.uk/ena/browser/view/ERR2699813) | [PRJEB27640](https://www.ebi.ac.uk/ena/browser/view/PRJEB27640) | Argonne National Lab, 2018-06-14 | indoor metagenome | SAMEA4790997 | CR8 |
+| [SAMN11374844](https://www.ncbi.nlm.nih.gov/biosample/SAMN11374844) | 75 | [SRR8904411](https://www.ncbi.nlm.nih.gov/sra/SRR8904411) | [PRJNA531288](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA531288) | ENCODE DCC, 2019-04-09 | Macaca fascicularis | KSAN3-KS52 |  |
+| [SAMN11374810](https://www.ncbi.nlm.nih.gov/biosample/SAMN11374810) | 74 | [SRR8904257](https://www.ncbi.nlm.nih.gov/sra/SRR8904257) | [PRJNA531288](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA531288) | ENCODE DCC, 2019-04-09 | Macaca fascicularis | KSAN3-KS12 |  |
+| [SAMN09829651](https://www.ncbi.nlm.nih.gov/biosample/SAMN09829651) | 67 | [SRR7756905](https://www.ncbi.nlm.nih.gov/sra/SRR7756905) | [PRJNA485869](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA485869) | Guangxi Lab, 2018-08-15 | Penaeus vannamei | F1 population shrimp 270 offspring from Guangxi Key Laboratory of Aquatic Genetic Breeding and Healthy Aquaculture | Invertebrate sample from Litopenaeus vannamei |
+| [SAMN11885008](https://www.ncbi.nlm.nih.gov/biosample/SAMN11885008) | 62 | [SRR9153062](https://www.ncbi.nlm.nih.gov/sra/SRR9153062) | [PRJNA545313](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA545313) | GEO, 2019-05-23 | Mus musculus | GSM3827791 | 180309_CEMBA_mm_P56_P63_2E_CEMBA180222_2E_1_CEMBA180222_2E_2_H12_AD001_indexed |
+| [SAMN11662441](https://www.ncbi.nlm.nih.gov/biosample/SAMN11662441) | 62 | [SRR9074249](https://www.ncbi.nlm.nih.gov/sra/SRR9074249) | [PRJNA543328](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA543328) | GEO, 2019-05-14 | Mus musculus | GSM3771128 | 171219_CEMBA_mm_P56_P63_4B_CEMBA171212_4B_1_CEMBA171212_4B_2_G12_AD002_indexed |
+| [SAMN31240689](https://www.ncbi.nlm.nih.gov/biosample/SAMN31240689) | 61 | [SRR21861451](https://www.ncbi.nlm.nih.gov/sra/SRR21861451) | [PRJNA889367](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA889367) | GEO, 2022-10-18 | Mus musculus | GSM6627042 | 10C_M_1484 |
+| [SAMN27553873](https://www.ncbi.nlm.nih.gov/biosample/SAMN27553873) | 61 | [SRR18740045](https://www.ncbi.nlm.nih.gov/sra/SRR18740045) | [PRJNA826255](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA826255) | Emory University, 2022-04-14 | Caenorhabditis elegans | fog-2 male treated F1 |  |
+| [SAMN06462397](https://www.ncbi.nlm.nih.gov/biosample/SAMN06462397) | 61 | [SRR5330768](https://www.ncbi.nlm.nih.gov/sra/SRR5330768) | [PRJNA377569](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA377569) | University of Vermont, 2017-03-09 | root metagenome | MRF_roots |  |
+| [SAMN14339251](https://www.ncbi.nlm.nih.gov/biosample/SAMN14339251) | 54 | [SRR11274019](https://www.ncbi.nlm.nih.gov/sra/SRR11274019) | [PRJNA611602](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA611602) | GEO, 2020-03-18 | Callithrix jacchus | GSM4400466 | MM_M1_2_sample 515 |
+| [SAMN14396196](https://www.ncbi.nlm.nih.gov/biosample/SAMN14396196) | 50 | [SRR11342363](https://www.ncbi.nlm.nih.gov/sra/SRR11342363) | [PRJNA613194](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA613194) | Chinese Academy of Sciences, 2020-03-26 | Lasiopodomys mandarinus | L33 | Lasiopodomys mandarinus LMAN14f neo-X2 |
+| [SAMN08476499](https://www.ncbi.nlm.nih.gov/biosample/SAMN08476499) | 48 | [SRR6682411](https://www.ncbi.nlm.nih.gov/sra/SRR6682411) | [PRJNA433375](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA433375) | GEO, 2018-02-06 | Mus musculus | GSM2985052 | Stage E7.5 embryo 3 section 9 region A |
+| [SAMN33976220](https://www.ncbi.nlm.nih.gov/biosample/SAMN33976220) | 46 | [SRR24010802](https://www.ncbi.nlm.nih.gov/sra/SRR24010802) | [PRJNA950127](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA950127) | UW-Madison, 2023-03-29 | air metagenome | ENV/USA/WI-MSN-AE0000100CC536/2022 |  |
+| [SAMN12545617](https://www.ncbi.nlm.nih.gov/biosample/SAMN12545617) | 44 | [SRR9941646](https://www.ncbi.nlm.nih.gov/sra/SRR9941646) | [PRJNA559540](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA559540) | GEO, 2019-08-19 | Mus musculus | GSM4024487 | CEMBA190307_5A_1_CEMBA190307_5A_2_E4_ad012 |
+| [SAMN33976221](https://www.ncbi.nlm.nih.gov/biosample/SAMN33976221) | 43 | [SRR24010801](https://www.ncbi.nlm.nih.gov/sra/SRR24010801) | [PRJNA950127](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA950127) | UW-Madison, 2023-03-29 | air metagenome | ENV/USA/WI-MSN-AE0000100CC63D/2022 |  |
+| [SAMN07373717](https://www.ncbi.nlm.nih.gov/biosample/SAMN07373717) | 36 | [SRR5853136](https://www.ncbi.nlm.nih.gov/sra/SRR5853136) | [PRJNA395239](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA395239) | UC Florida, 2017-08-01 | indoor metagenome | UCF13 | F6_DNA |
+| [SAMN10342723](https://www.ncbi.nlm.nih.gov/biosample/SAMN10342723) | 35 | [SRR8133840](https://www.ncbi.nlm.nih.gov/sra/SRR8133840) | [PRJNA499081](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA499081) | WashU Medicine, 2018-10-30 | human gut metagenome | 9_5_FF2_08_DNA_AAGAGGCA-TATCCTCT_L002 | R3_5 |
+| [SAMN29231487](https://www.ncbi.nlm.nih.gov/biosample/SAMN29231487) | 31 | [SRR19776513](https://www.ncbi.nlm.nih.gov/sra/SRR19776513) | [PRJNA741997](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA741997) | GEO, 2022-06-17 | Mus | GSM6258191 | mouse, blastocysts, Rbm14 ko, S4 |
+| [SAMEA5366993](https://www.ncbi.nlm.nih.gov/biosample/SAMEA5366993) | 30 | [ERR3173144](https://www.ebi.ac.uk/ena/browser/view/ERR3173144) | [PRJEB31375](https://www.ebi.ac.uk/ena/browser/view/PRJEB31375) | WTSI Parasites, 2019-02-15 | Schistosoma mansoni | SAMEA5366993 | Schistosoma mansoni |
+| [SAMN33976215](https://www.ncbi.nlm.nih.gov/biosample/SAMN33976215) | 29 | [SRR24010783](https://www.ncbi.nlm.nih.gov/sra/SRR24010783) | [PRJNA950127](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA950127) | UW-Madison, 2023-03-29 | air metagenome | ENV/USA/WI-MSN-AE0000100CA130/2022 |  |
+| [SAMN33976219](https://www.ncbi.nlm.nih.gov/biosample/SAMN33976219) | 25 | [SRR24010803](https://www.ncbi.nlm.nih.gov/sra/SRR24010803) | [PRJNA950127](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA950127) | UW-Madison, 2023-03-29 | air metagenome | ENV/USA/WI-MSN-AE0000100C702C/2022 |  |
+| [SAMN12333308](https://www.ncbi.nlm.nih.gov/biosample/SAMN12333308) | 20 | [SRR9724016](https://www.ncbi.nlm.nih.gov/sra/SRR9724016) | [PRJNA555850](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA555850) | GEO, 2019-08-05 | Mus musculus | GSM3957669 | CEMBA180910_5J_3_CEMBA180910_5J_4_E3_ad006 |
+| [SAMN14854320](https://www.ncbi.nlm.nih.gov/biosample/SAMN14854320) | 16 | [SRR11835980](https://www.ncbi.nlm.nih.gov/sra/SRR11835980) | [PRJNA631182](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA631182) | Eawag, 2020-04-27 | Caullerya mesnili | Caullerya mesnili spores | Invertebrate sample from Caullerya mesnili |
+| [SAMN33911630](https://www.ncbi.nlm.nih.gov/biosample/SAMN33911630) | 10 | [SRR23986800](https://www.ncbi.nlm.nih.gov/sra/SRR23986800) | [PRJNA948647](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA948647) | Wuhan Virology, 2023-03-25 | wastewater metagenome | wastewater metagenome 3 | Wastewater 2 |
+| [SAMEA4527617](https://www.ncbi.nlm.nih.gov/biosample/SAMEA4527617) | 8 | [ERR2200444](https://www.ebi.ac.uk/ena/browser/view/ERR2200444) | [PRJEB23496](https://www.ebi.ac.uk/ena/browser/view/PRJEB23496) | DTU, 2016-10-31 | wastewater metagenome | SAMEA4527617 | wastewater metagenome |
+| [SAMEA4527640](https://www.ncbi.nlm.nih.gov/biosample/SAMEA4527640) | 3 | [ERR2200451](https://www.ebi.ac.uk/ena/browser/view/ERR2200451) | [PRJEB23496](https://www.ebi.ac.uk/ena/browser/view/PRJEB23496) | DTU, 2016-10-31 | wastewater metagenome | SAMEA4527640 | wastewater metagenome |
+
