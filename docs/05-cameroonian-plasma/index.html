@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orf et al. Cameroonian Plasma densovirus reads</title>
+
+    <!-- IGV.js CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/igv@2.15.11/dist/css/igv.css">
+
+    <!-- Minimalist full-width styles -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+            font-size: 14px;
+            line-height: 1.5;
+            color: #1f2328;
+            background-color: #ffffff;
+        }
+
+        .header {
+            border-bottom: 1px solid #d1d9e0;
+            padding: 16px 0;
+            margin-bottom: 24px;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        h1 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1f2328;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #656d76;
+            margin-top: 4px;
+        }
+
+        #igvDiv {
+            border: 1px solid #d1d9e0;
+            border-radius: 6px;
+            background-color: #ffffff;
+            min-height: 600px;
+            overflow: hidden;
+        }
+
+        .loading-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 600px;
+            color: #656d76;
+        }
+
+        .loading-spinner {
+            border: 2px solid #d1d9e0;
+            border-top: 2px solid #2da44e;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            animation: spin 1s linear infinite;
+            margin-right: 12px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <h1>Orf et al. Cameroonian Plasma densovirus reads</h1>
+            <p class="subtitle">14,472 reads from 2 blood donors mapped to 1,266 known densovirus reference sequences (ordered by read count)</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div id="igvDiv">
+            <div class="loading-container">
+                <div class="loading-spinner"></div>
+                <span>Loading genome browser...</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- IGV.js -->
+    <script src="https://cdn.jsdelivr.net/npm/igv@2.15.11/dist/igv.min.js"></script>
+
+    <script>
+        let igvBrowser = null;
+
+        // Sample information
+        const samples = [
+            { name: "U172329", reads: 12415 },
+            { name: "U172471", reads: 2057 }
+        ];
+
+        // Initialize IGV
+        async function initializeIGV() {
+            const igvDiv = document.getElementById('igvDiv');
+
+            try {
+                // Clear the loading message
+                igvDiv.innerHTML = '';
+
+                // Create tracks array with both BAM files
+                const tracks = samples.map(sample => ({
+                    name: `${sample.name} (${sample.reads.toLocaleString()} reads)`,
+                    type: "alignment",
+                    format: "bam",
+                    url: `data/bam/${sample.name}.dedup.sorted.bam`,
+                    indexURL: `data/bam/${sample.name}.dedup.sorted.bam.bai`,
+                    displayMode: "SQUISHED",
+                    alignmentRowHeight: 6,
+                    showCoverage: true,
+                    colorBy: "none",
+                    showSoftClips: false,
+                    viewAsPairs: false,
+                    showMismatches: true,
+                    showAllBases: false,
+                    showAlignments: true,
+                    height: 300,
+                    margin: 15,
+                    minHeight: 100,
+                    samplingWindowSize: 100,
+                    samplingDepth: 100
+                }));
+
+                const options = {
+                    genome: {
+                        id: "densoviruses",
+                        name: "Known Densoviruses (NCBI GenBank)",
+                        fastaURL: "data/ref/known_densoviruses_NCBI_genbank_2025-11-19.fasta",
+                        indexURL: "data/ref/known_densoviruses_NCBI_genbank_2025-11-19.fasta.fai",
+                        tracks: tracks
+                    },
+                    locus: "OQ835745_(Densovirinae_sp.):1-6520",  // Start with the sequence with most reads
+                    showNavigation: true,
+                    showRuler: true,
+                    showCenterGuide: true,
+                    showCursorTrackingGuide: true,
+                    showCommandBar: true,
+                    showTrackLabels: true
+                };
+
+                igvBrowser = await igv.createBrowser(igvDiv, options);
+                console.log('IGV browser initialized with Orf et al. Cameroonian plasma data');
+
+                // Add error listener for track loading issues
+                igvBrowser.on('trackremoved', (track) => {
+                    console.log('Track removed:', track.name);
+                });
+
+                igvBrowser.on('trackloadfailed', (error, track) => {
+                    console.error('Track load failed:', track?.name, error);
+                });
+
+            } catch (error) {
+                console.error("Error initializing IGV:", error);
+                igvDiv.innerHTML = '<div class="loading-container">Failed to load viewer. Please refresh the page.</div>';
+            }
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Initializing IGV viewer for Orf et al. Cameroonian plasma data...');
+            initializeIGV();
+        });
+    </script>
+</body>
+</html>
