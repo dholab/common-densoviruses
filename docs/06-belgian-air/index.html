@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Belgian Daycare Air densovirus reads</title>
+
+    <!-- IGV.js CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/igv@2.15.11/dist/css/igv.css">
+
+    <!-- Minimalist full-width styles -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+            font-size: 14px;
+            line-height: 1.5;
+            color: #1f2328;
+            background-color: #ffffff;
+        }
+
+        .header {
+            border-bottom: 1px solid #d1d9e0;
+            padding: 16px 0;
+            margin-bottom: 24px;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        h1 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1f2328;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #656d76;
+            margin-top: 4px;
+        }
+
+        #igvDiv {
+            border: 1px solid #d1d9e0;
+            border-radius: 6px;
+            background-color: #ffffff;
+            min-height: 600px;
+            overflow: hidden;
+        }
+
+        .loading-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 600px;
+            color: #656d76;
+        }
+
+        .loading-spinner {
+            border: 2px solid #d1d9e0;
+            border-top: 2px solid #2da44e;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            animation: spin 1s linear infinite;
+            margin-right: 12px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <h1>Belgian Daycare Air densovirus reads</h1>
+            <p class="subtitle">119,699 reads from 46 air samples mapped to 194 densovirus reference sequences (ordered by read count)</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div id="igvDiv">
+            <div class="loading-container">
+                <div class="loading-spinner"></div>
+                <span>Loading genome browser...</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- IGV.js -->
+    <script src="https://cdn.jsdelivr.net/npm/igv@2.15.11/dist/igv.min.js"></script>
+
+    <script>
+        let igvBrowser = null;
+
+        // Sample information (sorted by read count)
+        const samples = [
+            { name: "CE46", reads: 19265 },
+            { name: "CE34", reads: 6397 },
+            { name: "CE21", reads: 5249 },
+            { name: "CE43", reads: 4138 },
+            { name: "CE35", reads: 4076 },
+            { name: "CE12", reads: 4072 },
+            { name: "CE25", reads: 4067 },
+            { name: "CE29", reads: 3819 },
+            { name: "CE11", reads: 3789 },
+            { name: "CE30", reads: 3380 },
+            { name: "CE3", reads: 3364 },
+            { name: "CE33", reads: 3172 },
+            { name: "CE6", reads: 3143 },
+            { name: "CE2", reads: 3111 },
+            { name: "CE13", reads: 2791 },
+            { name: "CE7", reads: 2712 },
+            { name: "CE5", reads: 2702 },
+            { name: "CE16", reads: 2699 },
+            { name: "CE24", reads: 2563 },
+            { name: "CE14", reads: 2485 },
+            { name: "CE38", reads: 2356 },
+            { name: "CE9", reads: 2325 },
+            { name: "CE18", reads: 2160 },
+            { name: "CE15", reads: 2150 },
+            { name: "CE32", reads: 2123 },
+            { name: "CE10", reads: 2119 },
+            { name: "CE17", reads: 1979 },
+            { name: "CE4", reads: 1778 },
+            { name: "CE27", reads: 1662 },
+            { name: "CE37", reads: 1556 },
+            { name: "CE53", reads: 1554 },
+            { name: "CE41", reads: 1278 },
+            { name: "CE39", reads: 1255 },
+            { name: "CE22", reads: 1154 },
+            { name: "CE23", reads: 1087 },
+            { name: "CE36", reads: 1074 },
+            { name: "CE47", reads: 1031 },
+            { name: "CE28", reads: 754 },
+            { name: "CE40", reads: 716 },
+            { name: "CE44", reads: 576 },
+            { name: "CE31", reads: 506 },
+            { name: "CE26", reads: 493 },
+            { name: "CE50", reads: 377 },
+            { name: "CE51", reads: 268 },
+            { name: "CE52", reads: 237 },
+            { name: "CE49", reads: 137 }
+        ];
+
+        // Initialize IGV
+        async function initializeIGV() {
+            const igvDiv = document.getElementById('igvDiv');
+
+            try {
+                // Clear the loading message
+                igvDiv.innerHTML = '';
+
+                // Create tracks array
+                const tracks = samples.map(sample => ({
+                    name: `${sample.name} (${sample.reads.toLocaleString()} reads)`,
+                    type: "alignment",
+                    format: "bam",
+                    url: `data/bam/${sample.name}.dedup.sorted.bam`,
+                    indexURL: `data/bam/${sample.name}.dedup.sorted.bam.bai`,
+                    displayMode: "SQUISHED",
+                    alignmentRowHeight: 4,
+                    showCoverage: true,
+                    colorBy: "none",
+                    showSoftClips: false,
+                    viewAsPairs: false,
+                    showMismatches: true,
+                    showAllBases: false,
+                    showAlignments: true,
+                    height: 80,
+                    margin: 5,
+                    minHeight: 50,
+                    samplingWindowSize: 100,
+                    samplingDepth: 50
+                }));
+
+                const options = {
+                    genome: {
+                        id: "densoviruses",
+                        name: "Known Densoviruses (NCBI GenBank)",
+                        fastaURL: "data/ref/known_densoviruses_NCBI_genbank_2025-11-19.fasta",
+                        indexURL: "data/ref/known_densoviruses_NCBI_genbank_2025-11-19.fasta.fai",
+                        tracks: tracks
+                    },
+                    locus: "MT733049_(Aquambidensovirus_asteroid21):1-5963",
+                    showNavigation: true,
+                    showRuler: true,
+                    showCenterGuide: true,
+                    showCursorTrackingGuide: true,
+                    showCommandBar: true,
+                    showTrackLabels: true
+                };
+
+                igvBrowser = await igv.createBrowser(igvDiv, options);
+                console.log('IGV browser initialized with Belgian daycare air data');
+
+            } catch (error) {
+                console.error("Error initializing IGV:", error);
+                igvDiv.innerHTML = '<div class="loading-container">Failed to load viewer. Please refresh the page.</div>';
+            }
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Initializing IGV viewer for Belgian daycare air data...');
+            initializeIGV();
+        });
+    </script>
+</body>
+</html>
