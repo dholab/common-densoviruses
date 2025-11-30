@@ -45,6 +45,18 @@
             margin-bottom: 32px;
         }
 
+        h2 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1f2328;
+            margin-bottom: 16px;
+            margin-top: 32px;
+        }
+
+        h2:first-of-type {
+            margin-top: 0;
+        }
+
         .datasets {
             display: grid;
             gap: 24px;
@@ -90,13 +102,13 @@
         }
 
         .coming-soon {
-            opacity: 0.5;
-            pointer-events: none;
+            opacity: 0.6;
         }
 
         .coming-soon .dataset-title {
             color: #656d76;
             cursor: default;
+            pointer-events: none;
         }
 
         .badge {
@@ -120,19 +132,21 @@
     <div class="header">
         <div class="container">
             <h1>Common Densoviruses</h1>
-            <p class="subtitle">Interactive genomic visualizations of densovirus sequences from environmental samples</p>
+            <p class="subtitle">Interactive genomic visualizations of HuCSFDV1-like densovirus sequences</p>
         </div>
     </div>
 
     <div class="container">
         <div class="datasets">
+            <h2>01 - Air Samples</h2>
+
             <div class="dataset-card">
-                <a href="dane_county_air/" class="dataset-title">
-                    Dane County, Wisconsin Air Samples
+                <a href="01-air-samples-vsp/" class="dataset-title">
+                    Dane County Schools (VSP Enrichment)
                 </a>
                 <p class="dataset-description">
-                    Densovirus reads from air samples collected across Dane County schools and healthcare facilities,
-                    mapped to Human CSF-associated densovirus 1 (HuCSFDV1)
+                    Densovirus reads from air samples collected in K-12 schools across Dane County, Wisconsin,
+                    enriched with Illumina Viral Surveillance Panel and mapped to HuCSFDV1
                 </p>
                 <div class="dataset-meta">
                     <span>77 samples</span>
@@ -142,12 +156,39 @@
             </div>
 
             <div class="dataset-card">
-                <a href="logan/" class="dataset-title">
-                    Logan SRA Samples
+                <a href="01-air-samples-tgs/" class="dataset-title">
+                    International Airports (TGS)
                 </a>
                 <p class="dataset-description">
-                    Densovirus reads from publicly available SRA samples retrieved via Logan,
-                    mapped to Human CSF-associated densovirus 1 (HuCSFDV1)
+                    Densovirus reads from air samples collected at U.S. international airports (Dulles, San Francisco),
+                    enriched with targeted gene sequencing and mapped to HuCSFDV1
+                </p>
+                <div class="dataset-meta">
+                    <span>7 samples with reads</span>
+                    <span>14 total reads</span>
+                    <span>Interactive IGV viewer</span>
+                </div>
+            </div>
+
+            <div class="dataset-card coming-soon">
+                <span class="dataset-title">
+                    Additional Air Sampling Study
+                    <span class="badge coming-soon-badge">Coming Soon</span>
+                </span>
+                <p class="dataset-description">
+                    Additional air sampling data will be added here
+                </p>
+            </div>
+
+            <h2>02 - SRA Mining</h2>
+
+            <div class="dataset-card">
+                <a href="02-sra-mining/" class="dataset-title">
+                    Logan Search Results
+                </a>
+                <p class="dataset-description">
+                    Densovirus reads from publicly available SRA datasets identified via Logan Search,
+                    including human CSF, lymphocyte, and mouse samples mapped to HuCSFDV1
                 </p>
                 <div class="dataset-meta">
                     <span>124 samples</span>
@@ -156,19 +197,17 @@
                 </div>
             </div>
 
-            <div class="dataset-card">
-                <a href="tgs/" class="dataset-title">
-                    TGS Samples
-                </a>
+            <h2>04 - Skin Microbiome</h2>
+
+            <div class="dataset-card coming-soon">
+                <span class="dataset-title">
+                    Oh et al. Skin Microbiome
+                    <span class="badge coming-soon-badge">Coming Soon</span>
+                </span>
                 <p class="dataset-description">
-                    Densovirus reads from TGS (Targeted Gene Sequencing) samples,
-                    mapped to Human CSF-associated densovirus 1 (HuCSFDV1)
+                    Densovirus reads from the Oh et al. longitudinal skin microbiome study,
+                    mapped to HuCSFDV1 and other densovirus references
                 </p>
-                <div class="dataset-meta">
-                    <span>7 samples with reads</span>
-                    <span>14 total reads</span>
-                    <span>Interactive IGV viewer</span>
-                </div>
             </div>
         </div>
     </div>

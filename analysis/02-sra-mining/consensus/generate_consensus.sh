@@ -7,8 +7,8 @@ REF_LEN=4678
 MIN_COV=0.80
 MIN_BASES=$(echo "$REF_LEN * $MIN_COV" | bc | cut -d. -f1)
 
-BAM_DIR="docs/logan/data/bam"
-CONS_DIR="logan/consensus"
+BAM_DIR="docs/02-sra-mining/data/bam"
+CONS_DIR="analysis/02-sra-mining/consensus"
 
 echo "Reference length: $REF_LEN bp"
 echo "Minimum coverage threshold: 80% = $MIN_BASES bases"
