@@ -1,10 +1,10 @@
-name: Deploy IGV Viewer to GitHub Pages
+name: Deploy IGV Viewers to GitHub Pages
 
 on:
   push:
     branches: [main]
     paths:
-      - 'air-samples/vsp/**'
+      - 'docs/**'
   workflow_dispatch:
 
 permissions:
@@ -29,11 +29,8 @@ jobs:
       - name: Create Pages artifact
         run: |
           mkdir -p _site
-          # Copy the VSP viewer and all required files
-          cp -r air-samples/vsp/* _site/
-          # Remove confidential files if they somehow got included
-          rm -f _site/SITE-KEY-CONFIDENTIAL.md
-          rm -rf _site/private
+          # Copy the docs directory (contains all IGV viewers)
+          cp -r docs/* _site/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

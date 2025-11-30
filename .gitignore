@@ -1,6 +1,5 @@
 # Confidential site identification files
-air-samples/vsp/SITE-KEY-CONFIDENTIAL.md
-air-samples/vsp/private
+analysis/01-air-samples/vsp/private/
 
 # OS files
 .DS_Store
