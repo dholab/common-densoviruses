@@ -104,7 +104,7 @@ The unexpected prevalence uncovered here argues that HuCSFDV1-like densoviruses 
 
 ## Data availability
 
-The VSP2 sequence reads are available in NCBI BioProject XX (TBD). All other reads are already available in SRA as described above.
+The VSP2 sequence reads are available in NCBI BioProject XX (TBD). Yes, we recognize the irony that our data isn't yet in SRA when we rely on data from SRA. We're working on it. All other reads are already available in SRA as described above.
 
 ## Authors and affiliations
 
