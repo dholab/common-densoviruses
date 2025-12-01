@@ -118,11 +118,9 @@ Isla Emmen<sup>1</sup>, Andrew Lail<sup>1</sup>, Nancy A. Wilson<sup>1</sup>, Wi
 
 ## Acknowledgements
 
-This work would not have been possible without data submitted to NCBI SRA by Oh and colleagues in BioProject 46333, as well as the other SRA datasets where we detected densovirus reads.
+This work is funded by [Inkfish](https://ink.fish).
 
-Searching SRA datasets for densovirus reads was made possible by [Logan Search](https://logan-search.org) ([GitHub](https://github.com/IndexThePlanet/LoganSearch)) and the work of the Logan Team.
-
-This work is funded by Inkfish.
+This work would not have been possible without data submitted to NCBI SRA as acknowledged in the text. Searching SRA datasets for densovirus reads was made possible by [Logan Search](https://logan-search.org) ([GitHub](https://github.com/IndexThePlanet/LoganSearch)) and the work of the Logan Team.
 
 We would like to thank [Adam Bailey](https://bailey.pathology.wisc.edu) for helpful discussions and preliminary conversations about modeling HuCSFDV1-related pathology in animal models. [Suman Mitra](https://scholar.google.com/citations?user=1gRtTPkAAAAJ&hl=en) and [Majid Kazemian](https://kazemianlab.com) provided information on SRR11392655. [Julie Segre](https://irp.nih.gov/pi/julie-segre) patiently helped us understand the sample composition of NCBI BioProject 46333.
 
