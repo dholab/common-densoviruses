@@ -106,13 +106,15 @@ The VSP2 sequence reads are available in NCBI BioProject XX (TBD). Yes, we recog
 
 ## Authors and affiliations
 
-Isla Emmen<sup>1</sup>, Andrew Lail<sup>1</sup>, Nancy A. Wilson<sup>1</sup>, Will Gardner<sup>1</sup>, Nicholas R. Minor<sup>1</sup>, Marc C. Johnson<sup>2,3</sup>, Shelby L. O'Connor<sup>1,4</sup>, David H. O'Connor<sup>1,4*</sup>
+Marc C. Johnson<sup>2,3</sup>, Shelby L. O'Connor<sup>1,4</sup>, David H. O'Connor<sup>1,4*</sup>
 
 <sup>1</sup> Department of Pathology and Laboratory Medicine, University of Wisconsin School of Medicine and Public Health, Madison, WI 53711, USA
 <sup>2</sup> Department of Molecular Microbiology and Immunology, University of Missouri School of Medicine, Columbia, MO 65211, USA
 <sup>3</sup> Christopher S. Bond Life Sciences Center, University of Missouri, Columbia, MO 65211, USA
 <sup>4</sup> Wisconsin National Primate Research Center, University of Wisconsin-Madison, Madison, WI 53715, USA
 <sup>*</sup> Corresponding author: Dave O'Connor • <dhoconnor@wisc.edu>
+
+Other co-authors will be added as the project evolves.
 
 ## Acknowledgements
 
