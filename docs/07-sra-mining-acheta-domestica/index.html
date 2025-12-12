@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logan SRA densovirus reads mapped to Acheta domestica densovirus (KF015279)</title>
+
+    <!-- IGV.js CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/igv@2.15.11/dist/css/igv.css">
+
+    <!-- Minimalist full-width styles -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+            font-size: 14px;
+            line-height: 1.5;
+            color: #1f2328;
+            background-color: #ffffff;
+        }
+
+        .header {
+            border-bottom: 1px solid #d1d9e0;
+            padding: 16px 0;
+            margin-bottom: 24px;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        h1 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1f2328;
+        }
+
+        #igvDiv {
+            border: 1px solid #d1d9e0;
+            border-radius: 6px;
+            background-color: #ffffff;
+            min-height: 800px;
+            overflow: hidden;
+        }
+
+        .loading-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 800px;
+            color: #656d76;
+        }
+
+        .loading-spinner {
+            border: 2px solid #d1d9e0;
+            border-top: 2px solid #2da44e;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            animation: spin 1s linear infinite;
+            margin-right: 12px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <h1>Logan SRA densovirus reads mapped to Acheta domestica densovirus (KF015279)</h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <div id="igvDiv">
+            <div class="loading-container">
+                <div class="loading-spinner"></div>
+                <span>Loading genome browser...</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- IGV.js -->
+    <script src="https://cdn.jsdelivr.net/npm/igv@2.15.11/dist/igv.min.js"></script>
+
+    <script>
+        let igvBrowser = null;
+
+        // All samples with actual read counts (verified from BAM files)
+        // Samples are SRA accessions retrieved via Logan
+        const samples = [
+            { name: "SAMN02209958", reads: 134759 },
+            { name: "SAMN13059154", reads: 41292 },
+            { name: "SAMN00714220", reads: 39487 },
+            { name: "SAMN07421817", reads: 24458 },
+            { name: "SAMN03025571", reads: 22104 },
+            { name: "SAMN04360074", reads: 20621 },
+            { name: "SAMN13059153", reads: 19817 },
+            { name: "SAMN07136291", reads: 18172 },
+            { name: "SAMN07136290", reads: 18171 },
+            { name: "SAMN03025570", reads: 15010 },
+            { name: "SAMN04360068", reads: 12809 },
+            { name: "SAMN04360085", reads: 9421 },
+            { name: "SAMN04005113", reads: 6885 },
+            { name: "SAMN01819015", reads: 6712 },
+            { name: "SAMN15768575", reads: 5961 },
+            { name: "SAMN14533983", reads: 5124 },
+            { name: "SAMN07136293", reads: 3582 },
+            { name: "SAMN22864198", reads: 3374 },
+            { name: "SAMN04360069", reads: 3022 },
+            { name: "SAMN21207652", reads: 2642 },
+            { name: "SAMN04360092", reads: 2405 },
+            { name: "SAMN04360083", reads: 2374 },
+            { name: "SAMN19068706", reads: 2310 },
+            { name: "SAMN31443433", reads: 1995 },
+            { name: "SAMN21207643", reads: 1968 },
+            { name: "SAMN04360086", reads: 1961 },
+            { name: "SAMN21207658", reads: 1913 },
+            { name: "SAMN04214871", reads: 1488 },
+            { name: "SAMN18850222", reads: 1197 },
+            { name: "SAMN07136292", reads: 1158 },
+            { name: "SAMN09423165", reads: 1095 },
+            { name: "SAMN04360066", reads: 1085 },
+            { name: "SAMN21207650", reads: 1072 },
+            { name: "SAMN04360065", reads: 1054 },
+            { name: "SAMN21207656", reads: 1016 },
+            { name: "SAMN04360082", reads: 979 },
+            { name: "SAMN04360073", reads: 918 },
+            { name: "SAMN04360075", reads: 860 },
+            { name: "SAMN21207641", reads: 764 },
+            { name: "SAMN03025566", reads: 691 },
+            { name: "SAMN21207661", reads: 548 },
+            { name: "SAMN22864219", reads: 496 },
+            { name: "SAMN23438345", reads: 480 },
+            { name: "SAMN34537733", reads: 470 },
+            { name: "SAMN31444807", reads: 460 },
+            { name: "SAMN03998690", reads: 460 },
+            { name: "SAMN21207638", reads: 446 },
+            { name: "SAMN08891674", reads: 402 },
+            { name: "SAMN07373718", reads: 390 },
+            { name: "SAMN17584332", reads: 350 },
+            { name: "SAMN37213140", reads: 347 },
+            { name: "SAMN08891671", reads: 346 },
+            { name: "SAMN22864229", reads: 334 },
+            { name: "SAMN34537731", reads: 332 },
+            { name: "SAMN21207653", reads: 327 },
+            { name: "SAMN15471090", reads: 291 },
+            { name: "SAMN34537734", reads: 235 },
+            { name: "SAMN34537718", reads: 228 },
+            { name: "SAMN08891673", reads: 215 },
+            { name: "SAMN21207640", reads: 214 },
+            { name: "SAMN08891675", reads: 214 },
+            { name: "SAMN11068138", reads: 204 },
+            { name: "SAMN04360072", reads: 201 },
+            { name: "SAMN04360064", reads: 201 },
+            { name: "SAMN21207659", reads: 200 },
+            { name: "SAMN34537714", reads: 187 },
+            { name: "SAMN22864202", reads: 183 },
+            { name: "SAMN31441521", reads: 182 },
+            { name: "SAMN34537730", reads: 181 },
+            { name: "SAMN18721325", reads: 175 },
+            { name: "SAMN06654238", reads: 175 },
+            { name: "SAMN01819014", reads: 174 },
+            { name: "SAMN21207646", reads: 170 },
+            { name: "SAMN08891676", reads: 170 },
+            { name: "SAMN17584330", reads: 165 },
+            { name: "SAMN06654079", reads: 153 },
+            { name: "SAMN22864210", reads: 152 },
+            { name: "SAMN34537735", reads: 151 },
+            { name: "SAMN08888593", reads: 150 },
+            { name: "SAMN08891669", reads: 146 },
+            { name: "SAMN21207644", reads: 145 },
+            { name: "SAMN08891672", reads: 142 },
+            { name: "SAMN08888580", reads: 142 },
+            { name: "SAMN34537715", reads: 141 },
+            { name: "SAMN08888589", reads: 125 },
+            { name: "SAMN34537741", reads: 123 },
+            { name: "SAMN04360087", reads: 122 },
+            { name: "SAMN08888576", reads: 120 },
+            { name: "SAMN22864268", reads: 119 },
+            { name: "SAMN37350462", reads: 114 },
+            { name: "SAMN14150078", reads: 109 },
+            { name: "SAMN32206465", reads: 108 },
+            { name: "SAMN08888616", reads: 108 },
+            { name: "SAMN30557083", reads: 107 },
+            { name: "SAMN34537719", reads: 106 },
+            { name: "SAMN34537812", reads: 105 },
+            { name: "SAMN17767422", reads: 104 },
+            { name: "SAMN08461543", reads: 102 },
+            { name: "SAMN08888602", reads: 98 },
+            { name: "SAMN15471082", reads: 92 },
+            { name: "SAMN08888600", reads: 92 },
+            { name: "SAMN08461540", reads: 92 },
+            { name: "SAMN03267995", reads: 88 },
+            { name: "SAMN34537711", reads: 86 },
+            { name: "SAMN36655173", reads: 81 },
+            { name: "SAMN34537737", reads: 81 },
+            { name: "SAMN06655846", reads: 80 },
+            { name: "SAMN31443454", reads: 77 },
+            { name: "SAMN08888591", reads: 77 },
+            { name: "SAMN34537710", reads: 73 },
+            { name: "SAMN21418183", reads: 73 },
+            { name: "SAMN20841606", reads: 70 },
+            { name: "SAMN23438339", reads: 69 },
+            { name: "SAMN06655902", reads: 67 },
+            { name: "SAMN04214876", reads: 61 },
+            { name: "SAMN22864232", reads: 59 },
+            { name: "SAMN34537717", reads: 57 },
+            { name: "SAMN08461562", reads: 57 },
+            { name: "SAMN34537738", reads: 56 },
+            { name: "SAMN07136298", reads: 56 },
+            { name: "SAMN33921310", reads: 55 },
+            { name: "SAMN11050323", reads: 54 },
+            { name: "SAMN06655177", reads: 54 },
+            { name: "SAMN34537732", reads: 52 },
+            { name: "SAMN21418378", reads: 51 },
+            { name: "SAMN34537716", reads: 50 },
+            { name: "SAMN21418330", reads: 50 },
+            { name: "SAMN17160231", reads: 48 },
+            { name: "SAMN06655539", reads: 46 },
+            { name: "SAMN34537736", reads: 45 },
+            { name: "SAMN06658135", reads: 43 },
+            { name: "SAMN07136289", reads: 42 },
+            { name: "SAMN34537743", reads: 40 },
+            { name: "SAMN34537729", reads: 38 },
+            { name: "SAMN34537664", reads: 36 },
+            { name: "SAMN15471135", reads: 36 },
+            { name: "SAMN34537721", reads: 35 },
+            { name: "SAMN34537740", reads: 31 },
+            { name: "SAMN34537709", reads: 31 },
+            { name: "SAMN15471118", reads: 31 },
+            { name: "SAMN34537942", reads: 27 },
+            { name: "SAMN15471097", reads: 26 },
+            { name: "SAMN07373723", reads: 26 },
+            { name: "SAMN34537720", reads: 21 },
+            { name: "SAMN34537742", reads: 20 }
+        ];
+
+        // Format sample name for display
+        function formatSampleName(name, reads) {
+            return `${name} (${reads} reads)`;
+        }
+
+        // Initialize IGV and load all tracks
+        async function initializeIGV() {
+            const igvDiv = document.getElementById('igvDiv');
+
+            try {
+                // Clear the loading message
+                igvDiv.innerHTML = '';
+
+                // Create initial tracks array with reference and gene annotations
+                const tracks = [
+                    {
+                        name: "Genes",
+                        type: "annotation",
+                        format: "gff3",
+                        url: "data/ref/KF015279.gff3",
+                        displayMode: "EXPANDED",
+                        height: 250,
+                        color: "rgb(0, 0, 150)"
+                    }
+                ];
+
+                // Add ALL BAM tracks (all have at least 1 read now)
+                const orderedSamples = samples; // Already sorted by read count
+
+                orderedSamples.forEach(sample => {
+                    // Scale height based on read count (min 50px, max 250px)
+                    // Increased minimum to ensure space for label
+                    const scaledHeight = Math.min(250, Math.max(50, Math.round(50 + (sample.reads / 100))));
+
+                    tracks.push({
+                        name: formatSampleName(sample.name, sample.reads),
+                        type: "alignment",
+                        format: "bam",
+                        url: `data/bam/${sample.name}.dedup.sorted.bam`,
+                        indexURL: `data/bam/${sample.name}.dedup.sorted.bam.bai`,
+                        displayMode: "SQUISHED",
+                        alignmentRowHeight: 6,
+                        showCoverage: false,  // Turn off coverage plot
+                        colorBy: "none",  // No color by attribute
+                        showSoftClips: false,  // Hide soft clips by default
+                        viewAsPairs: false,
+                        showMismatches: true,
+                        showAllBases: false,
+                        showAlignments: true,  // Show alignments
+                        height: scaledHeight,  // Scale height by read count
+                        margin: 15,  // Increased margin between tracks
+                        minHeight: 50,  // Minimum height to ensure label space
+                        samplingWindowSize: 100,
+                        samplingDepth: 50
+                    });
+                });
+
+                const options = {
+                    genome: {
+                        id: "AdDV",
+                        name: "Acheta domestica densovirus (KF015279)",
+                        fastaURL: "data/ref/KF015279.fasta",
+                        tracks: tracks
+                    },
+                    locus: "KF015279.1:1-5425",
+                    showNavigation: true,
+                    showRuler: true,
+                    showCenterGuide: true,
+                    showCursorTrackingGuide: true,
+                    showCommandBar: true,
+                    showTrackLabels: false  // Hide track labels by default
+                };
+
+                igvBrowser = await igv.createBrowser(igvDiv, options);
+                console.log(`IGV browser initialized with ${orderedSamples.length} samples containing densovirus reads`);
+
+                // Add error listener for track loading issues
+                igvBrowser.on('trackremoved', (track) => {
+                    console.log('Track removed:', track.name);
+                });
+
+                igvBrowser.on('trackloadfailed', (error, track) => {
+                    console.error('Track load failed:', track?.name, error);
+                });
+
+            } catch (error) {
+                console.error("Error initializing IGV:", error);
+                igvDiv.innerHTML = '<div class="loading-container">Failed to load viewer. Please refresh the page.</div>';
+            }
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Initializing IGV viewer with all samples containing reads...');
+            initializeIGV();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+# kmviz-891b952a-ba49-47b3-949e-80b80cb98191
+
+## Table
+
+- `KF015279-1-1000bp.tsv`
+
+## Session
+
+The file `session.json` allows to explore your results in any kmviz instance running in `session mode`.
+
+```bash
+pip install kmviz
+python -m kmviz app start session --no-seq-tab
+```
+
+A kmviz instance is now running at `https://localhost:8050/dashboard`. You can upload your session file using the `Upload session` button.

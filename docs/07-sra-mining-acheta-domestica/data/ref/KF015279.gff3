@@ -1,0 +1,16 @@
+##gff-version 3
+#!gff-spec-version 1.21
+#!processor NCBI annotwriter
+##sequence-region KF015279.1 1 5425
+##species https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=185639
+KF015279.1	Genbank	region	1	5425	.	+	.	ID=KF015279.1:1..5425;Dbxref=taxon:185639;collection-date=12-Dec-2012;country=Japan;gbkey=Src;genome=genomic;genotype=3;isolate=AdJP12;mol_type=genomic DNA;nat-host=Acheta domesticus
+KF015279.1	Genbank	gene	225	866	.	+	.	ID=gene-NS3;Name=NS3;gbkey=Gene;gene=NS3;gene_biotype=protein_coding
+KF015279.1	Genbank	CDS	225	866	.	+	0	ID=cds-AGO32213.1;Parent=gene-NS3;Dbxref=NCBI_GP:AGO32213.1;Name=AGO32213.1;gbkey=CDS;gene=NS3;product=nonstructural protein 3;protein_id=AGO32213.1
+KF015279.1	Genbank	gene	856	2586	.	+	.	ID=gene-NS1;Name=NS1;gbkey=Gene;gene=NS1;gene_biotype=protein_coding
+KF015279.1	Genbank	CDS	856	2586	.	+	0	ID=cds-AGO32210.1;Parent=gene-NS1;Dbxref=NCBI_GP:AGO32210.1;Name=AGO32210.1;gbkey=CDS;gene=NS1;product=nonstructural protein 1;protein_id=AGO32210.1
+KF015279.1	Genbank	gene	875	1735	.	+	.	ID=gene-NS2;Name=NS2;gbkey=Gene;gene=NS2;gene_biotype=protein_coding
+KF015279.1	Genbank	CDS	875	1735	.	+	0	ID=cds-AGO32209.1;Parent=gene-NS2;Dbxref=NCBI_GP:AGO32209.1;Name=AGO32209.1;gbkey=CDS;gene=NS2;product=nonstructural protein 2;protein_id=AGO32209.1
+KF015279.1	Genbank	CDS	4435	5230	.	-	0	ID=cds-AGO32212.1;Dbxref=NCBI_GP:AGO32212.1;Name=AGO32212.1;gbkey=CDS;product=structural protein VP1;protein_id=AGO32212.1
+KF015279.1	Genbank	CDS	2605	4259	.	-	2	ID=cds-AGO32212.1;Dbxref=NCBI_GP:AGO32212.1;Name=AGO32212.1;gbkey=CDS;product=structural protein VP1;protein_id=AGO32212.1
+KF015279.1	Genbank	CDS	2605	4398	.	-	0	ID=cds-AGO32211.1;Dbxref=NCBI_GP:AGO32211.1;Name=AGO32211.1;gbkey=CDS;product=structural protein 2;protein_id=AGO32211.1
+
