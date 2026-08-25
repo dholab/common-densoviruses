@@ -2,6 +2,7 @@
 
 from dataclasses import dataclass
 from html import escape, unescape
+from html.parser import HTMLParser
 import os
 from pathlib import Path
 import re
@@ -355,23 +356,52 @@ def render_page(manuscript: Manuscript, template: str, body_html: str) -> str:
     return page
 
 
-def _validate_rendered_page(page: str, root: Path, docs: Path, staging: Path) -> None:
+class _AssetAttributeParser(HTMLParser):
+    """Collect local-link candidates from HTML regardless of quote style."""
+
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self.targets: list[str] = []
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        for name, value in attrs:
+            if name in {"src", "href"} and value is not None:
+                self.targets.append(value)
+
+
+_SOURCE_ONLY_DOCS_FILES = {"README.md", "build_site.py", "template.html", "pixi.lock", "pixi.toml"}
+
+
+def _published_local_path(path: Path, docs: Path, staging: Path) -> bool:
+    """Return whether a relative path survives in the final Pages publication."""
+    if path.parts[:2] == ("assets", "figures"):
+        return (staging / path).exists()
+    if (staging / path).exists():
+        return True
+    if path.name in _SOURCE_ONLY_DOCS_FILES or path.parts[:1] in {("tests",), (".pixi",)}:
+        return False
+    return (docs / path).exists()
+
+
+def _validate_rendered_page(page: str, docs: Path, staging: Path) -> None:
     """Reject incomplete output before it can replace the published manuscript."""
     if re.search(r"{{[^}]+}}", page):
         raise BuildError("Rendered page contains an unresolved template token")
     required = ("<!doctype html>", "<html", "<head>", "<body", "</html>")
     if any(token not in page.lower() for token in required):
         raise BuildError("Rendered page is not a complete HTML document")
-    for match in re.finditer(r'(?:src|href)="([^"]+)"', page):
-        target = unescape(match.group(1))
+    parser = _AssetAttributeParser()
+    parser.feed(page)
+    parser.close()
+    for target in parser.targets:
+        target = unescape(target)
         parsed = urlsplit(target)
         if not parsed.path or parsed.scheme or target.startswith(("#", "//")):
             continue
         path = Path(unquote(parsed.path))
         if path.is_absolute() or any(part == ".." for part in path.parts):
             raise BuildError(f"Local asset path is not permitted: {target}")
-        candidates = [(base / path).resolve() for base in (staging, docs, root)]
-        if not any(candidate.exists() for candidate in candidates):
+        if not _published_local_path(path, docs, staging):
             raise BuildError(f"Completed page references missing local asset: {target}")
 
 
@@ -402,9 +432,9 @@ def build(root: Path = ROOT, docs: Path = DOCS) -> Path:
         body_html = rewrite_repository_links(body_html, root, REPOSITORY_URL)
         template = (docs / "template.html").read_text(encoding="utf-8")
         page = render_page(manuscript, template, body_html)
-        _validate_rendered_page(page, root, docs, staging)
         staged_page = staging / "index.html"
         staged_page.write_text(page, encoding="utf-8")
+        _validate_rendered_page(page, docs, staging)
 
         target_assets = docs / "assets" / "figures"
         target_assets.mkdir(parents=True, exist_ok=True)

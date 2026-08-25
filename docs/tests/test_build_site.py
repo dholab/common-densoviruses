@@ -298,3 +298,32 @@ class PageRenderingTests(unittest.TestCase):
 
         with self.assertRaisesRegex(BuildError, "local asset"):
             build(self.fixture_root, self.docs)
+
+    def test_rejects_repository_only_single_quoted_asset(self):
+        """A source-only repository file must not be accepted as a Pages asset."""
+        self.write_complete_fixture(
+            "<!doctype html><html><head><title>{{TITLE_TEXT}}</title></head><body>"
+            '<header class="masthead"><h1>{{TITLE_HTML}}</h1>{{AUTHORS}}{{AFFILIATIONS}}'
+            '<p class="standfirst">{{STANDFIRST}}</p></header><main>{{BODY}}'
+            "<img src='README.md'></main>"
+            '<footer class="colophon">{{REPOSITORY_URL}}</footer></body></html>'
+        )
+
+        with self.assertRaisesRegex(BuildError, "local asset"):
+            build(self.fixture_root, self.docs)
+
+    def test_rejects_stale_single_quoted_generated_figure(self):
+        """A figure that publication removes must not validate from the old output."""
+        self.write_complete_fixture(
+            "<!doctype html><html><head><title>{{TITLE_TEXT}}</title></head><body>"
+            '<header class="masthead"><h1>{{TITLE_HTML}}</h1>{{AUTHORS}}{{AFFILIATIONS}}'
+            '<p class="standfirst">{{STANDFIRST}}</p></header><main>{{BODY}}'
+            "<img src='assets/figures/stale.svg'></main>"
+            '<footer class="colophon">{{REPOSITORY_URL}}</footer></body></html>'
+        )
+        stale = self.docs / "assets" / "figures" / "stale.svg"
+        stale.parent.mkdir()
+        stale.write_text("<svg/>", encoding="utf-8")
+
+        with self.assertRaisesRegex(BuildError, "local asset"):
+            build(self.fixture_root, self.docs)
