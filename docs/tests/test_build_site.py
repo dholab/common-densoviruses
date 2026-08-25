@@ -130,6 +130,19 @@ class TransparentSvgTests(unittest.TestCase):
 
         self.assertFalse(self.destination.exists())
 
+    def test_rejects_non_svg_xml_without_publishing_destination(self):
+        """A matching rectangle in arbitrary XML must not become a figure asset."""
+        source = self.write_svg(
+            '<document width="100" height="60">'
+            '<rect x="0" y="0" width="100" height="60" fill="white"/>'
+            "</document>"
+        )
+
+        with self.assertRaises(BuildError):
+            make_svg_transparent(source, self.destination)
+
+        self.assertFalse(self.destination.exists())
+
 
 class FigureCollectionTests(unittest.TestCase):
     def setUp(self):

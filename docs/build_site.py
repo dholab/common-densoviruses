@@ -93,6 +93,8 @@ def make_svg_transparent(source: Path, destination: Path) -> None:
         raise BuildError(f"Cannot parse SVG source {source}") from error
 
     root = tree.getroot()
+    if root.tag != "{http://www.w3.org/2000/svg}svg":
+        raise BuildError(f"SVG source must have an SVG root element: {source}")
     canvas_width, canvas_height = _canvas_size(root)
     parents = {child: parent for parent in root.iter() for child in parent}
     fills = _effective_fills(root)
