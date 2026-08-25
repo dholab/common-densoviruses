@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{TITLE_TEXT}}</title>
+<meta name="description" content="{{TITLE_TEXT}}">
+<meta name="theme-color" content="#F8F4E9">
+<link rel="canonical" href="{{CANONICAL_URL}}">
+<!-- Social preview asset: {{SOCIAL_PREVIEW_PATH}} -->
+<style>
+:root {
+  --cream: #F8F4E9;
+  --ink: #163139;
+  --accent: #C16A3C;
+  --accent-light: #D98E60;
+  --surface: #FFFFFF;
+  --rule: rgba(22, 49, 57, 0.14);
+  --rule-strong: rgba(22, 49, 57, 0.32);
+  --tint: rgba(22, 49, 57, 0.05);
+  --measure: 42rem;
+  --serif: Georgia, "Iowan Old Style", "Times New Roman", serif;
+  --sans: Arial, Helvetica, "Liberation Sans", sans-serif;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--cream); }
+body {
+  margin: 0;
+  color: var(--ink);
+  font: 400 16px/1.62 var(--sans);
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+}
+.wrap { max-width: var(--measure); margin: 0 auto; padding: 0 1.375rem 6rem; }
+header.masthead { padding: 4rem 0 0; }
+header.masthead h1 {
+  margin: 0 0 1.5rem;
+  font: 700 clamp(2rem, 1.35rem + 2.6vw, 2.6rem)/1.18 var(--serif);
+  letter-spacing: -0.008em;
+}
+.byline { margin: 0 0 0.85rem; font: 400 15px/1.55 var(--sans); }
+.byline sup { font-size: 0.68em; }
+.affiliations { margin: 0 0 1.1rem; font: 400 12.5px/1.6 var(--sans); color: rgba(22, 49, 57, 0.78); }
+.affiliations sup { font-size: 0.75em; }
+.standfirst {
+  margin: 1.5rem 0 0;
+  padding-top: 1.35rem;
+  border-top: 1px solid var(--rule);
+  font: 400 14px/1.6 var(--sans);
+  color: rgba(22, 49, 57, 0.8);
+}
+main { margin-top: 3.25rem; }
+h2 { margin: 3.25rem 0 1.05rem; font: 700 1.45rem/1.25 var(--serif); letter-spacing: -0.005em; }
+h3 { margin: 2.5rem 0 0.85rem; font: 700 1.1rem/1.35 var(--serif); }
+h2 + h3 { margin-top: 1.75rem; }
+p { margin: 0 0 1.15rem; }
+a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-color: rgba(193, 106, 60, 0.42);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+a:hover { text-decoration-color: var(--accent); }
+strong { font-weight: 700; }
+em { font-family: var(--serif); font-style: italic; }
+sup { font-size: 0.7em; line-height: 0; }
+code, pre { font-family: var(--mono); }
+code { background: var(--tint); padding: 0.1em 0.34em; border-radius: 3px; font-size: 0.845em; }
+pre {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 0.95rem 1.05rem;
+  overflow-x: auto;
+  font-size: 0.8rem;
+  line-height: 1.55;
+}
+pre code { background: none; padding: 0; font-size: inherit; }
+figure.display {
+  margin: 2.5rem 0;
+  padding: 1.5rem 0 1.35rem;
+  border-top: 1px solid var(--rule-strong);
+  border-bottom: 1px solid var(--rule-strong);
+}
+figure.display > img { display: block; max-width: 100%; height: auto; }
+figure.display > figcaption { margin-top: 1.1rem; font: 400 12.5px/1.55 var(--sans); color: rgba(22, 49, 57, 0.82); }
+.fig-label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font: 700 11px/1.3 var(--sans);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.table-scroll { overflow-x: auto; background: transparent; border-radius: 4px; }
+table { border-collapse: collapse; width: 100%; font: 400 13px/1.45 var(--sans); }
+th, td { padding: 0.52rem 0.7rem; text-align: left; vertical-align: top; border-bottom: 1px solid var(--rule); }
+th { font: 700 10.5px/1.35 var(--sans); letter-spacing: 0.09em; text-transform: uppercase; border-bottom: 1px solid var(--rule-strong); white-space: nowrap; }
+tbody tr:last-child td { border-bottom: none; }
+footer.colophon {
+  margin-top: 4.5rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--rule);
+  font: 400 12.5px/1.6 var(--sans);
+  color: rgba(22, 49, 57, 0.72);
+}
+@media (max-width: 34rem) {
+  body { font-size: 15px; }
+  header.masthead { padding-top: 2.5rem; }
+  .wrap { padding: 0 1.1rem 4rem; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="masthead">
+  <h1>{{TITLE_HTML}}</h1>
+  <div class="byline">{{AUTHORS}}</div>
+  <div class="affiliations">{{AFFILIATIONS}}</div>
+  <p class="standfirst">{{STANDFIRST}} <a href="{{REPOSITORY_URL}}">View the repository.</a></p>
+</header>
+<main>
+{{BODY}}
+</main>
+<footer class="colophon">
+  Generated from <a href="{{REPOSITORY_URL}}/blob/main/README.md">README.md</a> by
+  <a href="{{REPOSITORY_URL}}/blob/main/docs/build_site.py">docs/build_site.py</a>.
+</footer>
+</div>
+</body>
+</html>

@@ -1,7 +1,8 @@
 """Helpers for building the manuscript GitHub Pages site from Markdown."""
 
 from dataclasses import dataclass
-from html import unescape
+from html import escape, unescape
+import os
 from pathlib import Path
 import re
 import shutil
@@ -10,6 +11,17 @@ from urllib.parse import urlsplit
 from xml.etree import ElementTree
 
 import markdown
+
+
+DOCS = Path(__file__).resolve().parent
+ROOT = DOCS.parent
+REPOSITORY_URL = "https://github.com/dholab/common-densoviruses"
+CANONICAL_URL = "https://dholab.github.io/common-densoviruses/"
+STANDFIRST = (
+    "This web version is the preferred way to read this evolving manuscript "
+    "because each figure links directly to its interactive genomic viewer, "
+    "methods, scripts, and source data in the repository."
+)
 
 
 class BuildError(ValueError):
@@ -183,9 +195,12 @@ def collect_figures(markdown_text: str, root: Path) -> list[Figure]:
     return figures
 
 
-def stage_figure_assets(figures: list[Figure], output_dir: Path) -> dict[str, str]:
+def stage_figure_assets(
+    figures: list[Figure], output_dir: Path, root: Path | None = None
+) -> dict[str, str]:
     """Stage validated transparent figure copies and return their published paths."""
     output_dir = output_dir.resolve()
+    repository_root = (root or output_dir.parent).resolve()
     output_dir.mkdir(parents=True, exist_ok=True)
     target_directory = output_dir / "assets" / "figures"
     staging_directory = Path(tempfile.mkdtemp(prefix=".figure-assets-", dir=output_dir))
@@ -193,7 +208,7 @@ def stage_figure_assets(figures: list[Figure], output_dir: Path) -> dict[str, st
     try:
         for figure in figures:
             try:
-                source_path = figure.source.relative_to(output_dir.parent)
+                source_path = figure.source.relative_to(repository_root)
             except ValueError as error:
                 raise BuildError(f"Figure source is outside the repository: {figure.source}") from error
             asset_path = Path("assets") / "figures" / figure.asset_name
@@ -262,3 +277,135 @@ def rewrite_repository_links(
         return f'href={quote}{repo_url}/{kind}/{branch}/{repository_path}{quote}'
 
     return re.sub(r"href=(['\"])(.*?)\1", replace_link, html_text)
+
+
+_FIGURE_IMAGE = re.compile(
+    r'<p>(<img alt="(?P<label>Figure [^"]+)" src="(?P<source>[^"]+)"\s*/?>)</p>'
+)
+_FIGURE_CAPTION = re.compile(
+    r'<blockquote>\s*<p><strong>(?P<label>Figure [^.]+)\.\s*</strong>(?P<caption>.*?)</p>\s*</blockquote>',
+    re.DOTALL,
+)
+
+
+def wrap_figures(body_html: str, figure_assets: dict[str, str]) -> str:
+    """Turn each rendered manuscript image and its following caption into a figure."""
+    images = list(_FIGURE_IMAGE.finditer(body_html))
+    captions = list(_FIGURE_CAPTION.finditer(body_html))
+    if not images or len(images) != len(captions):
+        raise BuildError("Every manuscript figure image must have one following caption")
+    if len(images) != len(figure_assets):
+        raise BuildError("Every staged manuscript figure must appear in the rendered body")
+
+    expected_labels = [image.group("label") for image in images]
+    caption_labels = [caption.group("label") for caption in captions]
+    if expected_labels != caption_labels:
+        raise BuildError("Figure captions must immediately follow their matching images")
+    if set(image.group("source") for image in images) != set(figure_assets):
+        raise BuildError("Rendered manuscript images do not match staged figure assets")
+
+    figure_pattern = re.compile(
+        r'<p>(<img alt="(?P<label>Figure [^"]+)" src="(?P<source>[^"]+)"\s*/?>)</p>'
+        r'\s*<blockquote>\s*<p><strong>(?P=label)\.\s*</strong>(?P<caption>.*?)</p>\s*</blockquote>',
+        re.DOTALL,
+    )
+
+    def replace(match: re.Match[str]) -> str:
+        label = match.group("label")
+        source = match.group("source")
+        asset = figure_assets.get(source)
+        if asset is None:
+            raise BuildError(f"No staged asset exists for {source}")
+        anchor = label.lower().replace(" ", "-")
+        image = match.group(1).replace(f'src="{source}"', f'src="{asset}"')
+        return (
+            f'<figure class="display" id="{anchor}">\n'
+            f"  {image}\n"
+            f"  <figcaption><span class=\"fig-label\">{label}</span>{match.group('caption')}</figcaption>\n"
+            "</figure>"
+        )
+
+    wrapped, count = figure_pattern.subn(replace, body_html)
+    if count != len(images):
+        raise BuildError("Figure image and caption pairs could not be assembled")
+    return wrapped
+
+
+def render_page(manuscript: Manuscript, template: str, body_html: str) -> str:
+    """Fill the house template with an escaped masthead and rendered manuscript."""
+    title_html = render_markdown(manuscript.title).removeprefix("<p>").removesuffix("</p>")
+    replacements = {
+        "{{TITLE_TEXT}}": escape(re.sub(r"<[^>]+>", "", title_html)),
+        "{{TITLE_HTML}}": title_html,
+        "{{AUTHORS}}": manuscript.authors_html,
+        "{{AFFILIATIONS}}": manuscript.affiliations_html,
+        "{{STANDFIRST}}": STANDFIRST,
+        "{{BODY}}": body_html,
+        "{{REPOSITORY_URL}}": REPOSITORY_URL,
+        "{{CANONICAL_URL}}": CANONICAL_URL,
+        "{{SOCIAL_PREVIEW_PATH}}": "assets/og.png",
+    }
+    page = template
+    for token, value in replacements.items():
+        page = page.replace(token, value)
+    if re.search(r"{{[^}]+}}", page):
+        raise BuildError("Template contains an unresolved token")
+    return page
+
+
+def _validate_rendered_page(page: str) -> None:
+    """Reject incomplete output before it can replace the published manuscript."""
+    if re.search(r"{{[^}]+}}", page):
+        raise BuildError("Rendered page contains an unresolved template token")
+    required = ("<!doctype html>", "<html", "<head>", "<body", "</html>")
+    if any(token not in page.lower() for token in required):
+        raise BuildError("Rendered page is not a complete HTML document")
+
+
+def build(root: Path = ROOT, docs: Path = DOCS) -> Path:
+    """Build validated manuscript HTML and transparent SVG assets into ``docs``."""
+    output = docs / "index.html"
+    root = root.resolve()
+    docs = docs.resolve()
+    manuscript_text = (root / "README.md").read_text(encoding="utf-8")
+    manuscript = split_manuscript(manuscript_text)
+    figures = collect_figures(manuscript_text, root)
+    expected_labels = [
+        "Figure 1", "Figure 2", "Figure 3", "Figure 4", "Figure 5A",
+        "Figure 5B", "Figure 6", "Figure 7A", "Figure 7B",
+    ]
+    if [figure.label for figure in figures] != expected_labels:
+        raise BuildError("Manuscript figures must use the required labels in order")
+
+    staging = Path(tempfile.mkdtemp(prefix=".manuscript-build-", dir=docs))
+    try:
+        assets = stage_figure_assets(figures, staging, root)
+        staged_figures = staging / "assets" / "figures"
+        for figure in figures:
+            ElementTree.parse(staged_figures / figure.asset_name)
+
+        body_html = render_markdown(manuscript.body_markdown)
+        body_html = wrap_figures(body_html, assets)
+        body_html = rewrite_repository_links(body_html, root, REPOSITORY_URL)
+        template = (docs / "template.html").read_text(encoding="utf-8")
+        page = render_page(manuscript, template, body_html)
+        _validate_rendered_page(page)
+        staged_page = staging / "index.html"
+        staged_page.write_text(page, encoding="utf-8")
+
+        target_assets = docs / "assets" / "figures"
+        target_assets.mkdir(parents=True, exist_ok=True)
+        expected_names = {figure.asset_name for figure in figures}
+        for old_asset in target_assets.glob("*.svg"):
+            if old_asset.name not in expected_names:
+                old_asset.unlink()
+        for figure in figures:
+            os.replace(staged_figures / figure.asset_name, target_assets / figure.asset_name)
+        os.replace(staged_page, docs / "index.html")
+        return output
+    finally:
+        shutil.rmtree(staging, ignore_errors=True)
+
+
+if __name__ == "__main__":
+    build()

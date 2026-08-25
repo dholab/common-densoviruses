@@ -5,11 +5,15 @@ from xml.etree import ElementTree
 
 from build_site import (
     BuildError,
+    build,
     collect_figures,
     make_svg_transparent,
+    render_markdown,
+    render_page,
     rewrite_repository_links,
     split_manuscript,
     stage_figure_assets,
+    wrap_figures,
 )
 
 
@@ -178,3 +182,99 @@ class FigureCollectionTests(unittest.TestCase):
 
         with self.assertRaises(BuildError):
             collect_figures(markdown_text, self.fixture_root)
+
+
+class PageRenderingTests(unittest.TestCase):
+    def setUp(self):
+        self.temporary_directory = tempfile.TemporaryDirectory()
+        self.fixture_root = Path(self.temporary_directory.name)
+        self.docs = self.fixture_root / "docs"
+        self.docs.mkdir()
+
+    def tearDown(self):
+        self.temporary_directory.cleanup()
+
+    def test_wraps_image_and_caption_as_labeled_figure(self):
+        """A figure image and its next caption must remain a single display item."""
+        body = (
+            '<p><img alt="Figure 5A" src="docs/source.svg" /></p>'
+            '<blockquote><p><strong>Figure 5A.</strong> Evidence caption.</p></blockquote>'
+        )
+
+        wrapped = wrap_figures(body, {"docs/source.svg": "assets/figures/figure-5a.svg"})
+
+        self.assertIn('<figure class="display" id="figure-5a">', wrapped)
+        self.assertIn('src="assets/figures/figure-5a.svg"', wrapped)
+        self.assertIn('<span class="fig-label">Figure 5A</span>', wrapped)
+        self.assertNotIn("<blockquote>", wrapped)
+
+    def test_rejects_image_without_a_matching_caption(self):
+        """A missing caption must fail rather than publish an unlabeled scientific figure."""
+        body = '<p><img alt="Figure 5A" src="docs/source.svg" /></p>'
+
+        with self.assertRaises(BuildError):
+            wrap_figures(body, {"docs/source.svg": "assets/figures/figure-5a.svg"})
+
+    def test_rejects_caption_without_a_matching_image(self):
+        """An orphan caption must fail rather than silently detach its evidence."""
+        body = '<blockquote><p><strong>Figure 5A.</strong> Evidence caption.</p></blockquote>'
+
+        with self.assertRaises(BuildError):
+            wrap_figures(body, {})
+
+    def test_builds_complete_house_style_manuscript_page(self):
+        """A complete fixture must render the masthead and all nine linked figures."""
+        labels = [
+            "Figure 1", "Figure 2", "Figure 3", "Figure 4", "Figure 5A",
+            "Figure 5B", "Figure 6", "Figure 7A", "Figure 7B",
+        ]
+        manuscript = [
+            "# Fixture manuscript",
+            "",
+            "Alice Example<sup>1*</sup>",
+            "",
+            "<sup>1</sup> Example Institute",
+            "",
+            "## Introduction",
+            "",
+            "Opening evidence paragraph.",
+        ]
+        for number, label in enumerate(labels, start=1):
+            source = f"figures/{number}.svg"
+            svg = self.fixture_root / source
+            svg.parent.mkdir(parents=True, exist_ok=True)
+            svg.write_text(
+                '<svg xmlns="http://www.w3.org/2000/svg" width="1" height="1">'
+                '<rect x="0" y="0" width="1" height="1" fill="white"/></svg>',
+                encoding="utf-8",
+            )
+            manuscript.extend([
+                "", f"![{label}]({source})", "", f"> **{label}.** Caption {number}.",
+            ])
+        (self.fixture_root / "README.md").write_text("\n".join(manuscript), encoding="utf-8")
+        (self.docs / "template.html").write_text(
+            "<!doctype html><html><head><title>{{TITLE_TEXT}}</title>"
+            '<meta name="theme-color" content="#F8F4E9">'
+            '<link rel="canonical" href="{{CANONICAL_URL}}"></head><body>'
+            '<header class="masthead"><h1>{{TITLE_HTML}}</h1>{{AUTHORS}}{{AFFILIATIONS}}'
+            '<p class="standfirst">{{STANDFIRST}}</p></header><main>{{BODY}}</main>'
+            '<footer class="colophon">{{REPOSITORY_URL}}</footer></body></html>',
+            encoding="utf-8",
+        )
+        (self.docs / "assets").mkdir()
+        (self.docs / "assets" / "og.png").write_bytes(b"placeholder social preview")
+
+        output = build(self.fixture_root, self.docs)
+        page = output.read_text(encoding="utf-8")
+
+        self.assertEqual(output, self.docs / "index.html")
+        self.assertIn("Fixture manuscript", page)
+        self.assertIn('class="masthead"', page)
+        self.assertIn("<h2>Introduction</h2>", page)
+        self.assertIn("This web version is the preferred way to read this evolving manuscript", page)
+        self.assertIn('class="colophon"', page)
+        self.assertIn('name="theme-color" content="#F8F4E9"', page)
+        self.assertIn('rel="canonical" href="https://dholab.github.io/common-densoviruses/"', page)
+        self.assertEqual(page.count('<figure class="display" id="figure-'), 9)
+        self.assertNotRegex(page, r"{{[^}]+}}")
+        self.assertEqual((self.docs / "assets" / "og.png").read_bytes(), b"placeholder social preview")

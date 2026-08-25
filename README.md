@@ -1,5 +1,15 @@
 # Common densoviruses in the human and mammalian virospheres
 
+Marc C. Johnson<sup>2,3</sup>, Shelby L. O'Connor<sup>1,4</sup>, David H. O'Connor<sup>1,4*</sup>
+
+<sup>1</sup> Department of Pathology and Laboratory Medicine, University of Wisconsin School of Medicine and Public Health, Madison, WI 53711, USA
+<sup>2</sup> Department of Molecular Microbiology and Immunology, University of Missouri School of Medicine, Columbia, MO 65211, USA
+<sup>3</sup> Christopher S. Bond Life Sciences Center, University of Missouri, Columbia, MO 65211, USA
+<sup>4</sup> Wisconsin National Primate Research Center, University of Wisconsin-Madison, Madison, WI 53715, USA
+<sup>*</sup> Corresponding author: Dave O'Connor • <dhoconnor@wisc.edu>
+
+## Introduction
+
 Densoviruses (subfamily Densovirinae, family Parvoviridae) are small, non-enveloped T=1 icosahedral single-stranded DNA viruses with linear genomes typically ranging from 4 to 6 kb that terminate in hairpin structures serving as replication origins ([Cotmore et al., 2019](https://doi.org/10.1099/jgv.0.001212)). Their genome organization follows the characteristic parvoviral pattern, with a 5′ nonstructural block encoding NS proteins including the SF3 helicase/endonuclease NS1, and a 3′ capsid block encoding VP proteins. These viruses make extensive use of alternative promoters, leaky scanning, and splicing to generate multiple gene products ([Yu and Tijssen, 2014](https://doi.org/10.1128/JVI.01719-14)). At the genus level, densoviruses exhibit meaningful architectural variation. Iteradensoviruses employ a monosense transcription strategy and produce multiple VP size variants ([ICTV Iteradensovirus Report, 2025](https://ictv.global/report/chapter/parvoviridae/parvoviridae/iteradensovirus)), whereas Ambidensoviruses use an ambisense arrangement with oppositely oriented NS and VP cassettes ([ICTV Ambidensovirus Report, 2025](https://ictv.global/report/chapter/parvoviridae/parvoviridae/ambidensovirus)). ICTV taxonomy recognizes multiple densovirus genera distributed across two deep evolutionary branches within Densovirinae, underscoring their long-standing diversification in invertebrates ([ICTV Densovirinae Report, 2023](https://ictv.global/report/chapter/parvoviridae/parvoviridae/densovirinae); [Cotmore et al., 2019](https://doi.org/10.1099/jgv.0.001212)).
 
 Evidence for densovirus infection of mammals remains limited, and most detections in mammalian samples are interpreted as environmental or dietary transit from infected invertebrates rather than productive replication. For instance, densovirus sequences recovered from insectivorous bat feces cluster with arthropod densoviruses ([Ge et al., 2012](https://doi.org/10.1128/JVI.06671-11)), consistent with ingestion and passive gut transit. The most striking human-linked genome is human CSF-associated densovirus 1 (HuCSFDV1), which was detected and independently confirmed in cerebrospinal fluid from a patient with anti-NMDA-receptor encephalitis. Although highly divergent, this genome falls within iteradensovirus-like lineages ([Phan et al., 2016](https://doi.org/10.1007/s00705-016-3002-9)). Additional human associations include metagenomic detection of densovirus-like sequences in plasma from Cameroonian blood donors participating in blood-borne virus surveillance, again without evidence of a sustained clinical syndrome or demonstrated human tropism ([Orf et al., 2023](https://doi.org/10.3390/v15041022)). Densoviruses have also been noted as low-abundance members of the cutaneous DNA virome in longitudinal shotgun metagenomic surveys of healthy skin ([Oh et al., 2016](https://doi.org/10.1016/j.cell.2016.04.008)). Moreover, a novel densovirus was recently identified in air samples collected from a Belgian day care facility ([Karatas et al., 2025](https://pmc.ncbi.nlm.nih.gov/articles/PMC12475893/)). Together, these reports suggest that densovirus sequences can be recovered from human-associated samples, but whether they represent rare vertebrate infection, transient carriage, or contamination remains unresolved. No robust experimental system has yet demonstrated efficient densovirus replication in vertebrate cells in vitro or in vivo ([Phan et al., 2016](https://doi.org/10.1007/s00705-016-3002-9); [Cotmore et al., 2019](https://doi.org/10.1099/jgv.0.001212)).
@@ -105,18 +115,6 @@ The unexpected prevalence uncovered here argues that HuCSFDV1-like densoviruses 
 ## Data availability
 
 The VSP2 sequence reads are available in NCBI BioProject XX (TBD). Yes, we recognize the irony that our data isn't yet in SRA when we rely on data from SRA. We're working on it. All other reads are already available in SRA as described above.
-
-## Authors and affiliations
-
-Marc C. Johnson<sup>2,3</sup>, Shelby L. O'Connor<sup>1,4</sup>, David H. O'Connor<sup>1,4*</sup>
-
-<sup>1</sup> Department of Pathology and Laboratory Medicine, University of Wisconsin School of Medicine and Public Health, Madison, WI 53711, USA
-<sup>2</sup> Department of Molecular Microbiology and Immunology, University of Missouri School of Medicine, Columbia, MO 65211, USA
-<sup>3</sup> Christopher S. Bond Life Sciences Center, University of Missouri, Columbia, MO 65211, USA
-<sup>4</sup> Wisconsin National Primate Research Center, University of Wisconsin-Madison, Madison, WI 53715, USA
-<sup>*</sup> Corresponding author: Dave O'Connor • <dhoconnor@wisc.edu>
-
-Other co-authors will be added as the project evolves.
 
 ## Acknowledgements
 
