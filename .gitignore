@@ -11,3 +11,7 @@ analysis/01-air-samples/vsp/private/
 # Conda
 .conda
 .claude
+
+# Local agent workspaces
+.worktrees/
+.superpowers/
