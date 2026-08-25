@@ -1,7 +1,9 @@
 import tempfile
 import unittest
 from pathlib import Path
+import struct
 from xml.etree import ElementTree
+import zlib
 
 from build_site import (
     BuildError,
@@ -313,6 +315,77 @@ class PageRenderingTests(unittest.TestCase):
             page,
         )
         self.assertIn(f'name="twitter:image" content="{image_url}"', page)
+
+    def test_social_preview_uses_only_approved_house_palette(self):
+        """The social card must retain only the three exact house-palette colors."""
+        preview = Path(__file__).resolve().parents[1] / "assets" / "og.png"
+        data = preview.read_bytes()
+        self.assertEqual(data[:8], b"\x89PNG\r\n\x1a\n")
+
+        offset = 8
+        header = None
+        compressed = bytearray()
+        while offset < len(data):
+            length = struct.unpack(">I", data[offset : offset + 4])[0]
+            chunk_type = data[offset + 4 : offset + 8]
+            chunk = data[offset + 8 : offset + 8 + length]
+            offset += 12 + length
+            if chunk_type == b"IHDR":
+                header = struct.unpack(">IIBBBBB", chunk)
+            elif chunk_type == b"IDAT":
+                compressed.extend(chunk)
+            elif chunk_type == b"IEND":
+                break
+
+        self.assertIsNotNone(header)
+        width, height, bit_depth, color_type, compression, filtering, interlace = header
+        self.assertEqual((width, height), (1200, 630))
+        self.assertEqual((bit_depth, color_type, compression, filtering, interlace), (8, 2, 0, 0, 0))
+
+        row_bytes = width * 3
+        inflated = zlib.decompress(compressed)
+        self.assertEqual(len(inflated), height * (row_bytes + 1))
+        previous = bytearray(row_bytes)
+        colors = set()
+        cursor = 0
+
+        def paeth(left: int, above: int, upper_left: int) -> int:
+            estimate = left + above - upper_left
+            left_distance = abs(estimate - left)
+            above_distance = abs(estimate - above)
+            upper_left_distance = abs(estimate - upper_left)
+            if left_distance <= above_distance and left_distance <= upper_left_distance:
+                return left
+            if above_distance <= upper_left_distance:
+                return above
+            return upper_left
+
+        for _ in range(height):
+            filter_type = inflated[cursor]
+            cursor += 1
+            filtered = inflated[cursor : cursor + row_bytes]
+            cursor += row_bytes
+            row = bytearray(row_bytes)
+            for index, value in enumerate(filtered):
+                left = row[index - 3] if index >= 3 else 0
+                above = previous[index]
+                upper_left = previous[index - 3] if index >= 3 else 0
+                if filter_type == 0:
+                    row[index] = value
+                elif filter_type == 1:
+                    row[index] = (value + left) & 0xFF
+                elif filter_type == 2:
+                    row[index] = (value + above) & 0xFF
+                elif filter_type == 3:
+                    row[index] = (value + ((left + above) // 2)) & 0xFF
+                elif filter_type == 4:
+                    row[index] = (value + paeth(left, above, upper_left)) & 0xFF
+                else:
+                    self.fail(f"Unsupported PNG filter type: {filter_type}")
+            colors.update(tuple(row[index : index + 3]) for index in range(0, row_bytes, 3))
+            previous = row
+
+        self.assertSetEqual(colors, {(248, 244, 233), (22, 49, 57), (193, 106, 60)})
 
     def test_rejects_completed_page_with_missing_local_asset(self):
         """A local page asset must exist before a build replaces the published page."""
