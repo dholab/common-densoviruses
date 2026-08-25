@@ -1,6 +1,7 @@
 import tempfile
 import unittest
 from pathlib import Path
+import re
 import struct
 from xml.etree import ElementTree
 import zlib
@@ -63,6 +64,47 @@ Opening paragraph.
         self.assertIn('href="mailto:a@example.org"', rewritten)
         self.assertIn('href="#figure-1"', rewritten)
 
+    def test_rewrite_repository_links_preserves_dot_prefixed_paths(self):
+        """A leading dot in a repository filename must survive URL rewriting."""
+        (self.fixture_root / ".metadata").write_text("metadata\n", encoding="utf-8")
+
+        rewritten = rewrite_repository_links(
+            '<a href="./.metadata">metadata</a>', self.fixture_root, REPO
+        )
+
+        self.assertIn(f'href="{REPO}/blob/main/.metadata"', rewritten)
+
+    def test_rewrite_repository_links_preserves_query_and_fragment(self):
+        """Repository links must retain browser-visible query and fragment components."""
+        rewritten = rewrite_repository_links(
+            '<a href="notes.txt?download=1&amp;format=raw#details">notes</a>',
+            self.fixture_root,
+            REPO,
+        )
+
+        self.assertIn(
+            f'href="{REPO}/blob/main/notes.txt?download=1&amp;format=raw#details"',
+            rewritten,
+        )
+
+    def test_rewrite_repository_links_rejects_missing_targets(self):
+        """Malformed Markdown cannot be published as a nonexistent repository blob."""
+        with self.assertRaisesRegex(BuildError, "missing repository target"):
+            rewrite_repository_links(
+                '<a href="[Citation](https://example.org)">citation</a>',
+                self.fixture_root,
+                REPO,
+            )
+
+    def test_rewrite_repository_links_rejects_paths_outside_repository(self):
+        """Parent-relative and root-relative links must not escape the repository root."""
+        for href in ("../notes.txt", "/notes.txt", "%2e%2e/notes.txt"):
+            with self.subTest(href=href):
+                with self.assertRaisesRegex(BuildError, "outside the repository"):
+                    rewrite_repository_links(
+                        f'<a href="{href}">notes</a>', self.fixture_root, REPO
+                    )
+
 
 class TransparentSvgTests(unittest.TestCase):
     def setUp(self):
@@ -122,6 +164,50 @@ class TransparentSvgTests(unittest.TestCase):
         root = ElementTree.parse(self.destination).getroot()
         self.assertEqual(len(list(root)), 1)
         self.assertEqual(list(root)[0].attrib["fill"], "#163139")
+
+    def test_rejects_unsafe_igv_percentage_backdrop_variants(self):
+        """Only the exact root-level IGV 100%-canvas signature is removable."""
+        unsafe_backdrops = {
+            "missing ID": '<rect width="100%" height="100%" fill="white"/>',
+            "wrong ID": (
+                '<rect id="other_backdrop" width="100%" height="100%" fill="white"/>'
+            ),
+            "nested below root": (
+                '<g><rect id="svg_output_backdrop" width="100%" height="100%" '
+                'fill="white"/></g>'
+            ),
+            "nonzero x origin": (
+                '<rect id="svg_output_backdrop" x="1" width="100%" height="100%" '
+                'fill="white"/>'
+            ),
+            "nonzero y origin": (
+                '<rect id="svg_output_backdrop" y="1" width="100%" height="100%" '
+                'fill="white"/>'
+            ),
+            "partial width": (
+                '<rect id="svg_output_backdrop" width="99%" height="100%" fill="white"/>'
+            ),
+            "partial height": (
+                '<rect id="svg_output_backdrop" width="100%" height="50%" fill="white"/>'
+            ),
+            "other percentage geometry": (
+                '<rect id="svg_output_backdrop" width="100.0%" height="100%" '
+                'fill="white"/>'
+            ),
+        }
+
+        for label, backdrop in unsafe_backdrops.items():
+            with self.subTest(label=label):
+                self.destination.unlink(missing_ok=True)
+                source = self.write_svg(
+                    '<svg xmlns="http://www.w3.org/2000/svg" width="100" height="60">'
+                    f"{backdrop}"
+                    '<rect x="10" y="10" width="20" height="20" fill="#163139"/>'
+                    "</svg>"
+                )
+                with self.assertRaises(BuildError):
+                    make_svg_transparent(source, self.destination)
+                self.assertFalse(self.destination.exists())
 
     def test_rejects_svg_without_expected_canvas_background(self):
         """A small white annotation must never be mistaken for a background."""
@@ -230,6 +316,47 @@ class RepositoryContractTests(unittest.TestCase):
         rebuilt_page = output.read_text(encoding="utf-8")
         self.assertEqual(output, docs / "index.html")
         self.assertEqual(rebuilt_page.count('<figure class="display" id="figure-'), 9)
+
+    def test_real_manuscript_publishes_all_viewer_urls_and_valid_citations(self):
+        """Committed and rebuilt manuscripts must retain every viewer and both citations."""
+        repository_root = Path(__file__).resolve().parents[2]
+        docs = repository_root / "docs"
+        expected_viewer_urls = [
+            "https://dholab.github.io/common-densoviruses/01-air-samples-tgs/",
+            "https://dholab.github.io/common-densoviruses/01-air-samples-vsp/",
+            "https://dholab.github.io/common-densoviruses/02-sra-mining/",
+            "https://dholab.github.io/common-densoviruses/04-skin-microbiome/",
+            "https://dholab.github.io/common-densoviruses/05-cameroonian-plasma/",
+            "https://dholab.github.io/common-densoviruses/06-belgian-air/",
+        ]
+        expected_citation_urls = [
+            "https://www.medrxiv.org/content/10.1101/2025.10.21.25338488v1",
+            "https://doi.org/10.1101/2025.09.22.25336185",
+        ]
+
+        committed_page = (docs / "index.html").read_text(encoding="utf-8")
+        for url in expected_viewer_urls:
+            with self.subTest(artifact="committed", url=url):
+                self.assertEqual(committed_page.count(f'href="{url}"'), 1)
+        committed_methods = next(
+            line for line in committed_page.splitlines()
+            if "essentially as previously described" in line
+        )
+        for url in expected_citation_urls:
+            with self.subTest(artifact="committed methods", url=url):
+                self.assertEqual(committed_methods.count(f'href="{url}"'), 1)
+
+        rebuilt_page = build(repository_root, docs).read_text(encoding="utf-8")
+        for url in expected_viewer_urls:
+            with self.subTest(artifact="rebuilt", url=url):
+                self.assertEqual(rebuilt_page.count(f'href="{url}"'), 1)
+        rebuilt_methods = next(
+            line for line in rebuilt_page.splitlines()
+            if "essentially as previously described" in line
+        )
+        for url in expected_citation_urls:
+            with self.subTest(artifact="rebuilt methods", url=url):
+                self.assertEqual(rebuilt_methods.count(f'href="{url}"'), 1)
 
 
 class PageRenderingTests(unittest.TestCase):
@@ -361,6 +488,54 @@ class PageRenderingTests(unittest.TestCase):
             page,
         )
         self.assertIn(f'name="twitter:image" content="{image_url}"', page)
+
+    def test_build_rejects_missing_social_preview(self):
+        """The required social card must exist before publication begins."""
+        template = (Path(__file__).resolve().parents[1] / "template.html").read_text(
+            encoding="utf-8"
+        )
+        self.write_complete_fixture(template)
+        (self.docs / "assets" / "og.png").unlink()
+
+        with self.assertRaisesRegex(BuildError, "social preview"):
+            build(self.fixture_root, self.docs)
+
+    def test_text_accent_meets_wcag_aa_contrast(self):
+        """Link and figure-label text must reach 4.5:1 against the cream canvas."""
+        template = (Path(__file__).resolve().parents[1] / "template.html").read_text(
+            encoding="utf-8"
+        )
+
+        def css_hex(variable: str) -> tuple[int, int, int]:
+            match = re.search(rf"--{variable}:\s*#([0-9A-Fa-f]{{6}})", template)
+            self.assertIsNotNone(match)
+            value = match.group(1)
+            return tuple(int(value[index : index + 2], 16) for index in (0, 2, 4))
+
+        def relative_luminance(color: tuple[int, int, int]) -> float:
+            channels = []
+            for component in color:
+                channel = component / 255
+                channels.append(
+                    channel / 12.92
+                    if channel <= 0.04045
+                    else ((channel + 0.055) / 1.055) ** 2.4
+                )
+            return sum(
+                weight * channel
+                for weight, channel in zip((0.2126, 0.7152, 0.0722), channels)
+            )
+
+        foreground = relative_luminance(css_hex("text-accent"))
+        background = relative_luminance(css_hex("cream"))
+        contrast = (max(foreground, background) + 0.05) / (
+            min(foreground, background) + 0.05
+        )
+
+        self.assertGreaterEqual(contrast, 4.5)
+        self.assertRegex(template, r"a\s*\{[^}]*color:\s*var\(--text-accent\)")
+        self.assertRegex(template, r"\.fig-label\s*\{[^}]*color:\s*var\(--text-accent\)")
+        self.assertEqual(css_hex("accent"), (193, 106, 60))
 
     def test_social_preview_uses_only_approved_house_palette(self):
         """The social card must retain only the three exact house-palette colors."""

@@ -8,7 +8,7 @@ from pathlib import Path
 import re
 import shutil
 import tempfile
-from urllib.parse import unquote, urlsplit
+from urllib.parse import quote as urlquote, unquote, urlsplit
 from xml.etree import ElementTree
 
 import markdown
@@ -268,15 +268,33 @@ def rewrite_repository_links(
 ) -> str:
     """Rewrite relative links to their file or directory location in the repository."""
     def replace_link(match: re.Match[str]) -> str:
-        quote, href = match.groups()
+        delimiter, href = match.groups()
         decoded_href = unescape(href)
         parsed = urlsplit(decoded_href)
-        if parsed.scheme or decoded_href.startswith(("#", "//")):
+        if parsed.scheme or parsed.netloc or not parsed.path:
             return match.group(0)
 
-        repository_path = decoded_href.lstrip("./")
-        kind = "tree" if (root / repository_path).is_dir() else "blob"
-        return f'href={quote}{repo_url}/{kind}/{branch}/{repository_path}{quote}'
+        repository_path = unquote(parsed.path.removeprefix("./"))
+        repository_root = root.resolve()
+        target = (repository_root / repository_path).resolve()
+        try:
+            relative_target = target.relative_to(repository_root)
+        except ValueError as error:
+            raise BuildError(
+                f"Repository link target is outside the repository: {decoded_href}"
+            ) from error
+        if not target.exists():
+            raise BuildError(f"Repository link has a missing repository target: {decoded_href}")
+
+        kind = "tree" if target.is_dir() else "blob"
+        rewritten = (
+            f"{repo_url}/{kind}/{branch}/{urlquote(relative_target.as_posix(), safe='/')}"
+        )
+        if parsed.query:
+            rewritten += f"?{parsed.query}"
+        if parsed.fragment:
+            rewritten += f"#{parsed.fragment}"
+        return f'href={delimiter}{escape(rewritten, quote=True)}{delimiter}'
 
     return re.sub(r"href=(['\"])(.*?)\1", replace_link, html_text)
 
@@ -410,6 +428,9 @@ def build(root: Path = ROOT, docs: Path = DOCS) -> Path:
     output = docs / "index.html"
     root = root.resolve()
     docs = docs.resolve()
+    social_preview = docs / "assets" / "og.png"
+    if not social_preview.is_file():
+        raise BuildError("Required social preview asset is missing: assets/og.png")
     manuscript_text = (root / "README.md").read_text(encoding="utf-8")
     manuscript = split_manuscript(manuscript_text)
     figures = collect_figures(manuscript_text, root)
