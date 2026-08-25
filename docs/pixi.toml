@@ -1,0 +1,14 @@
+[project]
+name = "common-densoviruses-manuscript-site"
+version = "0.1.0"
+description = "Builds the GitHub Pages manuscript from README.md"
+channels = ["conda-forge"]
+platforms = ["osx-arm64", "linux-64"]
+
+[tasks]
+build = "python build_site.py"
+test = "python -m unittest discover -s tests -p 'test_*.py'"
+
+[dependencies]
+python = ">=3.12,<3.13"
+markdown = ">=3.6,<4"
