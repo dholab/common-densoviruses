@@ -7,7 +7,7 @@ from pathlib import Path
 import re
 import shutil
 import tempfile
-from urllib.parse import urlsplit
+from urllib.parse import unquote, urlsplit
 from xml.etree import ElementTree
 
 import markdown
@@ -22,6 +22,7 @@ STANDFIRST = (
     "because each figure links directly to its interactive genomic viewer, "
     "methods, scripts, and source data in the repository."
 )
+DESCRIPTION = "An evolving manuscript on densoviruses in the human & mammalian virospheres."
 
 
 class BuildError(ValueError):
@@ -336,6 +337,7 @@ def render_page(manuscript: Manuscript, template: str, body_html: str) -> str:
     title_html = render_markdown(manuscript.title).removeprefix("<p>").removesuffix("</p>")
     replacements = {
         "{{TITLE_TEXT}}": escape(re.sub(r"<[^>]+>", "", title_html)),
+        "{{DESCRIPTION}}": escape(DESCRIPTION),
         "{{TITLE_HTML}}": title_html,
         "{{AUTHORS}}": manuscript.authors_html,
         "{{AFFILIATIONS}}": manuscript.affiliations_html,
@@ -353,13 +355,24 @@ def render_page(manuscript: Manuscript, template: str, body_html: str) -> str:
     return page
 
 
-def _validate_rendered_page(page: str) -> None:
+def _validate_rendered_page(page: str, root: Path, docs: Path, staging: Path) -> None:
     """Reject incomplete output before it can replace the published manuscript."""
     if re.search(r"{{[^}]+}}", page):
         raise BuildError("Rendered page contains an unresolved template token")
     required = ("<!doctype html>", "<html", "<head>", "<body", "</html>")
     if any(token not in page.lower() for token in required):
         raise BuildError("Rendered page is not a complete HTML document")
+    for match in re.finditer(r'(?:src|href)="([^"]+)"', page):
+        target = unescape(match.group(1))
+        parsed = urlsplit(target)
+        if not parsed.path or parsed.scheme or target.startswith(("#", "//")):
+            continue
+        path = Path(unquote(parsed.path))
+        if path.is_absolute() or any(part == ".." for part in path.parts):
+            raise BuildError(f"Local asset path is not permitted: {target}")
+        candidates = [(base / path).resolve() for base in (staging, docs, root)]
+        if not any(candidate.exists() for candidate in candidates):
+            raise BuildError(f"Completed page references missing local asset: {target}")
 
 
 def build(root: Path = ROOT, docs: Path = DOCS) -> Path:
@@ -389,7 +402,7 @@ def build(root: Path = ROOT, docs: Path = DOCS) -> Path:
         body_html = rewrite_repository_links(body_html, root, REPOSITORY_URL)
         template = (docs / "template.html").read_text(encoding="utf-8")
         page = render_page(manuscript, template, body_html)
-        _validate_rendered_page(page)
+        _validate_rendered_page(page, root, docs, staging)
         staged_page = staging / "index.html"
         staged_page.write_text(page, encoding="utf-8")
 

@@ -194,6 +194,39 @@ class PageRenderingTests(unittest.TestCase):
     def tearDown(self):
         self.temporary_directory.cleanup()
 
+    def write_complete_fixture(self, template: str) -> None:
+        labels = [
+            "Figure 1", "Figure 2", "Figure 3", "Figure 4", "Figure 5A",
+            "Figure 5B", "Figure 6", "Figure 7A", "Figure 7B",
+        ]
+        manuscript = [
+            "# Fixture manuscript",
+            "",
+            "Alice Example<sup>1*</sup>",
+            "",
+            "<sup>1</sup> Example Institute",
+            "",
+            "## Introduction",
+            "",
+            "Opening evidence paragraph.",
+        ]
+        for number, label in enumerate(labels, start=1):
+            source = f"figures/{number}.svg"
+            svg = self.fixture_root / source
+            svg.parent.mkdir(parents=True, exist_ok=True)
+            svg.write_text(
+                '<svg xmlns="http://www.w3.org/2000/svg" width="1" height="1">'
+                '<rect x="0" y="0" width="1" height="1" fill="white"/></svg>',
+                encoding="utf-8",
+            )
+            manuscript.extend([
+                "", f"![{label}]({source})", "", f"> **{label}.** Caption {number}.",
+            ])
+        (self.fixture_root / "README.md").write_text("\n".join(manuscript), encoding="utf-8")
+        (self.docs / "template.html").write_text(template, encoding="utf-8")
+        (self.docs / "assets").mkdir()
+        (self.docs / "assets" / "og.png").write_bytes(b"placeholder social preview")
+
     def test_wraps_image_and_caption_as_labeled_figure(self):
         """A figure image and its next caption must remain a single display item."""
         body = (
@@ -224,45 +257,15 @@ class PageRenderingTests(unittest.TestCase):
 
     def test_builds_complete_house_style_manuscript_page(self):
         """A complete fixture must render the masthead and all nine linked figures."""
-        labels = [
-            "Figure 1", "Figure 2", "Figure 3", "Figure 4", "Figure 5A",
-            "Figure 5B", "Figure 6", "Figure 7A", "Figure 7B",
-        ]
-        manuscript = [
-            "# Fixture manuscript",
-            "",
-            "Alice Example<sup>1*</sup>",
-            "",
-            "<sup>1</sup> Example Institute",
-            "",
-            "## Introduction",
-            "",
-            "Opening evidence paragraph.",
-        ]
-        for number, label in enumerate(labels, start=1):
-            source = f"figures/{number}.svg"
-            svg = self.fixture_root / source
-            svg.parent.mkdir(parents=True, exist_ok=True)
-            svg.write_text(
-                '<svg xmlns="http://www.w3.org/2000/svg" width="1" height="1">'
-                '<rect x="0" y="0" width="1" height="1" fill="white"/></svg>',
-                encoding="utf-8",
-            )
-            manuscript.extend([
-                "", f"![{label}]({source})", "", f"> **{label}.** Caption {number}.",
-            ])
-        (self.fixture_root / "README.md").write_text("\n".join(manuscript), encoding="utf-8")
-        (self.docs / "template.html").write_text(
+        self.write_complete_fixture(
             "<!doctype html><html><head><title>{{TITLE_TEXT}}</title>"
+            '<meta name="description" content="{{DESCRIPTION}}">'
             '<meta name="theme-color" content="#F8F4E9">'
             '<link rel="canonical" href="{{CANONICAL_URL}}"></head><body>'
             '<header class="masthead"><h1>{{TITLE_HTML}}</h1>{{AUTHORS}}{{AFFILIATIONS}}'
             '<p class="standfirst">{{STANDFIRST}}</p></header><main>{{BODY}}</main>'
             '<footer class="colophon">{{REPOSITORY_URL}}</footer></body></html>',
-            encoding="utf-8",
         )
-        (self.docs / "assets").mkdir()
-        (self.docs / "assets" / "og.png").write_bytes(b"placeholder social preview")
 
         output = build(self.fixture_root, self.docs)
         page = output.read_text(encoding="utf-8")
@@ -274,7 +277,24 @@ class PageRenderingTests(unittest.TestCase):
         self.assertIn("This web version is the preferred way to read this evolving manuscript", page)
         self.assertIn('class="colophon"', page)
         self.assertIn('name="theme-color" content="#F8F4E9"', page)
+        self.assertIn(
+            'name="description" content="An evolving manuscript on densoviruses in the human &amp; mammalian virospheres."',
+            page,
+        )
         self.assertIn('rel="canonical" href="https://dholab.github.io/common-densoviruses/"', page)
         self.assertEqual(page.count('<figure class="display" id="figure-'), 9)
         self.assertNotRegex(page, r"{{[^}]+}}")
         self.assertEqual((self.docs / "assets" / "og.png").read_bytes(), b"placeholder social preview")
+
+    def test_rejects_completed_page_with_missing_local_asset(self):
+        """A local page asset must exist before a build replaces the published page."""
+        self.write_complete_fixture(
+            "<!doctype html><html><head><title>{{TITLE_TEXT}}</title></head><body>"
+            '<header class="masthead"><h1>{{TITLE_HTML}}</h1>{{AUTHORS}}{{AFFILIATIONS}}'
+            '<p class="standfirst">{{STANDFIRST}}</p></header><main>{{BODY}}'
+            '<img src="assets/missing.svg"></main>'
+            '<footer class="colophon">{{REPOSITORY_URL}}</footer></body></html>'
+        )
+
+        with self.assertRaisesRegex(BuildError, "local asset"):
+            build(self.fixture_root, self.docs)
