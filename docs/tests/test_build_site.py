@@ -286,6 +286,34 @@ class PageRenderingTests(unittest.TestCase):
         self.assertNotRegex(page, r"{{[^}]+}}")
         self.assertEqual((self.docs / "assets" / "og.png").read_bytes(), b"placeholder social preview")
 
+    def test_social_metadata_is_complete(self):
+        """Shared manuscript links must expose the canonical card metadata and image."""
+        template = (Path(__file__).resolve().parents[1] / "template.html").read_text(
+            encoding="utf-8"
+        )
+        self.write_complete_fixture(template)
+
+        page = build(self.fixture_root, self.docs).read_text(encoding="utf-8")
+        image_url = "https://dholab.github.io/common-densoviruses/assets/og.png"
+
+        self.assertTrue((self.docs / "assets" / "og.png").is_file())
+        self.assertIn('rel="canonical" href="https://dholab.github.io/common-densoviruses/"', page)
+        self.assertIn('property="og:title" content="Fixture manuscript"', page)
+        self.assertIn(
+            'property="og:description" content="An evolving manuscript on densoviruses in the human &amp; mammalian virospheres."',
+            page,
+        )
+        self.assertIn('property="og:type" content="website"', page)
+        self.assertIn('property="og:url" content="https://dholab.github.io/common-densoviruses/"', page)
+        self.assertIn(f'property="og:image" content="{image_url}"', page)
+        self.assertIn('name="twitter:card" content="summary_large_image"', page)
+        self.assertIn('name="twitter:title" content="Fixture manuscript"', page)
+        self.assertIn(
+            'name="twitter:description" content="An evolving manuscript on densoviruses in the human &amp; mammalian virospheres."',
+            page,
+        )
+        self.assertIn(f'name="twitter:image" content="{image_url}"', page)
+
     def test_rejects_completed_page_with_missing_local_asset(self):
         """A local page asset must exist before a build replaces the published page."""
         self.write_complete_fixture(
