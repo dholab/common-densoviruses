@@ -1,252 +1,222 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Common Densoviruses - Genomic Visualizations</title>
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-            font-size: 14px;
-            line-height: 1.5;
-            color: #1f2328;
-            background-color: #ffffff;
-        }
-
-        .header {
-            border-bottom: 1px solid #d1d9e0;
-            padding: 24px 0;
-            margin-bottom: 32px;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 16px;
-        }
-
-        h1 {
-            font-size: 32px;
-            font-weight: 600;
-            color: #1f2328;
-            margin-bottom: 8px;
-        }
-
-        .subtitle {
-            font-size: 16px;
-            color: #656d76;
-            margin-bottom: 32px;
-        }
-
-        h2 {
-            font-size: 18px;
-            font-weight: 600;
-            color: #1f2328;
-            margin-bottom: 16px;
-            margin-top: 32px;
-        }
-
-        h2:first-of-type {
-            margin-top: 0;
-        }
-
-        .datasets {
-            display: grid;
-            gap: 24px;
-            max-width: 800px;
-        }
-
-        .dataset-card {
-            border: 1px solid #d1d9e0;
-            border-radius: 6px;
-            padding: 24px;
-            transition: border-color 0.2s;
-        }
-
-        .dataset-card:hover {
-            border-color: #818b98;
-        }
-
-        .dataset-title {
-            font-size: 20px;
-            font-weight: 600;
-            color: #0969da;
-            text-decoration: none;
-            display: block;
-            margin-bottom: 8px;
-        }
-
-        .dataset-title:hover {
-            text-decoration: underline;
-        }
-
-        .dataset-description {
-            color: #656d76;
-            margin-bottom: 12px;
-        }
-
-        .dataset-meta {
-            font-size: 12px;
-            color: #656d76;
-        }
-
-        .dataset-meta span {
-            margin-right: 16px;
-        }
-
-        .coming-soon {
-            opacity: 0.6;
-        }
-
-        .coming-soon .dataset-title {
-            color: #656d76;
-            cursor: default;
-            pointer-events: none;
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 2px 7px;
-            font-size: 12px;
-            font-weight: 500;
-            border-radius: 20px;
-            background-color: #ddf4ff;
-            color: #0969da;
-            margin-left: 8px;
-        }
-
-        .badge.coming-soon-badge {
-            background-color: #fff8c5;
-            color: #9a6700;
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Common densoviruses in the human and mammalian virospheres</title>
+<meta name="description" content="An evolving manuscript on densoviruses in the human &amp; mammalian virospheres.">
+<meta name="theme-color" content="#F8F4E9">
+<link rel="canonical" href="https://dholab.github.io/common-densoviruses/">
+<meta property="og:title" content="Common densoviruses in the human and mammalian virospheres">
+<meta property="og:description" content="An evolving manuscript on densoviruses in the human &amp; mammalian virospheres.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://dholab.github.io/common-densoviruses/">
+<meta property="og:image" content="https://dholab.github.io/common-densoviruses/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Common densoviruses in the human and mammalian virospheres">
+<meta name="twitter:description" content="An evolving manuscript on densoviruses in the human &amp; mammalian virospheres.">
+<meta name="twitter:image" content="https://dholab.github.io/common-densoviruses/assets/og.png">
+<style>
+:root {
+  --cream: #F8F4E9;
+  --ink: #163139;
+  --accent: #C16A3C;
+  --accent-light: #D98E60;
+  --surface: #FFFFFF;
+  --rule: rgba(22, 49, 57, 0.14);
+  --rule-strong: rgba(22, 49, 57, 0.32);
+  --tint: rgba(22, 49, 57, 0.05);
+  --measure: 42rem;
+  --serif: Georgia, "Iowan Old Style", "Times New Roman", serif;
+  --sans: Arial, Helvetica, "Liberation Sans", sans-serif;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--cream); }
+body {
+  margin: 0;
+  color: var(--ink);
+  font: 400 16px/1.62 var(--sans);
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+}
+.wrap { max-width: var(--measure); margin: 0 auto; padding: 0 1.375rem 6rem; }
+header.masthead { padding: 4rem 0 0; }
+header.masthead h1 {
+  margin: 0 0 1.5rem;
+  font: 700 clamp(2rem, 1.35rem + 2.6vw, 2.6rem)/1.18 var(--serif);
+  letter-spacing: -0.008em;
+}
+.byline { margin: 0 0 0.85rem; font: 400 15px/1.55 var(--sans); }
+.byline sup { font-size: 0.68em; }
+.affiliations { margin: 0 0 1.1rem; font: 400 12.5px/1.6 var(--sans); color: rgba(22, 49, 57, 0.78); }
+.affiliations sup { font-size: 0.75em; }
+.standfirst {
+  margin: 1.5rem 0 0;
+  padding-top: 1.35rem;
+  border-top: 1px solid var(--rule);
+  font: 400 14px/1.6 var(--sans);
+  color: rgba(22, 49, 57, 0.8);
+}
+main { margin-top: 3.25rem; }
+h2 { margin: 3.25rem 0 1.05rem; font: 700 1.45rem/1.25 var(--serif); letter-spacing: -0.005em; }
+h3 { margin: 2.5rem 0 0.85rem; font: 700 1.1rem/1.35 var(--serif); }
+h2 + h3 { margin-top: 1.75rem; }
+p { margin: 0 0 1.15rem; }
+a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-color: rgba(193, 106, 60, 0.42);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+a:hover { text-decoration-color: var(--accent); }
+strong { font-weight: 700; }
+em { font-family: var(--serif); font-style: italic; }
+sup { font-size: 0.7em; line-height: 0; }
+code, pre { font-family: var(--mono); }
+code { background: var(--tint); padding: 0.1em 0.34em; border-radius: 3px; font-size: 0.845em; }
+pre {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 0.95rem 1.05rem;
+  overflow-x: auto;
+  font-size: 0.8rem;
+  line-height: 1.55;
+}
+pre code { background: none; padding: 0; font-size: inherit; }
+figure.display {
+  margin: 2.5rem 0;
+  padding: 1.5rem 0 1.35rem;
+  border-top: 1px solid var(--rule-strong);
+  border-bottom: 1px solid var(--rule-strong);
+}
+figure.display > img { display: block; max-width: 100%; height: auto; }
+figure.display > figcaption { margin-top: 1.1rem; font: 400 12.5px/1.55 var(--sans); color: rgba(22, 49, 57, 0.82); }
+.fig-label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font: 700 11px/1.3 var(--sans);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.table-scroll { overflow-x: auto; background: transparent; border-radius: 4px; }
+table { border-collapse: collapse; width: 100%; font: 400 13px/1.45 var(--sans); }
+th, td { padding: 0.52rem 0.7rem; text-align: left; vertical-align: top; border-bottom: 1px solid var(--rule); }
+th { font: 700 10.5px/1.35 var(--sans); letter-spacing: 0.09em; text-transform: uppercase; border-bottom: 1px solid var(--rule-strong); white-space: nowrap; }
+tbody tr:last-child td { border-bottom: none; }
+footer.colophon {
+  margin-top: 4.5rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--rule);
+  font: 400 12.5px/1.6 var(--sans);
+  color: rgba(22, 49, 57, 0.72);
+}
+@media (max-width: 34rem) {
+  body { font-size: 15px; }
+  header.masthead { padding-top: 2.5rem; }
+  .wrap { padding: 0 1.1rem 4rem; }
+}
+</style>
 </head>
 <body>
-    <div class="header">
-        <div class="container">
-            <h1>Common Densoviruses</h1>
-            <p class="subtitle">Interactive genomic visualizations of HuCSFDV1-like densovirus sequences</p>
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="datasets">
-            <h2>01 - Air Samples</h2>
-
-            <div class="dataset-card">
-                <a href="01-air-samples-vsp/" class="dataset-title">
-                    Dane County Schools (VSP Enrichment)
-                </a>
-                <p class="dataset-description">
-                    Densovirus reads from air samples collected in K-12 schools across Dane County, Wisconsin,
-                    enriched with Illumina Viral Surveillance Panel and mapped to HuCSFDV1
-                </p>
-                <div class="dataset-meta">
-                    <span>77 samples</span>
-                    <span>5,762 total reads</span>
-                    <span>Interactive IGV viewer</span>
-                </div>
-            </div>
-
-            <div class="dataset-card">
-                <a href="01-air-samples-tgs/" class="dataset-title">
-                    International Airports (TGS)
-                </a>
-                <p class="dataset-description">
-                    Densovirus reads from air samples collected at U.S. international airports (Dulles, San Francisco),
-                    enriched with targeted gene sequencing and mapped to HuCSFDV1
-                </p>
-                <div class="dataset-meta">
-                    <span>7 samples with reads</span>
-                    <span>14 total reads</span>
-                    <span>Interactive IGV viewer</span>
-                </div>
-            </div>
-
-            <div class="dataset-card coming-soon">
-                <span class="dataset-title">
-                    Additional Air Sampling Study
-                    <span class="badge coming-soon-badge">Coming Soon</span>
-                </span>
-                <p class="dataset-description">
-                    Additional air sampling data will be added here
-                </p>
-            </div>
-
-            <h2>02 - SRA Mining</h2>
-
-            <div class="dataset-card">
-                <a href="02-sra-mining/" class="dataset-title">
-                    Logan Search Results
-                </a>
-                <p class="dataset-description">
-                    Densovirus reads from publicly available SRA datasets identified via Logan Search,
-                    including human CSF, lymphocyte, and mouse samples mapped to HuCSFDV1
-                </p>
-                <div class="dataset-meta">
-                    <span>124 samples</span>
-                    <span>97,054 total reads</span>
-                    <span>Interactive IGV viewer</span>
-                </div>
-            </div>
-
-            <h2>04 - Skin Microbiome</h2>
-
-            <div class="dataset-card">
-                <a href="04-skin-microbiome/" class="dataset-title">
-                    Oh et al. Skin Microbiome
-                </a>
-                <p class="dataset-description">
-                    Densovirus reads from the Oh et al. longitudinal skin microbiome study,
-                    mapped to 123 densovirus reference sequences with reads
-                </p>
-                <div class="dataset-meta">
-                    <span>147,210 total reads</span>
-                    <span>Interactive IGV viewer</span>
-                </div>
-            </div>
-
-            <h2>05 - Cameroonian Plasma</h2>
-
-            <div class="dataset-card">
-                <a href="05-cameroonian-plasma/" class="dataset-title">
-                    Orf et al. Cameroonian Plasma
-                </a>
-                <p class="dataset-description">
-                    Densovirus reads from blood plasma of two Cameroonian blood donors (U172329, U172471)
-                    from the Orf et al. blood-borne virus surveillance study, mapped to 43 densovirus reference sequences with reads
-                </p>
-                <div class="dataset-meta">
-                    <span>2 samples</span>
-                    <span>14,472 total reads</span>
-                    <span>Interactive IGV viewer</span>
-                </div>
-            </div>
-
-            <h2>06 - Belgian Daycare Air</h2>
-
-            <div class="dataset-card">
-                <a href="06-belgian-air/" class="dataset-title">
-                    Belgian Daycare Air Samples
-                </a>
-                <p class="dataset-description">
-                    Densovirus reads from air samples collected at a Belgian daycare center,
-                    mapped to 194 densovirus reference sequences with reads
-                </p>
-                <div class="dataset-meta">
-                    <span>46 samples</span>
-                    <span>119,699 total reads</span>
-                    <span>Interactive IGV viewer</span>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="wrap">
+<header class="masthead">
+  <h1>Common densoviruses in the human and mammalian virospheres</h1>
+  <div class="byline"><p>Marc C. Johnson<sup>2,3</sup>, Shelby L. O'Connor<sup>1,4</sup>, David H. O'Connor<sup>1,4*</sup></p></div>
+  <div class="affiliations"><p><sup>1</sup> Department of Pathology and Laboratory Medicine, University of Wisconsin School of Medicine and Public Health, Madison, WI 53711, USA<br />
+<sup>2</sup> Department of Molecular Microbiology and Immunology, University of Missouri School of Medicine, Columbia, MO 65211, USA<br />
+<sup>3</sup> Christopher S. Bond Life Sciences Center, University of Missouri, Columbia, MO 65211, USA<br />
+<sup>4</sup> Wisconsin National Primate Research Center, University of Wisconsin-Madison, Madison, WI 53715, USA<br />
+<sup>*</sup> Corresponding author: Dave O'Connor • <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#100;&#104;&#111;&#99;&#111;&#110;&#110;&#111;&#114;&#64;&#119;&#105;&#115;&#99;&#46;&#101;&#100;&#117;">&#100;&#104;&#111;&#99;&#111;&#110;&#110;&#111;&#114;&#64;&#119;&#105;&#115;&#99;&#46;&#101;&#100;&#117;</a></p></div>
+  <p class="standfirst">This web version is the preferred way to read this evolving manuscript because each figure links directly to its interactive genomic viewer, methods, scripts, and source data in the repository. <a href="https://github.com/dholab/common-densoviruses">View the repository.</a></p>
+</header>
+<main>
+<h2>Introduction</h2>
+<p>Densoviruses (subfamily Densovirinae, family Parvoviridae) are small, non-enveloped T=1 icosahedral single-stranded DNA viruses with linear genomes typically ranging from 4 to 6 kb that terminate in hairpin structures serving as replication origins (<a href="https://doi.org/10.1099/jgv.0.001212">Cotmore et al., 2019</a>). Their genome organization follows the characteristic parvoviral pattern, with a 5′ nonstructural block encoding NS proteins including the SF3 helicase/endonuclease NS1, and a 3′ capsid block encoding VP proteins. These viruses make extensive use of alternative promoters, leaky scanning, and splicing to generate multiple gene products (<a href="https://doi.org/10.1128/JVI.01719-14">Yu and Tijssen, 2014</a>). At the genus level, densoviruses exhibit meaningful architectural variation. Iteradensoviruses employ a monosense transcription strategy and produce multiple VP size variants (<a href="https://ictv.global/report/chapter/parvoviridae/parvoviridae/iteradensovirus">ICTV Iteradensovirus Report, 2025</a>), whereas Ambidensoviruses use an ambisense arrangement with oppositely oriented NS and VP cassettes (<a href="https://ictv.global/report/chapter/parvoviridae/parvoviridae/ambidensovirus">ICTV Ambidensovirus Report, 2025</a>). ICTV taxonomy recognizes multiple densovirus genera distributed across two deep evolutionary branches within Densovirinae, underscoring their long-standing diversification in invertebrates (<a href="https://ictv.global/report/chapter/parvoviridae/parvoviridae/densovirinae">ICTV Densovirinae Report, 2023</a>; <a href="https://doi.org/10.1099/jgv.0.001212">Cotmore et al., 2019</a>).</p>
+<p>Evidence for densovirus infection of mammals remains limited, and most detections in mammalian samples are interpreted as environmental or dietary transit from infected invertebrates rather than productive replication. For instance, densovirus sequences recovered from insectivorous bat feces cluster with arthropod densoviruses (<a href="https://doi.org/10.1128/JVI.06671-11">Ge et al., 2012</a>), consistent with ingestion and passive gut transit. The most striking human-linked genome is human CSF-associated densovirus 1 (HuCSFDV1), which was detected and independently confirmed in cerebrospinal fluid from a patient with anti-NMDA-receptor encephalitis. Although highly divergent, this genome falls within iteradensovirus-like lineages (<a href="https://doi.org/10.1007/s00705-016-3002-9">Phan et al., 2016</a>). Additional human associations include metagenomic detection of densovirus-like sequences in plasma from Cameroonian blood donors participating in blood-borne virus surveillance, again without evidence of a sustained clinical syndrome or demonstrated human tropism (<a href="https://doi.org/10.3390/v15041022">Orf et al., 2023</a>). Densoviruses have also been noted as low-abundance members of the cutaneous DNA virome in longitudinal shotgun metagenomic surveys of healthy skin (<a href="https://doi.org/10.1016/j.cell.2016.04.008">Oh et al., 2016</a>). Moreover, a novel densovirus was recently identified in air samples collected from a Belgian day care facility (<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12475893/">Karatas et al., 2025</a>). Together, these reports suggest that densovirus sequences can be recovered from human-associated samples, but whether they represent rare vertebrate infection, transient carriage, or contamination remains unresolved. No robust experimental system has yet demonstrated efficient densovirus replication in vertebrate cells in vitro or in vivo (<a href="https://doi.org/10.1007/s00705-016-3002-9">Phan et al., 2016</a>; <a href="https://doi.org/10.1099/jgv.0.001212">Cotmore et al., 2019</a>).</p>
+<p>The interpretation of such sporadic detections is changing rapidly as sequence-based interrogation of the Sequence Read Archive (SRA) has become practical at petabase scale. Early efforts such as Serratus used cloud-based ultra-high-throughput alignment of SRA runs to reference sets, effectively bringing targeted BLAST-like screening to millions of datasets. However, these approaches still required substantial computational resources and were optimized for family-level discovery rather than arbitrary ad hoc queries (<a href="https://doi.org/10.1038/s41586-021-04332-2">Edgar et al., 2022</a>; <a href="https://serratus.io/">Serratus Project</a>). More recent indexing approaches build searchable k-mer or graph representations of SRA content. Logan-search allows users to submit a short query sequence and receive ranked SRA accessions likely to contain matching reads within minutes (<a href="https://github.com/IndexThePlanet/LoganSearch">LoganSearch GitHub, 2025</a>; <a href="https://doi.org/10.1101/2024.07.30.605881">Chikhi et al., 2025</a>). MetaGraph similarly indexes public read sets into compressed de Bruijn graph structures that enable rapid presence/absence and abundance queries over petabases of data, with follow-up alignment providing nucleotide-level confirmation (<a href="https://doi.org/10.1038/s41592-024-02280-z">Shiryev and Agarwala, 2024</a>; <a href="https://doi.org/10.1038/s41586-025-09603-w">Karasikov et al., 2025</a>). In practical terms, these frameworks extend BLAST-like functionality to the entire SRA, transforming what was previously computationally expensive or prohibitive into web searches that can be completed in minutes (<a href="https://doi.org/10.1038/s41592-024-02280-z">Shiryev and Agarwala, 2024</a>; <a href="https://doi.org/10.1101/2024.07.30.605881">Chikhi et al., 2025</a>).</p>
+<p>Like the Belgian group and others <a href="https://pubmed.ncbi.nlm.nih.gov/40222255/">Bobrovska et al., 2025</a>, we have been developing air sampling as a metagenomic surveillance platform for human viruses. Using Thermo Fisher AerosolSense samplers deployed in built environments, we demonstrated that sequence-independent workflows coupled with deep sequencing can recover diverse respiratory and enteric viruses directly from ambient air, including influenza A/C, RSV, seasonal coronaviruses, rhinovirus, SARS-CoV-2, rotavirus, and astroviruses. These findings validated air metagenomics as a practical complement to clinical and wastewater surveillance (<a href="https://doi.org/10.1038/s41598-023-48352-6">Minor et al., 2023</a>). In parallel, air monitoring has been extended to ports of entry. Active samplers placed near customs and immigration areas of major U.S. international airports generated nucleic acids that were processed by hybrid-capture enrichment using Illumina RNA Prep with Enrichment and the Respiratory Virus Oligo Panel. This approach enabled metagenomic recovery of dozens of viral taxa and high-quality genomes for SARS-CoV-2, influenza, bocavirus, and seasonal coronaviruses from airport air samples (<a href="https://doi.org/10.1101/2025.09.22.25336185">Gratalo et al., 2025</a>). Together, these studies establish that low-biomass air samples can be rendered sequence-informative by combining high-volume aerosol capture with unbiased or capture-enriched metagenomics, and that the approach scales from local congregate settings to globally connected travel hubs.</p>
+<p>During our continued analysis of air metagenomic datasets generated through these efforts, we repeatedly observed densovirus contigs closely related to the previously described HuCSFDV1. These sequences appeared across multiple independent air samples and settings. This unexpected recurrence provided a rationale to revisit the question of densoviruses in mammals using orthogonal data streams. Specifically, it motivated three linked investigations: targeted screening of additional air samples collected through our ongoing surveillance network; systematic mining of public SRA datasets for reads related to HuCSFDV1-like sequences using petabase-scale search tools; and re-analysis of previously described human metagenomes to quantify and contextualize densovirus signals.</p>
+<h2>Results</h2>
+<h3>HuCSFDV1 is commonly found in air samples from congregate spaces</h3>
+<p>We collected air samples from congregate indoor spaces in K-12 schools essentially <a href="https://github.com/dholab/common-densoviruses/blob/main/[Ellis et al., 2025](https://www.medrxiv.org/content/10.1101/2025.10.21.25338488v1); [Gratalo et al., 2025](https://doi.org/10.1101/2025.09.22.25336185)">as previously described</a>. At most sites, a (now discontinued) <a href="https://www.fishersci.com/shop/products/aerosolsense-airborne-pathogen-detection-solution/2900AA">ThermoFisher AerosolSense</a> sampler was run continuously for at least one day and usually ~3 days. One school in our program also uses an <a href="https://inbio.com/apollo/">InBio Apollo</a> for air sample collection. Particulates were eluted in phosphate-buffered saline with 0.1% Tween, and total nucleic acids were extracted from the eluate on a <a href="https://www.promega.com/products/lab-automation/automated-dna-rna-extraction-purification-maxwell/">Promega Maxwell</a> instrument. Nucleic acids were enriched for viruses using the Illumina VSP2 protocol <a href="https://support.illumina.com/downloads/viral-surveillance-panel.html">according to the manufacturer's recommendation</a>. The purpose of target enrichment is monitoring conventional human pathogens; densoviruses are not included in the VSP probes and are therefore not specifically enriched. Sequences were obtained on an Illumina NovaSeq X Plus operated by the <a href="https://biotech.wisc.edu/dna-seq/illumina/">UW-Madison Biotechnology Center</a>. Three datasets comprising <a href="https://github.com/dholab/common-densoviruses/blob/main/analysis/01-air-samples/vsp/metadata/vsp-sample-metadata.md">102 total samples</a> were sequenced in independent VSP2 experiments.</p>
+<p>We developed a <a href="https://github.com/dholab/common-densoviruses/tree/main/workflows/read-mapping">Snakemake workflow</a> that aligns reads to the HuCSFDV1 reference <a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_076998.1">NC_076998</a> using <a href="https://github.com/lh3/minimap2">minimap2 (v2.28-r1209)</a> with short-read presets. The resulting alignments are processed through <a href="https://www.htslib.org">samtools (v1.20)</a> for coordinate sorting, mate-pair fixing, and PCR duplicate removal, yielding indexed BAM files suitable for variant calling and coverage analysis.</p>
+<p>As shown in Figure 1, 76 of the 102 samples from K-12 schools had at least one read mapped to HuCSFDV1. Although some low-level matches could reflect non-specific mapping, 14 of the samples had at least 100 reads mapped to HuCSFDV1. The sample with the strongest read support for HuCSFDV1, termed <code>high-school-001-20250901-pooled</code>, was collected between 2025-09-04 and 2025-09-08. A total of 2,355 reads from this sample mapped to HuCSFDV1, and the majority consensus sequence is 99% nucleotide identical to the reference, differing by 48 nucleotide substitutions.</p>
+<figure class="display" id="figure-1">
+  <img alt="Figure 1" src="assets/figures/figure-1.svg" />
+  <figcaption><span class="fig-label">Figure 1</span> Air samples frequently have reads mapping to HuCSFDV1. An interactive IGV browser with these results is available <a href="https://dholab.github.io/common-densoviruses/01-air-samples-vsp/">here</a>. </figcaption>
+</figure>
+<p>Fortuitously, two sampling sites (high-school-001 and elementary-school-004) each yielded more than 100 mapped reads in independent early, mid, and late September 2025 air samples. We developed <a href="https://github.com/dholab/common-densoviruses/blob/main/analysis/01-air-samples/vsp/consensus-align-tree.sh">a script</a> to compare sequences from these sites. For each September collection, we generated consensus sequences from indexed BAM files using <code>samtools consensus</code> (v1.20) with FASTA output and retaining ambiguous sites as N to avoid biasing downstream distance calculations. These sequences were <a href="https://github.com/dholab/common-densoviruses/blob/main/analysis/01-air-samples/vsp/alignments/consensus_plus_ref.aln.fasta">aligned</a> together with the NC_076998 reference using <a href="https://mafft.cbrc.jp/alignment/software/">MAFFT (v7.526)</a> with default nucleotide parameters. Phylogenies were inferred with <a href="https://iqtree.github.io">IQ-TREE (v3.0.1)</a> under a GTR+G model with 1,000 ultrafast bootstrap replicates, rooting on <a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_076998.1">NC_076998</a> to provide an external outgroup. As shown in Figure 2, the three elementary-school-004 consensus sequences formed a monophyletic cluster distinct from the three high-school-001 sequences, which similarly grouped together. This pattern is consistent with independent circulation of related but distinct HuCSFDV1-like variants in the two schools rather than repeated sampling of a single shared source.</p>
+<figure class="display" id="figure-2">
+  <img alt="Figure 2" src="assets/figures/figure-2.svg" />
+  <figcaption><span class="fig-label">Figure 2</span> Phylogenetic tree of HuCSFDV1-like densovirus sequences from the air of an elementary and high school. The IQ-TREE files are available <a href="https://github.com/dholab/common-densoviruses/tree/main/analysis/01-air-samples/vsp/trees">here</a>. </figcaption>
+</figure>
+<p>We recently participated in another air sampling project at <a href="https://www.medrxiv.org/content/10.1101/2025.09.22.25336185v3">international airports</a>. Metagenomic sequencing with VSP enrichment was also performed on a subset of 159 of these samples (Bioproject: <a href="https://www.ncbi.nlm.nih.gov/bioproject/?term=PRJNA989177">PRJNA989177</a>; <a href="https://github.com/dholab/common-densoviruses/blob/main/analysis/01-air-samples/tgs/metadata/tgs-SraExperimentPackage.xml">SRA XML</a>). Reads from these datasets were downloaded and mapped to the HuCSFDV1 reference as described above. <a href="https://github.com/dholab/common-densoviruses/blob/main/analysis/01-air-samples/tgs/metadata/tgs-sample-metadata.csv">Seven samples</a> had a <a href="https://github.com/dholab/common-densoviruses/tree/main/analysis/01-air-samples/tgs/consensus">single paired-end read</a> that mapped to HuCSFDV1, and a BLASTN search against core-nt (as of 23 November 2025) unambiguously identified HuCSFDV1 as the most significant alignment for all seven. Unlike schools where air samplers are located primarily in cafeterias where students and staff dwell, the air samplers in airports were located in international arrival corridors. Arriving passengers would be in the vicinity of the air samplers only briefly, possibly accounting for the less robust detection of HuCSFDV1 reads. Nevertheless, these findings demonstrate that reads corresponding to this virus were found in multiple air samples from two international airports, Dulles and San Francisco, separated by thousands of miles.</p>
+<h3>HuCSFDV1 is detected in NCBI SRA mammalian datasets</h3>
+<p>The HuCSFDV1 reference <a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_076998.1">NC_076998</a> was split into 1 kb segments. Each segment was input into <a href="https://logan-search.org/dashboard">Logan Search</a> using the default threshold of 0.5 and the 'All' reference group. <a href="https://github.com/dholab/common-densoviruses/tree/main/analysis/02-sra-mining/logan-search-output">The results</a> of Logan Search for each segment were combined to create the set of matching SRA accessions. <a href="https://github.com/dholab/common-densoviruses/blob/main/analysis/02-sra-mining/metadata/sra-metadata.md">This table</a> shows all of the matching datasets. To explore HuCSFDV1-like reads in these SRA datasets, the reads were downloaded with fasterq-dump, mapped to the HuCSFDV1 reference, and mapped reads were deduplicated as described above, yielding indexed BAM files that are visualized in Figure 3. Two human SRA datasets (SAMN05172265 and SAMN05172266) were deposited in 2016 in support of the original manuscript describing HuCSFDV1. Both were identified in this analysis, providing a sanity check on the use of Logan Search to find additional datasets containing HuCSFDV1-like reads.</p>
+<figure class="display" id="figure-3">
+  <img alt="Figure 3" src="assets/figures/figure-3.svg" />
+  <figcaption><span class="fig-label">Figure 3</span> SRA datasets with reads mapping to HuCSFDV1. An interactive IGV browser with these results is available <a href="https://dholab.github.io/common-densoviruses/02-sra-mining/">here</a>. </figcaption>
+</figure>
+<p>Clues to HuCSFDV1 infection in humans come from three additional human datasets with matches to HuCSFDV1 that were independent from the two datasets associated with the original discovery. The first was found in a German investigation (<a href="https://doi.org/10.1172/JCI128475">Beltrán et al., 2019</a>) of CSF lymphocytes from a 28-year-old with subclinical neuroinflammation. The only 28-year-old described in the manuscript has the identifier code BF-H. In addition to providing independent confirmation that HuCSFDV1 can be detected in human CSF, this dataset used single-cell RNA sequencing. Unlike most of the Logan Search results which had reads mapping throughout the HuCSFDV1 genome, <a href="https://www.ncbi.nlm.nih.gov/sra/SRR8478958">SRR8478958</a> was characterized by reads mapping entirely to NS3, consistent with NS3 expression in whatever target cell(s) are infected. The indices needed to deconvolute SRR8478958 into single cells are unfortunately not available, so at present we can only surmise that HuCSFDV1 transcripts are likely in CSF lymphocytes. </p>
+<p>The second human dataset, from BioSample <a href="https://www.ncbi.nlm.nih.gov/biosample/SAMN14427291">SAMN14427291</a> is described in <a href="https://doi.org/10.1016/j.celrep.2020.108545">Martinez-Fabregas et al. (2020)</a>. Thanks to the assistance of Majid Kazemian and Suman Mitra who submitted the samples to SRA and provided additional information, we learned that the primary cells were collected from a healthy donor. PBMCs were purified from buffy coats and polarized toward a Th1 phenotype before bulk RNA sequencing. This finding again supports lymphocytes as a potential target for HuCSFDV1. The third dataset is from BioSample <a href="https://www.ncbi.nlm.nih.gov/biosample/SAMN02199191">SAMN02199191</a>, which was submitted as part of a <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3875860/">French study on RNA polymerase III subunit genes</a>. These reads were derived from <a href="https://www.atcc.org/products/ccl-186">human IMR90 cells</a>, fibroblasts derived from a 16-week-old female fetus. Unlike the other two human studies, this study also included murine samples, raising the possibility that these hits could have been due to cross-contamination from mice. It is also possible, however, that viral detection in fibroblasts indicates that HuCSFDV1 can infect skin cells, potentially accounting for the frequent detection of HuCSFDV1 in air metagenomes that often includes nucleic acids sloughed from skin.</p>
+<p>Murine datasets have a pattern of HuCSFDV1-like reads distinct from human samples. Unlike the human datasets where viral reads correlate with lymphocytes and fibroblasts, the majority of mouse samples with HuCSFDV1-related sequences derive from germ cells and brain tissue, with no lymphocyte samples represented. The sample with the highest mapped read count comes from BioSample <a href="https://www.ncbi.nlm.nih.gov/biosample/SAMN35556869">SAMN35556869</a>, a sperm sample from an <a href="https://www.ncbi.nlm.nih.gov/bioproject/PRJNA978525">ETH Zurich study</a> examining epigenetic inheritance through ATAC-seq of mouse sperm chromatin. The second-largest cluster of samples originates from <a href="https://www.ncbi.nlm.nih.gov/bioproject/PRJNA272507">PRJNA272507</a>, representing the original development of Genome Architecture Mapping (GAM) in mouse embryonic stem cells, described by Beagrie et al. in Nature (<a href="https://doi.org/10.1038/nature21411">Beagrie et al., 2017</a>). </p>
+<p>Brain-derived samples come from <a href="https://www.ncbi.nlm.nih.gov/bioproject/PRJNA625732">PRJNA625732</a>, a <a href="https://www.nature.com/articles/s41586-021-04081-2">2021 Nature study by Winick-Ng et al.</a> The Salk Institute's CEMBA project (<a href="https://doi.org/10.1038/s41586-020-03182-8">Liu et al., 2021</a>) contributed numerous brain samples using single-nucleus methylation sequencing.</p>
+<p>None of the mouse studies with the most abundant HuCSFDV1 reads involve scRNAseq that could be used to identify which specific cell types contain viral transcripts. The predominance of germ cell and neural samples—rather than lymphocytes—in mouse datasets may reflect either different tissue tropism of a related murine virus, or alternatively, that these sample types are particularly amenable to detecting these viral reads. The absence of mouse CSF or lymphocyte datasets in the Logan Search results makes direct comparison with the human tissue tropism difficult to establish.</p>
+<h3>Integrated analysis of NS1 from air, SRA, and known densovirus samples</h3>
+<p>To determine the relationship of the various samples with HuCSFDV1-like sequences and known densoviruses in NCBI GenBank, we evaluated NS1 sequence homology. NS1 is the most conserved protein across densoviruses and aligns far more reliably than full genomes that contain long non-coding hairpins, rapidly evolving VP regions, and frequent frameshifts in fragmented metagenomic contigs. An amino acid level comparison reduces nucleotide saturation and codon-usage noise, making it easier to distinguish genuinely divergent clades from alignment artifacts. </p>
+<p>A script describing the analysis is <a href="https://github.com/dholab/common-densoviruses/blob/main/analysis/03-phylogenetics/scripts/align.sh">here</a>. We rooted the tree using four Parvovirinae NS1 sequences (human B19 erythroparvovirus, adenovirus-dependent AAV-like dependoparvovirus, feline protoparvovirus, and human bocaparvovirus) to provide a vertebrate outgroup that is clearly outside Densovirinae. This approach allowed us to polarize splits and test whether HuCSFDV1-like sequences cluster with known insect densoviruses or form a distinct vertebrate-associated branch. Putative NS1 amino acid FASTA sequences from <a href="https://github.com/dholab/common-densoviruses/blob/main/analysis/03-phylogenetics/scripts/extract_vsp_ns1.py">VSP air samples</a> and <a href="https://github.com/dholab/common-densoviruses/blob/main/analysis/03-phylogenetics/scripts/extract_logan_ns1.py">Logan SRA hits</a> were positionally inferred from the HuCSFDV1 reference. These NS1 sequences and NS1 sequences <a href="https://github.com/dholab/common-densoviruses/blob/main/analysis/03-phylogenetics/scripts/extract_ns1.py">extracted from Densovirinae NCBI Genbank entries</a> were concatenated. Low-information records containing only ambiguous characters were removed, and sequences were aligned with MAFFT (v7.526, <code>--auto</code>, 12 threads). A maximum-likelihood tree was inferred with IQ-TREE (v3.0.1) under LG+G4+F with 1,000 ultrafast bootstrap and 1,000 SH-aLRT replicates, rooting on the Parvovirinae outgroup to constrain the direction of evolution (Figure 4). All of the sequences from the air samples and SRA form a separate node from all other Densovirinae NS1 amino acid sequences.</p>
+<figure class="display" id="figure-4">
+  <img alt="Figure 4" src="assets/figures/figure-4.svg" />
+  <figcaption><span class="fig-label">Figure 4</span> NS1 tree, with the HuCSFDV1-like node containing the original HuCSFDV1 sequence and all of the SRA and air samples from this manuscript shown in green. The complete IQ-TREE output is available <a href="https://github.com/dholab/common-densoviruses/tree/main/analysis/03-phylogenetics/trees">here</a>.</figcaption>
+</figure>
+<h3>HuCSFDV1 may not be the only human-associated densovirus</h3>
+<p>We initially hypothesized that incidental detections of densoviruses in other human studies described above were also HuCSFDV1 that had been inadvertently misclassified. In a 2016 manuscript from <a href="https://doi.org/10.1016/j.cell.2016.04.008">Oh et al.</a>, metagenomic sequencing was performed on 594 skin samples from 12 healthy individuals. One of these individuals, HV08, had 47 BioSamples that contained sequencing reads categorized as Acheta domestica (i.e., house cricket) densovirus in <a href="https://ars.els-cdn.com/content/image/1-s2.0-S0092867416303993-mmc3.xlsx">Supplemental Table 2</a>. To revisit these sequences, we created a list of <a href="https://github.com/dholab/common-densoviruses/blob/main/analysis/04-skin-microbiome/metadata/HV08-SraAccList.csv">HV08 SRA accession numbers</a> and downloaded these reads with fasterq-dump. We concatenated all HV08 reads and used minimap2 with a short-read preset to map against <a href="https://github.com/dholab/common-densoviruses/blob/main/data/reference/known_densoviruses_NCBI_genbank_2025-11-19.fasta.gz">all 1,266 densovirus sequences</a> in NCBI GenBank as of 19 November 2025. Surprisingly, only three reads mapped to HuCSFDV1 (Figure 5A), while 7,917 reads mapped to Acheta domestica densovirus (Figure 5B) as described in the original manuscript. </p>
+<figure class="display" id="figure-5a">
+  <img alt="Figure 5A" src="assets/figures/figure-5a.svg" />
+  <figcaption><span class="fig-label">Figure 5A</span> Only three reads from HV08 map to HuCSFDV1.</figcaption>
+</figure>
+<figure class="display" id="figure-5b">
+  <img alt="Figure 5B" src="assets/figures/figure-5b.svg" />
+  <figcaption><span class="fig-label">Figure 5B</span> 7,917 reads from HV08 map to <a href="https://www.ncbi.nlm.nih.gov/nuccore/KF015279">KF015279</a> Acheta domestica densovirus isolate AdJP12, complete genome. An interactive IGV browser with these results is available <a href="https://dholab.github.io/common-densoviruses/04-skin-microbiome/">here</a>.</figcaption>
+</figure>
+<p>Another study (<a href="https://doi.org/10.3390/v15041022">Orf et al., 2023</a>) of blood plasma from Cameroon found two volunteers (U172329 and U172471) with densovirus sequences that were virtually identical to each other but divergent from other known densoviruses. SRA reads from this project are available in <a href="https://www.ncbi.nlm.nih.gov/bioproject/PRJNA1188190">BioProject PRJNA1188190</a>. We downloaded the reads associated with this study, pooling reads from both patients because the densovirus reads are described as being virtually identical, and mapped to the 1,266 densovirus sequences. There were no reads mapped to HuCSFDV1. The most abundant mappings are to the Genbank sequences deposited as part of this manuscript with 6,190 reads (U172329) and 999 reads (U172471), as expected. Excluding these mappings, the next closest mapping has only 28 mapped reads to AY461507 (Mythimna loreyi densovirus, complete genome) (Figure 6).</p>
+<figure class="display" id="figure-6">
+  <img alt="Figure 6" src="assets/figures/figure-6.svg" />
+  <figcaption><span class="fig-label">Figure 6</span> Densovirus reads from the plasma of two Cameroonian volunteers do not map to HuCSFDV1. However, the investigators reconstructed a novel densovirus from these patients that is well supported by sequencing reads. An interactive IGV browser with these results is available <a href="https://dholab.github.io/common-densoviruses/05-cameroonian-plasma/">here</a>.</figcaption>
+</figure>
+<p>A similar virus discovery effort in plasma from Brazilians suspecited of being infected with Dengue virus but negative for arbovirus RNA yielded another partial densovirus genome. The discovery of this ambidensovirus genome is described in <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7058308/#pone.0229993.g003">Fahsbender et al., 2020</a> and the partial genome sequence has the Genbank accession <a href="https://www.ncbi.nlm.nih.gov/nuccore/MN968058">MN968058</a>.</p>
+<p>Finally, the <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12475893/">Karatas et al., 2025</a>  study of air samples from a Belgian daycare also identified a novel densovirus by deep sequencing. Given the frequent detection of HuCSFDV1 in our air samples, it would not have been surprising to see HuCSFDV1 in these samples. Indeed, as shown in Figure 7A, HuCSFDV1-like reads were present in 18 of 46 samples. More interestingly, another divergent densovirus sequence, termed 'Creche densovirus' (<a href="https://www.ncbi.nlm.nih.gov/nuccore/PQ335166">PQ335166</a>), appeared even more frequently, in 30 of 46 samples (Figure 7B).</p>
+<figure class="display" id="figure-7a">
+  <img alt="Figure 7A" src="assets/figures/figure-7a.svg" />
+  <figcaption><span class="fig-label">Figure 7A</span> HuCSFDV1 reads detected in 18 air samples collected from a Belgian daycare. </figcaption>
+</figure>
+<figure class="display" id="figure-7b">
+  <img alt="Figure 7B" src="assets/figures/figure-7b.svg" />
+  <figcaption><span class="fig-label">Figure 7B</span> Creche densovirus isolate env/indoorair/2022/BE7 is found frequently in the same Belgian daycare samples. An interactive IGV browser with these results is available <a href="https://dholab.github.io/common-densoviruses/06-belgian-air/">here</a>.</figcaption>
+</figure>
+<h2>Discussion</h2>
+<p>This study is tightly coupled to the recent emergence of petabase-scale SRA search tools, particularly Logan-Search and related graph and k-mer indexing approaches, that make rapid, sequence-specific exploration of public read archives feasible (<a href="https://doi.org/10.1101/2024.07.30.605881">Chikhi et al., 2025</a>; <a href="https://github.com/IndexThePlanet/LoganSearch">LoganSearch GitHub, 2025</a>). The SRA was built during a period when storage capacity outpaced the ability to query the archive interactively, and the continued commitment to deposit raw reads and metadata has created a resource whose value is now expanding rather than plateauing (<a href="https://www.ncbi.nlm.nih.gov/sra">NCBI SRA, 2025</a>). In a climate where biomedical infrastructure is increasingly evaluated for cost-effectiveness, the decision to preserve deep sequencing datasets at scale is proving prescient because it supports unforeseen secondary analyses such as the present work (<a href="https://doi.org/10.1101/2024.07.30.605881">Logan Consortium, 2024</a>; <a href="https://doi.org/10.1038/s41592-024-02280-z">Karasikov et al., 2024</a>). A concrete example in our findings is the monozygotic twin multiple sclerosis cohort, where HuCSFDV1-like reads were present but not highlighted in the original study. Only through retrospective archive-wide querying could they be recognized as part of a reproducible signal (<a href="https://doi.org/10.1038/s41586-022-04419-4">Ingelfinger et al., 2022</a>). The broader implication is that depositing sequence data in the SRA, despite real costs in time and effort for investigators, enables discovery of unexpected viral associations years after primary publication.</p>
+<p>A limitation of SRA-centric discovery is that dataset biases and artifacts propagate. The archive is enriched for particular hosts, tissues, and protocols, and false signals can arise from recurrent reagent contaminants, index hopping, or study-specific laboratory workflows. However, several features of the HuCSFDV1-like pattern argue against these explanations. If HuCSFDV1 were primarily a reagent contaminant, we would expect near-ubiquitous low-level k-mer matches across SRA runs regardless of sample type, reflecting shared extraction kits and library construction pipelines. Instead, matches are concentrated in specific biological contexts and absent from large fractions of the archive surveyed here (<a href="https://doi.org/10.1101/2024.07.30.605881">Chikhi et al., 2025</a>; <a href="https://github.com/IndexThePlanet/LoganSearch">LoganSearch GitHub, 2025</a>). Second, the host distribution of HuCSFDV1-like reads is not simply a by-product of the numerical dominance of human and mouse datasets in the SRA. Even when focusing on the major invertebrate taxa known to support densovirus replication, HuCSFDV1-like matches are essentially absent. As of 26 November 2025, the SRA contained 719,839 datasets associated with known densovirus-host clades (Blattodea 6,179; Diptera 374,969; Hemiptera 32,059; Hymenoptera 103,337; Lepidoptera 93,852; Orthoptera 10,253; Crustacea 78,320; Echinodermata 20,870), yet these taxa are virtually unrepresented among HuCSFDV1-positive accessions. This skew is difficult to reconcile with a model in which HuCSFDV1 is broadly circulating in canonical invertebrate hosts and only passively reaching mammals, and instead supports mammalian host association (<a href="https://doi.org/10.1007/s00705-016-3002-9">Phan et al., 2016</a>; <a href="https://doi.org/10.1099/jgv.0.001212">Cotmore et al., 2019</a>).</p>
+<p>Multiple independent observation streams now point in the same direction. HuCSFDV1 was originally discovered in CSF from a child with anti-NMDA-receptor encephalitis, and its genome was confirmed in independent laboratories, reducing the likelihood of a trivial artifact (<a href="https://doi.org/10.1007/s00705-016-3002-9">Phan et al., 2016</a>). A second CSF detection in an unrelated dataset, also from a neuroinflammatory context, provides partial replication of that initial observation, although clinical interpretation should remain cautious (<a href="https://doi.org/10.1172/JCI128475">Beltrán et al., 2019</a>). Beyond CSF, HuCSFDV1-like reads appear in human lymphocyte datasets, and related densovirus sequences have been detected in plasma from Cameroonian and Brazilian blood donors in a blood-borne virus surveillance study (<a href="https://doi.org/10.3390/v15041022">Orf et al., 2023</a>; <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7058308/#pone.0229993.g003">Fahsbender et al., 2020</a>). Densoviruses are additionally present at low but detectable levels in healthy human skin metagenomes, including longitudinal profiling in the Oh et al. cohort where they were noted but not analyzed in depth (<a href="https://doi.org/10.1016/j.cell.2016.04.008">Oh et al., 2016</a>). Finally, our air metagenomic surveillance repeatedly recovers HuCSFDV1-like contigs from congregate human spaces, and a separate year-long indoor air virome study from a U.S. daycare center likewise detected a spectrum of human-associated DNA and RNA viruses in air, supporting the plausibility of persistent human bioaerosol signals that are not dominated by invertebrate material (<a href="https://doi.org/10.1186/s40168-019-0672-z">Prussin et al., 2019</a>). The convergence of CSF, blood, immune-cell, skin, and air signals, across unrelated sampling frames and laboratories, makes a purely incidental exposure model predicated on invertebrate biomaterial increasingly strained.</p>
+<p>Taken together, these findings provide preliminary but provocative evidence that HuCSFDV1 and closely related densoviruses occupy the human and mammalian virospheres more frequently than previously appreciated. This echoes other recent work suggesting that divergent densoviruses may have expanded into new vertebrate niches, including reports of highly divergent densovirus-like genomes in wild birds (<a href="https://doi.org/10.1093/gigascience/giad001">Dai et al., 2023</a>). The long-standing view that densoviruses are principally invertebrate viruses may therefore be incomplete. The key remaining question is transmission. Although we cannot exclude spillover from an unrecognized insect reservoir through bites or ingestion, the repeated recovery of HuCSFDV1-like nucleic acids in human air samples raises the possibility of alternative routes, including human-to-human transmission or environmental persistence in human-occupied microhabitats. These hypotheses are not mutually exclusive, and defining whether HuCSFDV1 represents a true mammalian-adapted densovirus lineage, a virus with dual invertebrate and vertebrate cycles, or a recurrently introduced environmental agent will require more direct evidence of replication, tropism, and immune engagement in mammals.</p>
+<p>The unexpected prevalence uncovered here argues that HuCSFDV1-like densoviruses should be evaluated as candidate human-associated viruses rather than dismissed as coincidental insect contaminants. The availability of HuCSFDV1-positive mouse datasets provides a practical path to mechanistic work, including reverse-genetics rescue of infectious virus and controlled in vivo infections. In parallel, broader epidemiologic inference will depend on expanding archive-scale screening with tools such as Logan-Search and MetaGraph, coupled with careful secondary validation, and on targeted sampling in additional human cohorts and built environments. Together, these steps should clarify host range, tissue tropism, and any associations with inflammation or disease, and determine whether HuCSFDV1-like densoviruses represent an underrecognized component of the human virome.</p>
+<h2>Data availability</h2>
+<p>The VSP2 sequence reads are available in NCBI BioProject XX (TBD). Yes, we recognize the irony that our data isn't yet in SRA when we rely on data from SRA. We're working on it. All other reads are already available in SRA as described above.</p>
+<h2>Acknowledgements</h2>
+<p>This work is funded by <a href="https://ink.fish">Inkfish</a>.</p>
+<p>This work would not have been possible without data submitted to NCBI SRA as acknowledged in the text. Searching SRA datasets for densovirus reads was made possible by <a href="https://logan-search.org">Logan Search</a> (<a href="https://github.com/IndexThePlanet/LoganSearch">GitHub</a>) and the work of the Logan Team.</p>
+<p>We would like to thank <a href="https://bailey.pathology.wisc.edu">Adam Bailey</a> for helpful discussions and preliminary conversations about modeling HuCSFDV1-related pathology in animal models. <a href="https://scholar.google.com/citations?user=1gRtTPkAAAAJ&amp;hl=en">Suman Mitra</a> and <a href="https://kazemianlab.com">Majid Kazemian</a> provided information on SRR11392655. <a href="https://irp.nih.gov/pi/julie-segre">Julie Segre</a> patiently helped us understand the sample composition of NCBI BioProject 46333. <a href="https://pathology.ucsf.edu/about/faculty/eric-l-delwart-phd">Eric Delwart</a>, <a href="https://mcardle.wisc.edu/faculty/kinjal-majumder/">Kinjal Majumder</a>, and <a href="https://researchportal.helsinki.fi/en/persons/maria-söderlund-venermo/">Maria Söderlund-Venermo</a> provided valuable feedback on the initial version of this repository and suggested additional experiments and analyses</p>
+<p>Computing was performed on the UW-Madison Center for High Throughput Computing cluster. Claude Code, Claude Sonnet v4.5, Claude Opus v4.5, and ChatGPT v5.1 were used for research and text drafting. Claude Code was used the most, until it started generating spurious Usage Policy violations that required us to fallback to ChatGPT v5.1.</p>
+</main>
+<footer class="colophon">
+  Generated from <a href="https://github.com/dholab/common-densoviruses/blob/main/README.md">README.md</a> by
+  <a href="https://github.com/dholab/common-densoviruses/blob/main/docs/build_site.py">docs/build_site.py</a>.
+</footer>
+</div>
 </body>
 </html>

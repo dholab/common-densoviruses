@@ -186,6 +186,52 @@ class FigureCollectionTests(unittest.TestCase):
             collect_figures(markdown_text, self.fixture_root)
 
 
+class RepositoryContractTests(unittest.TestCase):
+    """Protect the committed GitHub Pages manuscript surface."""
+
+    def test_real_manuscript_publishes_all_figures_and_preserves_viewers(self):
+        """Missing or stale committed output must fail before a rebuild can hide it."""
+        repository_root = Path(__file__).resolve().parents[2]
+        docs = repository_root / "docs"
+        expected_labels = [
+            "Figure 1", "Figure 2", "Figure 3", "Figure 4", "Figure 5A",
+            "Figure 5B", "Figure 6", "Figure 7A", "Figure 7B",
+        ]
+        expected_assets = [
+            "figure-1.svg", "figure-2.svg", "figure-3.svg", "figure-4.svg",
+            "figure-5a.svg", "figure-5b.svg", "figure-6.svg", "figure-7a.svg",
+            "figure-7b.svg",
+        ]
+        viewer_routes = [
+            "01-air-samples-tgs",
+            "01-air-samples-vsp",
+            "02-sra-mining",
+            "04-skin-microbiome",
+            "05-cameroonian-plasma",
+            "06-belgian-air",
+        ]
+
+        figures = collect_figures(
+            (repository_root / "README.md").read_text(encoding="utf-8"), repository_root
+        )
+        self.assertEqual([figure.label for figure in figures], expected_labels)
+        self.assertTrue(all(figure.source.is_file() for figure in figures))
+        self.assertTrue(all((docs / route / "index.html").is_file() for route in viewer_routes))
+
+        # Check the committed artifact first: this deliberately precedes build().
+        published_assets = docs / "assets" / "figures"
+        self.assertEqual(
+            sorted(asset.name for asset in published_assets.glob("*.svg")), expected_assets
+        )
+        committed_page = (docs / "index.html").read_text(encoding="utf-8")
+        self.assertEqual(committed_page.count('<figure class="display" id="figure-'), 9)
+
+        output = build(repository_root, docs)
+        rebuilt_page = output.read_text(encoding="utf-8")
+        self.assertEqual(output, docs / "index.html")
+        self.assertEqual(rebuilt_page.count('<figure class="display" id="figure-'), 9)
+
+
 class PageRenderingTests(unittest.TestCase):
     def setUp(self):
         self.temporary_directory = tempfile.TemporaryDirectory()
